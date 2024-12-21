@@ -101,26 +101,41 @@ void setup() {
 void process_input() {
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
-        if (event.type == SDL_QUIT) {
-            game_is_running = FALSE;
-        } else if (PAGE_ID == MENUID) {
-            int result = MenuPage->process_input(&event);
-            if (result == EXIT) {
-                game_is_running = FALSE;  // Ensure game loop will end
-                return;  // Exit the function immediately
-            }
-            if (result == PLAYGROUNDID) {
-                // Start new game when moving from menu to playground
-                if (PlayPage) {
-                    delete PlayPage;
+        switch (event.type) {
+            case SDL_QUIT:
+                game_is_running = FALSE;
+                break;
+                
+            case SDL_MOUSEMOTION:
+            case SDL_MOUSEBUTTONDOWN:
+                // Route mouse events to appropriate page
+                switch (PAGE_ID) {
+                    case MENUID:
+                        PAGE_ID = MenuPage->process_input(&event);
+                        break;
+                    case PLAYGROUNDID:
+                        PAGE_ID = PlayPage->process_input(&event);
+                        break;
+                    case SETTINGSID:
+                        PAGE_ID = SettingsPage->process_input(&event);
+                        break;
                 }
-                PlayPage = new playground(PLAYGROUND_BACKGROUND, renderer, "Player1");
-            }
-            PAGE_ID = result;
-            GameState = result;
-        } else if (PAGE_ID == PLAYGROUNDID) {
-            PAGE_ID = PlayPage->process_input(&event);
-            GameState = PAGE_ID;
+                break;
+                
+            default:
+                // Handle other events
+                switch (PAGE_ID) {
+                    case MENUID:
+                        PAGE_ID = MenuPage->process_input(&event);
+                        break;
+                    case PLAYGROUNDID:
+                        PAGE_ID = PlayPage->process_input(&event);
+                        break;
+                    case SETTINGSID:
+                        PAGE_ID = SettingsPage->process_input(&event);
+                        break;
+                }
+                break;
         }
     }
 }
