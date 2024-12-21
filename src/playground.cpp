@@ -58,7 +58,7 @@ playground::playground(const std::string& backgroundPath, SDL_Renderer* renderer
     obstacles.push_back(std::make_unique<Bookshelf>(renderer, 0, 0, 1, 18, BOOKSHELF_TEXTURE_LEFT));
     SDL_Log("Bookshelf-left obstacle added.");
 
-    obstacles.push_back(std::make_unique<Bookshelf>(renderer, 1, 0, 24, 5, BOOKSHELF_TEXTURE_UP));
+    obstacles.push_back(std::make_unique<Bookshelf>(renderer, 1, 0, 24, 2, BOOKSHELF_TEXTURE_UP));
     SDL_Log("Bookshelf-up obstacle added.");
 
     obstacles.push_back(std::make_unique<Bookshelf>(renderer, 25, 0, 1, 18, BOOKSHELF_TEXTURE_RIGHT));
@@ -329,7 +329,7 @@ void playground::reset() {
     obstacles.push_back(std::make_unique<Bookshelf>(renderer, 0, 0, 1, 18, BOOKSHELF_TEXTURE_LEFT));
     SDL_Log("Bookshelf-left obstacle added.");
 
-    obstacles.push_back(std::make_unique<Bookshelf>(renderer, 1, 0, 24, 5, BOOKSHELF_TEXTURE_UP));
+    obstacles.push_back(std::make_unique<Bookshelf>(renderer, 1, 0, 24, 2, BOOKSHELF_TEXTURE_UP));
     SDL_Log("Bookshelf-up obstacle added.");
 
     obstacles.push_back(std::make_unique<Bookshelf>(renderer, 25, 0, 1, 18, BOOKSHELF_TEXTURE_RIGHT));
