@@ -4,8 +4,9 @@
 
 #include "../include/engine.h"
 #include "../include/settings.h"
-#include "../include/game_management.h""
-
+#include "../include/game_management.h" // Remove extra quote
+#include "../include/game_state.h"
+#include "../include/score_page.h"  // Add score page include
 // Define global variables
 SDL_Window* mywindow = nullptr;
 SDL_Renderer* renderer = nullptr;
@@ -13,6 +14,8 @@ SDL_Texture* background = nullptr;
 menu* MenuPage = nullptr;
 playground* PlayPage = nullptr;
 settings* SettingsPage = nullptr;
+class ScorePage;  // Forward declaration
+ScorePage* scorePage = nullptr;  // Change variable name to lowercase
 int PAGE_ID = MENUID;
 int GameState = MENUID;
 int game_is_running = FALSE;
@@ -90,6 +93,13 @@ void setup() {
     }
     SDL_Log("SettingsPage created.");
 
+    scorePage = new ScorePage(renderer);
+    if (!scorePage) {
+        SDL_Log("Failed to create ScorePage!");
+        return;
+    }
+    SDL_Log("ScorePage created.");
+
     background = loadTexture("../imgs/background2.jpg", renderer);
     if (!background) {
         SDL_Log("Failed to load background image!");
@@ -108,27 +118,28 @@ void process_input() {
                 break;
                 
             default:
-                // Route all events (including mouse and keyboard) to appropriate page
                 int newPageId;
                 switch (PAGE_ID) {
                     case MENUID:
                         newPageId = MenuPage->process_input(&event);
-                        // Reset game when entering playground from menu
                         if (newPageId == PLAYGROUNDID) {
-                            PlayPage->reset();  // Reset game state
-                            GameManagement::resetCounts();  // Reset collectible counts
+                            PlayPage->reset();
+                            GameManagement::resetCounts();
                         }
                         break;
                     case PLAYGROUNDID:
                         newPageId = PlayPage->process_input(&event);
                         // Handle surrender
                         if (newPageId == MENUID) {
-                            PlayPage->endGame();  // Calculate final score
-                            GameManagement::printStats();  // Show final stats
+                            PlayPage->endGame();  // This will set PAGE_ID to SCOREID
+                            newPageId = SCOREID;  // Redirect to score page instead of menu
                         }
                         break;
                     case SETTINGSID:
                         newPageId = SettingsPage->process_input(&event);
+                        break;
+                    case SCOREID:
+                        newPageId = scorePage->handleMouseClick(event.button.x, event.button.y);
                         break;
                     default:
                         newPageId = PAGE_ID;
@@ -149,13 +160,14 @@ int update() {
     float delta_time = (SDL_GetTicks() - last_frame_time) / 1000.0f;
     last_frame_time = SDL_GetTicks();
 
-    // Call appropriate page update with delta_time
     if (PAGE_ID == MENUID) {
         return MenuPage->update();
     } else if (PAGE_ID == PLAYGROUNDID) {
-        return PlayPage->update(delta_time);  // Pass delta_time here
+        return PlayPage->update(delta_time);
     } else if (PAGE_ID == SETTINGSID) {
         return SettingsPage->update();
+    } else if (PAGE_ID == SCOREID) {
+        scorePage->update(delta_time);
     }
     return game_is_running;
 }
@@ -169,10 +181,13 @@ void render() {
             MenuPage->render();
             break;
         case PLAYGROUNDID:
-            PlayPage->render();  // Now works without parameter
+            PlayPage->render();
             break;
         case SETTINGSID:
             SettingsPage->render();
+            break;
+        case SCOREID:
+            scorePage->render();
             break;
     }
     
@@ -186,6 +201,7 @@ void destroy_window() {
     if (MenuPage) delete MenuPage;
     if (PlayPage) delete PlayPage;
     if (SettingsPage) delete SettingsPage;
+    if (scorePage) delete scorePage;
     if (background) SDL_DestroyTexture(background);
     
     // Clean up SDL resources

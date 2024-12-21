@@ -22,4 +22,11 @@ public:
     static int getExamCount() { return examCount; }
     static int getCoffeeCount() { return coffeeCount; }
     static int getFreezeCount() { return freezeCount; }
+
+    static int calculateFinalScore() {
+        return (getNoteCount() * 20) + 
+               (getExamCount() * 30) + 
+               (getCoffeeCount() * 15) + 
+               (getFreezeCount() * 10);
+    }
 };

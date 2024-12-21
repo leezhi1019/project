@@ -22,6 +22,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "C:/Users/jacob/Desktop/test/project/src/obstacle.cpp" "CMakeFiles/my_Final_project_game.dir/src/obstacle.cpp.obj" "gcc" "CMakeFiles/my_Final_project_game.dir/src/obstacle.cpp.obj.d"
   "C:/Users/jacob/Desktop/test/project/src/pastexam.cpp" "CMakeFiles/my_Final_project_game.dir/src/pastexam.cpp.obj" "gcc" "CMakeFiles/my_Final_project_game.dir/src/pastexam.cpp.obj.d"
   "C:/Users/jacob/Desktop/test/project/src/playground.cpp" "CMakeFiles/my_Final_project_game.dir/src/playground.cpp.obj" "gcc" "CMakeFiles/my_Final_project_game.dir/src/playground.cpp.obj.d"
+  "C:/Users/jacob/Desktop/test/project/src/score_page.cpp" "CMakeFiles/my_Final_project_game.dir/src/score_page.cpp.obj" "gcc" "CMakeFiles/my_Final_project_game.dir/src/score_page.cpp.obj.d"
   "C:/Users/jacob/Desktop/test/project/src/settings.cpp" "CMakeFiles/my_Final_project_game.dir/src/settings.cpp.obj" "gcc" "CMakeFiles/my_Final_project_game.dir/src/settings.cpp.obj.d"
   "C:/Users/jacob/Desktop/test/project/src/table.cpp" "CMakeFiles/my_Final_project_game.dir/src/table.cpp.obj" "gcc" "CMakeFiles/my_Final_project_game.dir/src/table.cpp.obj.d"
   "C:/Users/jacob/Desktop/test/project/src/tool.cpp" "CMakeFiles/my_Final_project_game.dir/src/tool.cpp.obj" "gcc" "CMakeFiles/my_Final_project_game.dir/src/tool.cpp.obj.d"

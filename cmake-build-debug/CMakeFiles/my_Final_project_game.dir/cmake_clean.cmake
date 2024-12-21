@@ -27,6 +27,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/my_Final_project_game.dir/src/pastexam.cpp.obj.d"
   "CMakeFiles/my_Final_project_game.dir/src/playground.cpp.obj"
   "CMakeFiles/my_Final_project_game.dir/src/playground.cpp.obj.d"
+  "CMakeFiles/my_Final_project_game.dir/src/score_page.cpp.obj"
+  "CMakeFiles/my_Final_project_game.dir/src/score_page.cpp.obj.d"
   "CMakeFiles/my_Final_project_game.dir/src/settings.cpp.obj"
   "CMakeFiles/my_Final_project_game.dir/src/settings.cpp.obj.d"
   "CMakeFiles/my_Final_project_game.dir/src/table.cpp.obj"

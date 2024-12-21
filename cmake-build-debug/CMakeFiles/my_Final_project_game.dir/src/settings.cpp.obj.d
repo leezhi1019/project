@@ -279,4 +279,5 @@ CMakeFiles/my_Final_project_game.dir/src/settings.cpp.obj: \
  C:/Program\ Files/JetBrains/CLion\ 2024.3/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/vector.tcc \
  C:/Users/jacob/Desktop/test/project/include/constants.h \
  C:/Users/jacob/Desktop/test/project/include/tool.h \
- C:/Users/jacob/Desktop/test/project/include/constants.h
+ C:/Users/jacob/Desktop/test/project/include/constants.h \
+ C:/Users/jacob/Desktop/test/project/include/game_state.h

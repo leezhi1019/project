@@ -1,7 +1,7 @@
 #include "../include/settings.h"
 #include "../include/tool.h"  // Add this for loadTexture function
 #include "../include/constants.h"
-
+#include "../include/game_state.h"
 settings::settings(const std::string& path, SDL_Renderer* renderer) {
     this->renderer = renderer;
     this->background = loadTexture(path.c_str(), renderer);

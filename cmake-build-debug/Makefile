@@ -464,6 +464,30 @@ src/playground.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\my_Final_project_game.dir\build.make CMakeFiles/my_Final_project_game.dir/src/playground.cpp.s
 .PHONY : src/playground.cpp.s
 
+src/score_page.obj: src/score_page.cpp.obj
+.PHONY : src/score_page.obj
+
+# target to build an object file
+src/score_page.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\my_Final_project_game.dir\build.make CMakeFiles/my_Final_project_game.dir/src/score_page.cpp.obj
+.PHONY : src/score_page.cpp.obj
+
+src/score_page.i: src/score_page.cpp.i
+.PHONY : src/score_page.i
+
+# target to preprocess a source file
+src/score_page.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\my_Final_project_game.dir\build.make CMakeFiles/my_Final_project_game.dir/src/score_page.cpp.i
+.PHONY : src/score_page.cpp.i
+
+src/score_page.s: src/score_page.cpp.s
+.PHONY : src/score_page.s
+
+# target to generate assembly for a file
+src/score_page.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\my_Final_project_game.dir\build.make CMakeFiles/my_Final_project_game.dir/src/score_page.cpp.s
+.PHONY : src/score_page.cpp.s
+
 src/settings.obj: src/settings.cpp.obj
 .PHONY : src/settings.obj
 
@@ -587,6 +611,9 @@ help:
 	@echo ... src/playground.obj
 	@echo ... src/playground.i
 	@echo ... src/playground.s
+	@echo ... src/score_page.obj
+	@echo ... src/score_page.i
+	@echo ... src/score_page.s
 	@echo ... src/settings.obj
 	@echo ... src/settings.i
 	@echo ... src/settings.s

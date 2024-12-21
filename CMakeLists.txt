@@ -35,6 +35,7 @@ add_executable(my_Final_project_game
     src/freeze.cpp            
     src/pastexam.cpp
     src/game_management.cpp    # Add this line
+    src/score_page.cpp         # Add this line
 )
 
 target_sources(${PROJECT_NAME} PRIVATE

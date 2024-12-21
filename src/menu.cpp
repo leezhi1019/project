@@ -4,7 +4,7 @@
 
 #include "../include/menu.h"
 #include "../include/constants.h" // For MENUID, PLAYGROUNDID, TRUE, FALSE, EXIT
-
+#include "../include/game_state.h"
 extern bool game_is_running;
 
 menu::menu(const std::string& path, SDL_Renderer* renderer) {

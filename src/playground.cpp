@@ -3,13 +3,15 @@
 //
 
 #include "../include/playground.h"
+#include "../include/game_state.h"
+#include "../include/game_management.h"
+#include "../include/collectible_manager.h"
 #include "../include/character.h"
 #include "../include/tool.h"
 #include "../include/constants.h"
 #include "../include/freeze.h"
-#include "../include/collectible_manager.h"
-#include "../include/game_management.h"
-
+#include "../include/game_state.h"
+#include "../include/score_page.h" // Add this include
 playground::playground(const std::string& backgroundPath, SDL_Renderer* renderer, const std::string& playerName)
     : renderer(renderer), isPaused(false), collectTimer(0), isCollecting(false)
 {
@@ -186,8 +188,8 @@ int playground::handleMouseClick(int x, int y) {
                     isPaused = false;
                     return PLAYGROUNDID;
                 case 1:  // Surrender
-                    endGame();  // Call endGame before returning to menu
-                    return MENUID;
+                    endGame();  // Call endGame before returning
+                    return SCOREID;  // Return SCOREID instead of MENUID to show score page
             }
         }
     }
@@ -291,11 +293,11 @@ bool playground::isPositionBlocked(int x, int y) const {
 
 void playground::endGame() {
     isGameEnded = true;
-    // You can add score calculation here or call another class's method
-    // For example: ScoreManager::getInstance()->calculateFinalScore();
-
-    // When game ends or for debugging
     GameManagement::printStats();
+    extern int PAGE_ID;
+    PAGE_ID = SCOREID;  // Use SCOREID directly
+    extern ScorePage* scorePage;  // Match the lowercase name
+    scorePage->initialize();
 }
 
 void playground::reset() {

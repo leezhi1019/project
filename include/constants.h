@@ -1,18 +1,11 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 
-// Game states/IDs
-const int MENUID = 0;
-const int PLAYGROUNDID = 1;
-// Add new state ID
-const int SETTINGSID = 2;
-
 // Boolean constants
 const int TRUE = 1;
 const int FALSE = 0;
 const int EXIT = -1;
 
-// Add any other constants here
 // Window dimensions, frame rates, etc.
 #define WINDOW_HEIGHT 600
 #define WINDOW_WIDTH 1200
@@ -31,4 +24,3 @@ const int EXIT = -1;
 #define GRID_SIZE 40  // Size of each grid cell in pixels
 
 #endif // STUDYSNATCHER_CONSTANTS_H
-

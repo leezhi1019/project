@@ -320,4 +320,5 @@ CMakeFiles/my_Final_project_game.dir/src/menu.cpp.obj: \
  C:/Users/jacob/Desktop/test/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/begin_code.h \
  C:/Users/jacob/Desktop/test/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/close_code.h \
  C:/Users/jacob/Desktop/test/project/include/tool.h \
- C:/Users/jacob/Desktop/test/project/include/constants.h
+ C:/Users/jacob/Desktop/test/project/include/constants.h \
+ C:/Users/jacob/Desktop/test/project/include/game_state.h
