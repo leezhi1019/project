@@ -46,7 +46,7 @@ playground::playground(const std::string& backgroundPath, SDL_Renderer* renderer
     SDL_Log("Group work tables added.");
 
     // Reading area tables
-    obstacles.push_back(std::make_unique<Table>(renderer, 15, 15, 2, 2));
+    obstacles.push_back(std::make_unique<Table>(renderer, 15, 16, 2, 2));
     obstacles.push_back(std::make_unique<Table>(renderer, 20, 15, 2, 2));
     SDL_Log("Reading area tables added.");
 
