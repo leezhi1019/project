@@ -18,15 +18,16 @@ settings::settings(const std::string& path, SDL_Renderer* renderer) {
         return;  // Don't create buttons if font failed to load
     }
     
-    // Create settings buttons
+    // Setup button dimensions
     int scale = 2;
     int baseWidth = 150 * scale;
     int baseHeight = 35 * scale;
     int centerX = (675 * scale - baseWidth) / 2;
     
+    // Create settings buttons
     createButton("Character 1", centerX-220, 125 * scale, baseWidth, baseHeight);
     createButton("Character 2", centerX-220, 175 * scale, baseWidth, baseHeight);
-    createButton("Back to Menu", centerX-220, 225 * scale, baseWidth, baseHeight);
+    createButton("Back to Menu", centerX-220, 275 * scale, baseWidth, baseHeight);  // Added lower position
 }
 
 settings::~settings() {
@@ -124,16 +125,22 @@ void settings::handleMouseMotion(int x, int y) {
 }
 
 int settings::handleMouseClick(int x, int y) {
+    SDL_Log("Checking click at x:%d y:%d", x, y);
+    
     for (size_t i = 0; i < buttons.size(); i++) {
-        if (x >= buttons[i].rect.x && x <= buttons[i].rect.x + buttons[i].rect.w &&
-            y >= buttons[i].rect.y && y <= buttons[i].rect.y + buttons[i].rect.h) {
-            
+        const auto& button = buttons[i];
+        bool isClicked = (x >= button.rect.x && x <= button.rect.x + button.rect.w &&
+                         y >= button.rect.y && y <= button.rect.y + button.rect.h);
+                         
+        SDL_Log("Button %d: x:%d y:%d w:%d h:%d clicked:%d", 
+                (int)i, button.rect.x, button.rect.y, button.rect.w, button.rect.h, isClicked);
+                
+        if (isClicked) {
+            SDL_Log("Button %d clicked!", (int)i);
             switch(i) {
                 case 0:  // Character 1
-                    // Add character selection logic
                     return SETTINGSID;
-                case 1:  // Character 2
-                    // Add character selection logic
+                case 1:  // Character 2 
                     return SETTINGSID;
                 case 2:  // Back to Menu
                     return MENUID;

@@ -10,6 +10,7 @@ const int SETTINGSID = 2;
 // Boolean constants
 const int TRUE = 1;
 const int FALSE = 0;
+const int EXIT = -1;
 
 // Add any other constants here
 // Window dimensions, frame rates, etc.

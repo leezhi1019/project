@@ -3,7 +3,9 @@
 //
 
 #include "../include/menu.h"
-#include "../include/constants.h" // For MENUID, PLAYGROUNDID, TRUE, FALSE
+#include "../include/constants.h" // For MENUID, PLAYGROUNDID, TRUE, FALSE, EXIT
+
+extern bool game_is_running;
 
 menu::menu(const std::string& path, SDL_Renderer* renderer) {
     SDL_Log("Creating menu...");
@@ -77,17 +79,24 @@ void menu::handleMouseMotion(int x, int y) {
 }
 
 int menu::handleMouseClick(int x, int y) {
+    SDL_Log("Checking click at x:%d y:%d", x, y);
+    
     for (size_t i = 0; i < buttons.size(); i++) {
-        if (x >= buttons[i].rect.x && x <= buttons[i].rect.x + buttons[i].rect.w &&
-            y >= buttons[i].rect.y && y <= buttons[i].rect.y + buttons[i].rect.h) {
-            
+        const auto& button = buttons[i];
+        bool isClicked = (x >= button.rect.x && x <= button.rect.x + button.rect.w &&
+                         y >= button.rect.y && y <= button.rect.y + button.rect.h);
+                         
+        if (isClicked) {
+            SDL_Log("Button %d clicked!", (int)i);
             switch(i) {
-                case 0: 
-                    return PLAYGROUNDID;  // Play Game
-                case 1: 
-                    return SETTINGSID;    // Settings page
-                case 2: 
-                    return FALSE;         // Exit
+                case 0:  // Play Game
+                    return PLAYGROUNDID;
+                case 1:  // Settings 
+                    return SETTINGSID;
+                case 2:  // Exit
+                    SDL_Log("Exit button clicked, initiating game shutdown...");
+                    game_is_running = FALSE;  // Set the global flag to false
+                    return EXIT;  // Return EXIT constant
             }
         }
     }

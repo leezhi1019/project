@@ -105,6 +105,10 @@ void process_input() {
             game_is_running = FALSE;
         } else if (PAGE_ID == MENUID) {
             int result = MenuPage->process_input(&event);
+            if (result == EXIT) {
+                game_is_running = FALSE;  // Ensure game loop will end
+                return;  // Exit the function immediately
+            }
             if (result == PLAYGROUNDID) {
                 // Start new game when moving from menu to playground
                 if (PlayPage) {
