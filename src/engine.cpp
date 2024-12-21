@@ -4,6 +4,7 @@
 
 #include "../include/engine.h"
 #include "../include/settings.h"
+#include "../include/game_management.h""
 
 // Define global variables
 SDL_Window* mywindow = nullptr;
@@ -106,35 +107,35 @@ void process_input() {
                 game_is_running = FALSE;
                 break;
                 
-            case SDL_MOUSEMOTION:
-            case SDL_MOUSEBUTTONDOWN:
-                // Route mouse events to appropriate page
-                switch (PAGE_ID) {
-                    case MENUID:
-                        PAGE_ID = MenuPage->process_input(&event);
-                        break;
-                    case PLAYGROUNDID:
-                        PAGE_ID = PlayPage->process_input(&event);
-                        break;
-                    case SETTINGSID:
-                        PAGE_ID = SettingsPage->process_input(&event);
-                        break;
-                }
-                break;
-                
             default:
-                // Handle other events
+                // Route all events (including mouse and keyboard) to appropriate page
+                int newPageId;
                 switch (PAGE_ID) {
                     case MENUID:
-                        PAGE_ID = MenuPage->process_input(&event);
+                        newPageId = MenuPage->process_input(&event);
+                        // Reset game when entering playground from menu
+                        if (newPageId == PLAYGROUNDID) {
+                            PlayPage->reset();  // Reset game state
+                            GameManagement::resetCounts();  // Reset collectible counts
+                        }
                         break;
                     case PLAYGROUNDID:
-                        PAGE_ID = PlayPage->process_input(&event);
+                        newPageId = PlayPage->process_input(&event);
+                        // Handle surrender
+                        if (newPageId == MENUID) {
+                            PlayPage->endGame();  // Calculate final score
+                            GameManagement::printStats();  // Show final stats
+                        }
                         break;
                     case SETTINGSID:
-                        PAGE_ID = SettingsPage->process_input(&event);
+                        newPageId = SettingsPage->process_input(&event);
+                        break;
+                    default:
+                        newPageId = PAGE_ID;
                         break;
                 }
+                
+                PAGE_ID = newPageId;
                 break;
         }
     }
