@@ -242,11 +242,11 @@ void playground::render() {
 }
 
 void playground::addTable(int x, int y, int w, int h) {
-    obstacles.push_back(std::make_unique<Table>(renderer, x, y, w, h));
+    obstacles.push_back(std::make_unique<Table>(renderer, x, y, w, h, TABLE_TEXTURE_1x1book));
 }
 
 void playground::addBookshelf(int x, int y, int w, int h) {
-    obstacles.push_back(std::make_unique<Bookshelf>(renderer, x, y, w, h));
+    obstacles.push_back(std::make_unique<Bookshelf>(renderer, x, y, w, h, BOOKSHELF_TEXTURE_2x1));
 }
 
 bool playground::isPositionBlocked(int x, int y) const {

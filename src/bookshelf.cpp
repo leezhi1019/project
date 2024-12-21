@@ -45,3 +45,14 @@ bool Bookshelf::removeBook() {
     }
     return false;
 }
+
+void Bookshelf::updateTexture() {
+    // Implementation to update the texture based on bookCount
+    // For example:
+    if (renderer && currentTexturePath) {
+        // Free existing texture if any
+        if (texture) {
+            SDL_DestroyTexture(texture);
+        }
+    }
+}
