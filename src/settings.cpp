@@ -28,6 +28,28 @@ settings::settings(const std::string& path, SDL_Renderer* renderer) {
     createButton("Character 1", centerX-220, 125 * scale, baseWidth, baseHeight);
     createButton("Character 2", centerX-220, 175 * scale, baseWidth, baseHeight);
     createButton("Back to Menu", centerX-220, 275 * scale, baseWidth, baseHeight);  // Added lower position
+
+    // Initialize three sections
+    int sectionWidth = WINDOW_WIDTH / 3;
+    int sectionHeight = WINDOW_HEIGHT;
+    
+    sections.push_back({
+        SDL_Rect{0, 0, sectionWidth, sectionHeight},
+        "Game Rules",
+        false
+    });
+    
+    sections.push_back({
+        SDL_Rect{sectionWidth, 0, sectionWidth, sectionHeight},
+        "High Scores",
+        false
+    });
+    
+    sections.push_back({
+        SDL_Rect{sectionWidth * 2, 0, sectionWidth, sectionHeight},
+        "Settings",
+        false
+    });
 }
 
 settings::~settings() {
@@ -86,35 +108,38 @@ int settings::process_input(SDL_Event* event) {
 void settings::render() {
     SDL_RenderClear(renderer);
     
-    // Render background
+    // 繪製背景
     if (background) {
         SDL_RenderCopy(renderer, background, nullptr, nullptr);
     }
     
-    // Render buttons
-    for (const auto& button : buttons) {
-        SDL_SetRenderDrawColor(renderer,
-            button.isHovered ? buttonHoverColor.r : buttonColor.r,
-            button.isHovered ? buttonHoverColor.g : buttonColor.g,
-            button.isHovered ? buttonHoverColor.b : buttonColor.b,
-            255);
-        SDL_RenderFillRect(renderer, &button.rect);
+    // 繪製三個區域
+    for (const auto& section : sections) {
+        // 繪製區域邊框
+        SDL_SetRenderDrawColor(renderer, 200, 200, 200, 255);
+        SDL_RenderDrawRect(renderer, &section.rect);
         
-        // Change texture to textTexture to match struct member name
-        if (button.textTexture) {
-            int textWidth, textHeight;
-            SDL_QueryTexture(button.textTexture, nullptr, nullptr, &textWidth, &textHeight);
-            SDL_Rect textRect = {
-                button.rect.x + (button.rect.w - textWidth) / 2,
-                button.rect.y + (button.rect.h - textHeight) / 2,
-                textWidth,
-                textHeight
+        // 繪製區域標題
+        if (font) {
+            SDL_Color textColor = {255, 255, 255, 255};
+            SDL_Surface* surface = TTF_RenderText_Solid(font, section.title.c_str(), textColor);
+            SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
+            
+            SDL_Rect titleRect = {
+                section.rect.x + 10,
+                section.rect.y + 10,
+                surface->w,
+                surface->h
             };
-            SDL_RenderCopy(renderer, button.textTexture, nullptr, &textRect);
+            
+            SDL_RenderCopy(renderer, texture, nullptr, &titleRect);
+            SDL_FreeSurface(surface);
+            SDL_DestroyTexture(texture);
         }
     }
     
-    SDL_RenderPresent(renderer);
+    // 根據當前活動的區域繪製對應的按鈕
+    // ...其他渲染程式碼
 }
 
 void settings::handleMouseMotion(int x, int y) {
@@ -125,27 +150,19 @@ void settings::handleMouseMotion(int x, int y) {
 }
 
 int settings::handleMouseClick(int x, int y) {
-    SDL_Log("Checking click at x:%d y:%d", x, y);
-    
-    for (size_t i = 0; i < buttons.size(); i++) {
-        const auto& button = buttons[i];
-        bool isClicked = (x >= button.rect.x && x <= button.rect.x + button.rect.w &&
-                         y >= button.rect.y && y <= button.rect.y + button.rect.h);
-                         
-        SDL_Log("Button %d: x:%d y:%d w:%d h:%d clicked:%d", 
-                (int)i, button.rect.x, button.rect.y, button.rect.w, button.rect.h, isClicked);
-                
-        if (isClicked) {
-            SDL_Log("Button %d clicked!", (int)i);
-            switch(i) {
-                case 0:  // Character 1
-                    return SETTINGSID;
-                case 1:  // Character 2 
-                    return SETTINGSID;
-                case 2:  // Back to Menu
-                    return MENUID;
+    // 檢查點擊了哪個區域
+    for (size_t i = 0; i < sections.size(); i++) {
+        if (x >= sections[i].rect.x && x <= sections[i].rect.x + sections[i].rect.w &&
+            y >= sections[i].rect.y && y <= sections[i].rect.y + sections[i].rect.h) {
+            // 設置當前活動區域
+            for (auto& section : sections) {
+                section.isActive = false;
             }
+            sections[i].isActive = true;
+            return SETTINGSID;
         }
     }
-    return SETTINGSID;
+    
+    // 處理各區域內的按鈕點擊
+    // ...現有的按鈕處理程式碼
 }

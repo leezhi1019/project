@@ -14,8 +14,9 @@ const int EXIT = -1;
 
 // Add any other constants here
 // Window dimensions, frame rates, etc.
-#define WINDOW_HEIGHT 600
-#define WINDOW_WIDTH 1200
+// 修改視窗大小常數
+#define WINDOW_HEIGHT 760
+#define WINDOW_WIDTH 1320
 #define FPS 60
 #define FRAME_TARGET_TIME (1000 / FPS)
 #define PLAYER_W 20
