@@ -48,8 +48,8 @@ playground::playground(const std::string& backgroundPath, SDL_Renderer* renderer
     SDL_Log("Reading area tables added.");
 
     // Keep existing bookshelf
-    obstacles.push_back(std::make_unique<Bookshelf>(renderer, 15, 10, 1, 2, BOOKSHELF_TEXTURE_2x1));
-    obstacles.push_back(std::make_unique<Bookshelf>(renderer, 5, 10, 1, 3, BOOKSHELF_TEXTURE_3x1));
+    obstacles.push_back(std::make_unique<Bookshelf>(renderer, 5, 10, 1, 2, BOOKSHELF_TEXTURE_2x1));
+    obstacles.push_back(std::make_unique<Bookshelf>(renderer, 15, 10, 1, 3, BOOKSHELF_TEXTURE_3x1));
     obstacles.push_back(std::make_unique<Bookshelf>(renderer, 20, 10, 1, 4, BOOKSHELF_TEXTURE_4x1));
     obstacles.push_back(std::make_unique<Bookshelf>(renderer, 10, 10, 2, 4, BOOKSHELF_TEXTURE_4x2));
     
