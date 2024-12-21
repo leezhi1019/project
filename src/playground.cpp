@@ -37,22 +37,24 @@ playground::playground(const std::string& backgroundPath, SDL_Renderer* renderer
 
     // Add more tables around the playground
     // Study area tables
-    obstacles.push_back(std::make_unique<Table>(renderer, 5, 5, 2, 2, TABLE_TEXTURE_2x2bag));
+    obstacles.push_back(std::make_unique<Table>(renderer, 3, 7, 2, 2, TABLE_TEXTURE_2x2bag));
     obstacles.push_back(std::make_unique<Table>(renderer, 5, 8, 2, 2, TABLE_TEXTURE_2x2book));
     SDL_Log("Study area tables added.");
 
     // Group work tables
-    obstacles.push_back(std::make_unique<Table>(renderer, 20, 5, 1, 1, TABLE_TEXTURE_1x1bag));
-    obstacles.push_back(std::make_unique<Table>(renderer, 20, 8, 1, 1, TABLE_TEXTURE_1x1book));
+    obstacles.push_back(std::make_unique<Table>(renderer, 20, 5, 2, 2, TABLE_TEXTURE_1x1bag));
+    obstacles.push_back(std::make_unique<Table>(renderer, 20, 8, 2, 2, TABLE_TEXTURE_1x1book));
     SDL_Log("Group work tables added.");
 
     // Reading area tables
-    obstacles.push_back(std::make_unique<Table>(renderer, 15, 16, 1, 1, TABLE_TEXTURE_1x1book));
-    obstacles.push_back(std::make_unique<Table>(renderer, 20, 15, 2, 2, TABLE_TEXTURE_2x2bag));
+    obstacles.push_back(std::make_unique<Table>(renderer, 5, 17, 2, 2, TABLE_TEXTURE_1x1book));
+    obstacles.push_back(std::make_unique<Table>(renderer, 10, 17, 2, 2, TABLE_TEXTURE_1x1book));
+    obstacles.push_back(std::make_unique<Table>(renderer, 15, 17, 2, 2, TABLE_TEXTURE_1x1book));
+    obstacles.push_back(std::make_unique<Table>(renderer, 20, 17, 2, 2, TABLE_TEXTURE_2x2bag));
     SDL_Log("Reading area tables added.");
 
     // Keep existing bookshelf
-    obstacles.push_back(std::make_unique<Bookshelf>(renderer, 15, 12, 2, 4, BOOKSHELF_TEXTURE_4x2));
+    obstacles.push_back(std::make_unique<Bookshelf>(renderer, 12, 12, 2, 4, BOOKSHELF_TEXTURE_4x2));
     SDL_Log("Bookshelf obstacle added.");
 
     obstacles.push_back(std::make_unique<Bookshelf>(renderer, 0, 0, 1, 18, BOOKSHELF_TEXTURE_LEFT));
@@ -273,7 +275,7 @@ void playground::reset() {
     if (mainCharacter) {
         delete mainCharacter;
     }
-    mainCharacter = new Character(renderer, "Player1", this, 5, 5);
+    mainCharacter = new Character(renderer, "Player1", this, 2, 8);
     
     // Clear and reinitialize obstacles
     obstacles.clear();
@@ -283,22 +285,24 @@ void playground::reset() {
 
     // Add more tables around the playground
     // Study area tables
-    obstacles.push_back(std::make_unique<Table>(renderer, 5, 5, 2, 2, TABLE_TEXTURE_2x2bag));
+    obstacles.push_back(std::make_unique<Table>(renderer, 3, 7, 2, 2, TABLE_TEXTURE_2x2bag));
     obstacles.push_back(std::make_unique<Table>(renderer, 5, 8, 2, 2, TABLE_TEXTURE_2x2book));
     SDL_Log("Study area tables added.");
 
     // Group work tables
-    obstacles.push_back(std::make_unique<Table>(renderer, 20, 5, 1, 1, TABLE_TEXTURE_1x1bag));
-    obstacles.push_back(std::make_unique<Table>(renderer, 20, 8, 1, 1, TABLE_TEXTURE_1x1book));
+    obstacles.push_back(std::make_unique<Table>(renderer, 20, 5, 2, 2, TABLE_TEXTURE_1x1bag));
+    obstacles.push_back(std::make_unique<Table>(renderer, 20, 8, 2, 2, TABLE_TEXTURE_1x1book));
     SDL_Log("Group work tables added.");
 
     // Reading area tables
-    obstacles.push_back(std::make_unique<Table>(renderer, 15, 16, 1, 1, TABLE_TEXTURE_1x1book));
-    obstacles.push_back(std::make_unique<Table>(renderer, 20, 15, 2, 2, TABLE_TEXTURE_2x2bag));
+    obstacles.push_back(std::make_unique<Table>(renderer, 5, 17, 2, 2, TABLE_TEXTURE_1x1book));
+    obstacles.push_back(std::make_unique<Table>(renderer, 10, 17, 2, 2, TABLE_TEXTURE_1x1book));
+    obstacles.push_back(std::make_unique<Table>(renderer, 15, 17, 2, 2, TABLE_TEXTURE_1x1book));
+    obstacles.push_back(std::make_unique<Table>(renderer, 20, 17, 2, 2, TABLE_TEXTURE_2x2bag));
     SDL_Log("Reading area tables added.");
 
     // Keep existing bookshelf
-    obstacles.push_back(std::make_unique<Bookshelf>(renderer, 15, 12, 2, 4, BOOKSHELF_TEXTURE_4x2));
+    obstacles.push_back(std::make_unique<Bookshelf>(renderer, 12, 12, 2, 4, BOOKSHELF_TEXTURE_4x2));
     SDL_Log("Bookshelf obstacle added.");
 
     obstacles.push_back(std::make_unique<Bookshelf>(renderer, 0, 0, 1, 18, BOOKSHELF_TEXTURE_LEFT));
