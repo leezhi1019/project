@@ -6,7 +6,7 @@
 Bookshelf::Bookshelf(SDL_Renderer* renderer, int x, int y, int w, int h)
     : Obstacle(renderer, x, y, w, h), bookCount(0) {
     // Try to load texture, but don't require it
-    texture = loadTexture(BOOKSHELF_TEXTURE, renderer);  // Use the constant
+    texture = loadTexture(BOOKSHELF_TEXTURE_4x2, renderer);  // Use the constant
     if (!texture) {
         SDL_Log("Using fallback rendering for bookshelf");
     }

@@ -51,7 +51,7 @@ playground::playground(const std::string& backgroundPath, SDL_Renderer* renderer
     SDL_Log("Reading area tables added.");
 
     // Keep existing bookshelf
-    obstacles.push_back(std::make_unique<Bookshelf>(renderer, 15, 12, 2, 3));
+    obstacles.push_back(std::make_unique<Bookshelf>(renderer, 15, 12, 2, 4));
     SDL_Log("Bookshelf obstacle added.");
 
     initializePauseMenu();
@@ -287,7 +287,7 @@ void playground::reset() {
     SDL_Log("Reading area tables added.");
 
     // Keep existing bookshelf
-    obstacles.push_back(std::make_unique<Bookshelf>(renderer, 15, 12, 2, 3));
+    obstacles.push_back(std::make_unique<Bookshelf>(renderer, 15, 12, 2, 4));
     SDL_Log("Bookshelf obstacle added.");
     
     // Reset any other game-specific variables

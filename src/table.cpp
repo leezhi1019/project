@@ -6,7 +6,7 @@
 Table::Table(SDL_Renderer* renderer, int x, int y, int w, int h)
     : Obstacle(renderer, x, y, w, h) {
     // Try to load texture, but don't require it
-    texture = loadTexture(TABLE_TEXTURE, renderer);  // Use TABLE_TEXTURE instead of BOOKSHELF_TEXTURE
+    texture = loadTexture(TABLE_TEXTURE_2x2, renderer);  // Use TABLE_TEXTURE instead of BOOKSHELF_TEXTURE
     if (!texture) {
         SDL_Log("Using fallback rendering for table");
     }
