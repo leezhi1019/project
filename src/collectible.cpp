@@ -26,8 +26,12 @@ void Collectible::update(float deltaTime) {
 }
 
 void Collectible::render() {
-    if (m_isVisible && texture) {
-        SDL_RenderCopy(renderer, texture, nullptr, &position);
+    if (m_isVisible) {
+        renderGlow();  // First layer - glow
+        if (texture) {
+            SDL_RenderCopy(renderer, texture, nullptr, &position);  // Second layer - texture
+        }
+        drawProgressRing();  // Final layer - progress ring
     }
 }
 
@@ -102,4 +106,51 @@ void Collectible::drawCircularGlow(float frequency, int layerCount,
     }
     
     SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_NONE);
+}
+
+void Collectible::drawProgressRing() {
+    if (!isBeingCollected || !m_isVisible) return;
+
+    // Calculate center and radius with larger offset
+    int centerX = position.x + position.w / 2;
+    int centerY = position.y + position.h / 2;
+    int radius = (position.w / 2) + 12;  // Increased from 6 to 12 for larger ring
+
+    // Set up drawing with higher alpha and brighter color
+    SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 230);  // Increased alpha from 200 to 230
+
+    // Draw thicker progress arc
+    float endAngle = collectionProgress * 2 * M_PI;
+    for (float angle = 0; angle < endAngle; angle += 0.01f) {
+        // Draw multiple points for thicker line
+        for (int offset = -1; offset <= 1; offset++) {
+            int x = centerX + (radius + offset) * cos(angle - M_PI/2);
+            int y = centerY + (radius + offset) * sin(angle - M_PI/2);
+            SDL_RenderDrawPoint(renderer, x, y);
+        }
+    }
+
+    SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_NONE);
+}
+
+void Collectible::startCollection() {
+    isBeingCollected = true;
+    collectionProgress = 0.0f;
+}
+
+void Collectible::updateCollection(float deltaTime) {
+    if (isBeingCollected) {
+        collectionProgress += deltaTime / COLLECTION_TIME;
+        if (collectionProgress >= 1.0f) {
+            collect();
+            isBeingCollected = false;
+            collectionProgress = 0.0f;
+        }
+    }
+}
+
+void Collectible::cancelCollection() {
+    isBeingCollected = false;
+    collectionProgress = 0.0f;  // Reset progress to 0
 }

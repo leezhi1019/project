@@ -376,28 +376,25 @@ bool playground::isAdjacentToCollectible(SDL_Rect playerPos, SDL_Rect collectibl
 
 void playground::checkCollectibles() {
     SDL_Rect playerPos = mainCharacter->getPosition();
-    
+
     for (auto& collectible : collectibles) {
-        if (collectible->isVisible()) {
-            SDL_Rect collectiblePos = collectible->getPosition();
-            bool isAdjacent = isAdjacentToCollectible(playerPos, collectiblePos);
-            
-            SDL_Log("Checking collectible - Player pos: (%d,%d), Collectible pos: (%d,%d), Adjacent: %s",
-                   playerPos.x, playerPos.y, collectiblePos.x, collectiblePos.y, 
-                   isAdjacent ? "true" : "false");  // Add debug log
-            
-            if (isAdjacent) {
-                collectTimer += 1.0f/60.0f;
-                SDL_Log("Collection timer: %.2f", collectTimer);  // Add debug log
-                
-                if (collectTimer >= 0.5f) {
-                    collectible->collect();
-                    collectTimer = 0;
-                    isCollecting = false;
-                    SDL_Log("Collectible collected!");
-                }
-                break;
+        if (!collectible->isVisible()) continue;
+
+        SDL_Rect collectiblePos = collectible->getPosition();
+        bool adjacent = isAdjacentToCollectible(playerPos, collectiblePos);
+
+        if (adjacent) {
+            if (isCollecting && !collectible->getIsBeingCollected()) {
+                collectible->startCollection();
             }
+            if (isCollecting) {
+                collectible->updateCollection(1.0f/60.0f);
+            } else {
+                collectible->cancelCollection();
+            }
+        } else {
+            // Immediately cancel if player isn't adjacent
+            collectible->cancelCollection();
         }
     }
 }

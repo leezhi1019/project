@@ -20,11 +20,18 @@ protected:
     float glowIntensity;
     float glowTime;
 
+    // Add these members
+    bool isBeingCollected;
+    float collectionProgress;  // 0.0f to 1.0f
+    const float COLLECTION_TIME = 0.5f;  // Time to collect in seconds
+
     // Helper method for derived classes
     void drawCircularGlow(float frequency = 2.5f, 
                          int layerCount = 4, 
                          float baseRadius = 2.0f,
                          float radiusIncrement = 2.0f);
+
+    void drawProgressRing();  // New helper method
 
 public:
     Collectible(SDL_Renderer* renderer, const char* texturePath, int x, int y, int respawnTime);
@@ -38,6 +45,14 @@ public:
 
     // Add glow methods
     virtual void renderGlow();  // Virtual method for glow effect
+
+    // Add these methods
+    void startCollection();
+    void updateCollection(float deltaTime);
+    void cancelCollection();
+
+    // Add this getter method
+    bool getIsBeingCollected() const { return isBeingCollected; }
 
     bool isVisible() const { return m_isVisible; }  // Access renamed member variable
     SDL_Rect getPosition() const { return position; }
