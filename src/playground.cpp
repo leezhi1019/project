@@ -42,31 +42,23 @@ playground::playground(const std::string& backgroundPath, SDL_Renderer* renderer
     SDL_Log("Center table added.");
 
     // Add more tables around the playground
-    // Study area tables
-    obstacles.push_back(std::make_unique<Table>(renderer, 5, 8, 2, 2));
-    SDL_Log("Study area tables added.");
-
+    
     // Group work tables
     obstacles.push_back(std::make_unique<Table>(renderer, 20, 5, 2, 2));
     obstacles.push_back(std::make_unique<Table>(renderer, 20, 8, 2, 2));
-    SDL_Log("Group work tables added.");
-
+   
     // Reading area tables
     obstacles.push_back(std::make_unique<Table>(renderer, 15, 15, 2, 2));
     obstacles.push_back(std::make_unique<Table>(renderer, 20, 15, 2, 2));
-    SDL_Log("Reading area tables added.");
-
+   
     // Keep existing bookshelf
     obstacles.push_back(std::make_unique<Bookshelf>(renderer, 15, 12, 2, 3));
-    SDL_Log("Bookshelf obstacle added.");
-
+   
     // Initialize test coffee collectible
     collectibles.push_back(std::make_unique<Coffee>(renderer, 10, 10));  // Place at grid position 10,10
-    SDL_Log("Test coffee collectible added to playground");
-
+    
     initializePauseMenu();
-    SDL_Log("Playground initialized.");
-
+    
     // In playground initialization
     GameManagement::initialize();
 
@@ -321,28 +313,20 @@ void playground::reset() {
     obstacles.clear();
     // Center table
     obstacles.push_back(std::make_unique<Table>(renderer, 10, 10, 2, 2));  
-    SDL_Log("Center table added.");
 
     // Add more tables around the playground
-    // Study area tables
-    obstacles.push_back(std::make_unique<Table>(renderer, 5, 5, 2, 2));
-    obstacles.push_back(std::make_unique<Table>(renderer, 5, 8, 2, 2));
-    SDL_Log("Study area tables added.");
-
+    
     // Group work tables
     obstacles.push_back(std::make_unique<Table>(renderer, 20, 5, 2, 2));
     obstacles.push_back(std::make_unique<Table>(renderer, 20, 8, 2, 2));
-    SDL_Log("Group work tables added.");
 
     // Reading area tables
     obstacles.push_back(std::make_unique<Table>(renderer, 15, 15, 2, 2));
     obstacles.push_back(std::make_unique<Table>(renderer, 20, 15, 2, 2));
-    SDL_Log("Reading area tables added.");
 
     // Keep existing bookshelf
     obstacles.push_back(std::make_unique<Bookshelf>(renderer, 15, 12, 2, 3));
-    SDL_Log("Bookshelf obstacle added.");
-    
+
     // Reset any other game-specific variables
 
     collectibles.clear();

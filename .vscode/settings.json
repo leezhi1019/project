@@ -1,5 +1,7 @@
 {
     "files.associations": {
+        "memory": "cpp",
+        "vector": "cpp",
         "atomic": "cpp",
         "bit": "cpp",
         "cctype": "cpp",
@@ -25,7 +27,7 @@
         "iterator": "cpp",
         "limits": "cpp",
         "locale": "cpp",
-        "memory": "cpp",
+        "map": "cpp",
         "new": "cpp",
         "ostream": "cpp",
         "stdexcept": "cpp",
@@ -36,7 +38,6 @@
         "type_traits": "cpp",
         "typeinfo": "cpp",
         "utility": "cpp",
-        "vector": "cpp",
         "xfacet": "cpp",
         "xiosbase": "cpp",
         "xlocale": "cpp",
@@ -49,9 +50,7 @@
         "xmemory": "cpp",
         "xstring": "cpp",
         "xtr1common": "cpp",
-        "xutility": "cpp",
-        "computer": "cpp",
-        "map": "cpp",
-        "xtree": "cpp"
+        "xtree": "cpp",
+        "xutility": "cpp"
     }
 }
