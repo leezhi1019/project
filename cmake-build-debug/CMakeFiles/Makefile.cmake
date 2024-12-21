@@ -117,15 +117,15 @@ set(CMAKE_MAKEFILE_DEPENDS
   "C:/Program Files/JetBrains/CLion 2024.3/bin/cmake/win/x64/share/cmake-3.30/Modules/Platform/Windows-windres.cmake"
   "C:/Program Files/JetBrains/CLion 2024.3/bin/cmake/win/x64/share/cmake-3.30/Modules/Platform/Windows.cmake"
   "C:/Program Files/JetBrains/CLion 2024.3/bin/cmake/win/x64/share/cmake-3.30/Modules/Platform/WindowsPaths.cmake"
-  "C:/Users/jacob/Desktop/Final Project/CMakeLists.txt"
+  "C:/Users/jacob/Desktop/test/project/CMakeLists.txt"
   "CMakeFiles/3.30.5/CMakeCCompiler.cmake"
   "CMakeFiles/3.30.5/CMakeCXXCompiler.cmake"
   "CMakeFiles/3.30.5/CMakeRCCompiler.cmake"
   "CMakeFiles/3.30.5/CMakeSystem.cmake"
-  "C:/Users/jacob/Desktop/Final Project/cmake_modules/FindSDL2.cmake"
-  "C:/Users/jacob/Desktop/Final Project/cmake_modules/FindSDL2_image.cmake"
-  "C:/Users/jacob/Desktop/Final Project/cmake_modules/FindSDL2_mixer.cmake"
-  "C:/Users/jacob/Desktop/Final Project/cmake_modules/FindSDL2_ttf.cmake"
+  "C:/Users/jacob/Desktop/test/project/cmake_modules/FindSDL2.cmake"
+  "C:/Users/jacob/Desktop/test/project/cmake_modules/FindSDL2_image.cmake"
+  "C:/Users/jacob/Desktop/test/project/cmake_modules/FindSDL2_mixer.cmake"
+  "C:/Users/jacob/Desktop/test/project/cmake_modules/FindSDL2_ttf.cmake"
   )
 
 # The corresponding makefile is:

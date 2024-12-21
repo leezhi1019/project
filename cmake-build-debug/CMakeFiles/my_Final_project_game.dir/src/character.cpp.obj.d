@@ -1,13 +1,13 @@
 CMakeFiles/my_Final_project_game.dir/src/character.cpp.obj: \
- C:\Users\jacob\Desktop\Final\ Project\src\character.cpp \
- C:/Users/jacob/Desktop/Final\ Project/include/character.h \
- C:/Users/jacob/Desktop/FINALP~1/SDL_lib/SDL2-2~1.7/X86_64~1/include/SDL2/SDL.h \
- C:/Users/jacob/Desktop/FINALP~1/SDL_lib/SDL2-2~1.7/X86_64~1/include/SDL2/SDL_main.h \
- C:/Users/jacob/Desktop/FINALP~1/SDL_lib/SDL2-2~1.7/X86_64~1/include/SDL2/SDL_stdinc.h \
- C:/Users/jacob/Desktop/FINALP~1/SDL_lib/SDL2-2~1.7/X86_64~1/include/SDL2/SDL_config.h \
- C:/Users/jacob/Desktop/FINALP~1/SDL_lib/SDL2-2~1.7/X86_64~1/include/SDL2/SDL_platform.h \
- C:/Users/jacob/Desktop/FINALP~1/SDL_lib/SDL2-2~1.7/X86_64~1/include/SDL2/begin_code.h \
- C:/Users/jacob/Desktop/FINALP~1/SDL_lib/SDL2-2~1.7/X86_64~1/include/SDL2/close_code.h \
+ C:\Users\jacob\Desktop\test\project\src\character.cpp \
+ C:/Users/jacob/Desktop/test/project/include/character.h \
+ C:/Users/jacob/Desktop/test/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/SDL.h \
+ C:/Users/jacob/Desktop/test/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/SDL_main.h \
+ C:/Users/jacob/Desktop/test/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/SDL_stdinc.h \
+ C:/Users/jacob/Desktop/test/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/SDL_config.h \
+ C:/Users/jacob/Desktop/test/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/SDL_platform.h \
+ C:/Users/jacob/Desktop/test/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/begin_code.h \
+ C:/Users/jacob/Desktop/test/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/close_code.h \
  C:/Program\ Files/JetBrains/CLion\ 2024.3/bin/mingw/x86_64-w64-mingw32/include/winsdkver.h \
  C:/Program\ Files/JetBrains/CLion\ 2024.3/bin/mingw/x86_64-w64-mingw32/include/winapifamily.h \
  C:/Program\ Files/JetBrains/CLion\ 2024.3/bin/mingw/x86_64-w64-mingw32/include/sdkddkver.h \
@@ -25,20 +25,20 @@ CMakeFiles/my_Final_project_game.dir/src/character.cpp.obj: \
  C:/Program\ Files/JetBrains/CLion\ 2024.3/bin/mingw/x86_64-w64-mingw32/include/_mingw_stdarg.h \
  C:/Program\ Files/JetBrains/CLion\ 2024.3/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/stdint.h \
  C:/Program\ Files/JetBrains/CLion\ 2024.3/bin/mingw/x86_64-w64-mingw32/include/stdint.h \
- C:/Users/jacob/Desktop/FINALP~1/SDL_lib/SDL2-2~1.7/X86_64~1/include/SDL2/SDL_assert.h \
- C:/Users/jacob/Desktop/FINALP~1/SDL_lib/SDL2-2~1.7/X86_64~1/include/SDL2/SDL_atomic.h \
- C:/Users/jacob/Desktop/FINALP~1/SDL_lib/SDL2-2~1.7/X86_64~1/include/SDL2/SDL_audio.h \
- C:/Users/jacob/Desktop/FINALP~1/SDL_lib/SDL2-2~1.7/X86_64~1/include/SDL2/SDL_error.h \
- C:/Users/jacob/Desktop/FINALP~1/SDL_lib/SDL2-2~1.7/X86_64~1/include/SDL2/SDL_endian.h \
- C:/Users/jacob/Desktop/FINALP~1/SDL_lib/SDL2-2~1.7/X86_64~1/include/SDL2/SDL_mutex.h \
- C:/Users/jacob/Desktop/FINALP~1/SDL_lib/SDL2-2~1.7/X86_64~1/include/SDL2/SDL_thread.h \
+ C:/Users/jacob/Desktop/test/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/SDL_assert.h \
+ C:/Users/jacob/Desktop/test/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/SDL_atomic.h \
+ C:/Users/jacob/Desktop/test/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/SDL_audio.h \
+ C:/Users/jacob/Desktop/test/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/SDL_error.h \
+ C:/Users/jacob/Desktop/test/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/SDL_endian.h \
+ C:/Users/jacob/Desktop/test/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/SDL_mutex.h \
+ C:/Users/jacob/Desktop/test/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/SDL_thread.h \
  C:/Program\ Files/JetBrains/CLion\ 2024.3/bin/mingw/x86_64-w64-mingw32/include/process.h \
  C:/Program\ Files/JetBrains/CLion\ 2024.3/bin/mingw/x86_64-w64-mingw32/include/corecrt_startup.h \
  C:/Program\ Files/JetBrains/CLion\ 2024.3/bin/mingw/x86_64-w64-mingw32/include/sys/types.h \
  C:/Program\ Files/JetBrains/CLion\ 2024.3/bin/mingw/x86_64-w64-mingw32/include/_mingw_off_t.h \
- C:/Users/jacob/Desktop/FINALP~1/SDL_lib/SDL2-2~1.7/X86_64~1/include/SDL2/SDL_rwops.h \
- C:/Users/jacob/Desktop/FINALP~1/SDL_lib/SDL2-2~1.7/X86_64~1/include/SDL2/SDL_clipboard.h \
- C:/Users/jacob/Desktop/FINALP~1/SDL_lib/SDL2-2~1.7/X86_64~1/include/SDL2/SDL_cpuinfo.h \
+ C:/Users/jacob/Desktop/test/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/SDL_rwops.h \
+ C:/Users/jacob/Desktop/test/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/SDL_clipboard.h \
+ C:/Users/jacob/Desktop/test/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/SDL_cpuinfo.h \
  C:/Program\ Files/JetBrains/CLion\ 2024.3/bin/mingw/x86_64-w64-mingw32/include/intrin.h \
  C:/Program\ Files/JetBrains/CLion\ 2024.3/bin/mingw/x86_64-w64-mingw32/include/setjmp.h \
  C:/Program\ Files/JetBrains/CLion\ 2024.3/bin/mingw/x86_64-w64-mingw32/include/psdk_inc/intrin-impl.h \
@@ -157,42 +157,42 @@ CMakeFiles/my_Final_project_game.dir/src/character.cpp.obj: \
  C:/Program\ Files/JetBrains/CLion\ 2024.3/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/ammintrin.h \
  C:/Program\ Files/JetBrains/CLion\ 2024.3/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/xopintrin.h \
  C:/Program\ Files/JetBrains/CLion\ 2024.3/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/cpuid.h \
- C:/Users/jacob/Desktop/FINALP~1/SDL_lib/SDL2-2~1.7/X86_64~1/include/SDL2/SDL_events.h \
- C:/Users/jacob/Desktop/FINALP~1/SDL_lib/SDL2-2~1.7/X86_64~1/include/SDL2/SDL_video.h \
- C:/Users/jacob/Desktop/FINALP~1/SDL_lib/SDL2-2~1.7/X86_64~1/include/SDL2/SDL_pixels.h \
- C:/Users/jacob/Desktop/FINALP~1/SDL_lib/SDL2-2~1.7/X86_64~1/include/SDL2/SDL_rect.h \
- C:/Users/jacob/Desktop/FINALP~1/SDL_lib/SDL2-2~1.7/X86_64~1/include/SDL2/SDL_surface.h \
- C:/Users/jacob/Desktop/FINALP~1/SDL_lib/SDL2-2~1.7/X86_64~1/include/SDL2/SDL_blendmode.h \
- C:/Users/jacob/Desktop/FINALP~1/SDL_lib/SDL2-2~1.7/X86_64~1/include/SDL2/SDL_keyboard.h \
- C:/Users/jacob/Desktop/FINALP~1/SDL_lib/SDL2-2~1.7/X86_64~1/include/SDL2/SDL_keycode.h \
- C:/Users/jacob/Desktop/FINALP~1/SDL_lib/SDL2-2~1.7/X86_64~1/include/SDL2/SDL_scancode.h \
- C:/Users/jacob/Desktop/FINALP~1/SDL_lib/SDL2-2~1.7/X86_64~1/include/SDL2/SDL_mouse.h \
- C:/Users/jacob/Desktop/FINALP~1/SDL_lib/SDL2-2~1.7/X86_64~1/include/SDL2/SDL_joystick.h \
- C:/Users/jacob/Desktop/FINALP~1/SDL_lib/SDL2-2~1.7/X86_64~1/include/SDL2/SDL_guid.h \
- C:/Users/jacob/Desktop/FINALP~1/SDL_lib/SDL2-2~1.7/X86_64~1/include/SDL2/SDL_gamecontroller.h \
- C:/Users/jacob/Desktop/FINALP~1/SDL_lib/SDL2-2~1.7/X86_64~1/include/SDL2/SDL_sensor.h \
- C:/Users/jacob/Desktop/FINALP~1/SDL_lib/SDL2-2~1.7/X86_64~1/include/SDL2/SDL_quit.h \
- C:/Users/jacob/Desktop/FINALP~1/SDL_lib/SDL2-2~1.7/X86_64~1/include/SDL2/SDL_gesture.h \
- C:/Users/jacob/Desktop/FINALP~1/SDL_lib/SDL2-2~1.7/X86_64~1/include/SDL2/SDL_touch.h \
- C:/Users/jacob/Desktop/FINALP~1/SDL_lib/SDL2-2~1.7/X86_64~1/include/SDL2/SDL_filesystem.h \
- C:/Users/jacob/Desktop/FINALP~1/SDL_lib/SDL2-2~1.7/X86_64~1/include/SDL2/SDL_haptic.h \
- C:/Users/jacob/Desktop/FINALP~1/SDL_lib/SDL2-2~1.7/X86_64~1/include/SDL2/SDL_hidapi.h \
- C:/Users/jacob/Desktop/FINALP~1/SDL_lib/SDL2-2~1.7/X86_64~1/include/SDL2/SDL_hints.h \
- C:/Users/jacob/Desktop/FINALP~1/SDL_lib/SDL2-2~1.7/X86_64~1/include/SDL2/SDL_loadso.h \
- C:/Users/jacob/Desktop/FINALP~1/SDL_lib/SDL2-2~1.7/X86_64~1/include/SDL2/SDL_log.h \
- C:/Users/jacob/Desktop/FINALP~1/SDL_lib/SDL2-2~1.7/X86_64~1/include/SDL2/SDL_messagebox.h \
- C:/Users/jacob/Desktop/FINALP~1/SDL_lib/SDL2-2~1.7/X86_64~1/include/SDL2/SDL_metal.h \
- C:/Users/jacob/Desktop/FINALP~1/SDL_lib/SDL2-2~1.7/X86_64~1/include/SDL2/SDL_power.h \
- C:/Users/jacob/Desktop/FINALP~1/SDL_lib/SDL2-2~1.7/X86_64~1/include/SDL2/SDL_render.h \
- C:/Users/jacob/Desktop/FINALP~1/SDL_lib/SDL2-2~1.7/X86_64~1/include/SDL2/SDL_shape.h \
- C:/Users/jacob/Desktop/FINALP~1/SDL_lib/SDL2-2~1.7/X86_64~1/include/SDL2/SDL_system.h \
- C:/Users/jacob/Desktop/FINALP~1/SDL_lib/SDL2-2~1.7/X86_64~1/include/SDL2/SDL_timer.h \
- C:/Users/jacob/Desktop/FINALP~1/SDL_lib/SDL2-2~1.7/X86_64~1/include/SDL2/SDL_version.h \
- C:/Users/jacob/Desktop/FINALP~1/SDL_lib/SDL2-2~1.7/X86_64~1/include/SDL2/SDL_locale.h \
- C:/Users/jacob/Desktop/FINALP~1/SDL_lib/SDL2-2~1.7/X86_64~1/include/SDL2/SDL_misc.h \
- C:/Users/jacob/Desktop/FINALP~1/SDL_lib/SDL2_T~1.0/X86_64~1/include/SDL2/SDL_ttf.h \
- C:/Users/jacob/Desktop/FINALP~1/SDL_lib/SDL2-2~1.7/X86_64~1/include/SDL2/begin_code.h \
- C:/Users/jacob/Desktop/FINALP~1/SDL_lib/SDL2-2~1.7/X86_64~1/include/SDL2/close_code.h \
+ C:/Users/jacob/Desktop/test/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/SDL_events.h \
+ C:/Users/jacob/Desktop/test/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/SDL_video.h \
+ C:/Users/jacob/Desktop/test/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/SDL_pixels.h \
+ C:/Users/jacob/Desktop/test/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/SDL_rect.h \
+ C:/Users/jacob/Desktop/test/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/SDL_surface.h \
+ C:/Users/jacob/Desktop/test/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/SDL_blendmode.h \
+ C:/Users/jacob/Desktop/test/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/SDL_keyboard.h \
+ C:/Users/jacob/Desktop/test/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/SDL_keycode.h \
+ C:/Users/jacob/Desktop/test/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/SDL_scancode.h \
+ C:/Users/jacob/Desktop/test/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/SDL_mouse.h \
+ C:/Users/jacob/Desktop/test/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/SDL_joystick.h \
+ C:/Users/jacob/Desktop/test/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/SDL_guid.h \
+ C:/Users/jacob/Desktop/test/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/SDL_gamecontroller.h \
+ C:/Users/jacob/Desktop/test/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/SDL_sensor.h \
+ C:/Users/jacob/Desktop/test/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/SDL_quit.h \
+ C:/Users/jacob/Desktop/test/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/SDL_gesture.h \
+ C:/Users/jacob/Desktop/test/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/SDL_touch.h \
+ C:/Users/jacob/Desktop/test/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/SDL_filesystem.h \
+ C:/Users/jacob/Desktop/test/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/SDL_haptic.h \
+ C:/Users/jacob/Desktop/test/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/SDL_hidapi.h \
+ C:/Users/jacob/Desktop/test/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/SDL_hints.h \
+ C:/Users/jacob/Desktop/test/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/SDL_loadso.h \
+ C:/Users/jacob/Desktop/test/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/SDL_log.h \
+ C:/Users/jacob/Desktop/test/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/SDL_messagebox.h \
+ C:/Users/jacob/Desktop/test/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/SDL_metal.h \
+ C:/Users/jacob/Desktop/test/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/SDL_power.h \
+ C:/Users/jacob/Desktop/test/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/SDL_render.h \
+ C:/Users/jacob/Desktop/test/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/SDL_shape.h \
+ C:/Users/jacob/Desktop/test/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/SDL_system.h \
+ C:/Users/jacob/Desktop/test/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/SDL_timer.h \
+ C:/Users/jacob/Desktop/test/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/SDL_version.h \
+ C:/Users/jacob/Desktop/test/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/SDL_locale.h \
+ C:/Users/jacob/Desktop/test/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/SDL_misc.h \
+ C:/Users/jacob/Desktop/test/project/SDL_lib/SDL2_ttf-2.22.0/x86_64-w64-mingw32/include/SDL2/SDL_ttf.h \
+ C:/Users/jacob/Desktop/test/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/begin_code.h \
+ C:/Users/jacob/Desktop/test/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/close_code.h \
  C:/Program\ Files/JetBrains/CLion\ 2024.3/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/string \
  C:/Program\ Files/JetBrains/CLion\ 2024.3/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/requires_hosted.h \
  C:/Program\ Files/JetBrains/CLion\ 2024.3/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stringfwd.h \
@@ -272,8 +272,8 @@ CMakeFiles/my_Final_project_game.dir/src/character.cpp.obj: \
  C:/Program\ Files/JetBrains/CLion\ 2024.3/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/uses_allocator_args.h \
  C:/Program\ Files/JetBrains/CLion\ 2024.3/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/tuple \
  C:/Program\ Files/JetBrains/CLion\ 2024.3/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/ranges_util.h \
- C:/Users/jacob/Desktop/Final\ Project/include/tool.h \
- C:/Users/jacob/Desktop/Final\ Project/include/playground.h \
+ C:/Users/jacob/Desktop/test/project/include/tool.h \
+ C:/Users/jacob/Desktop/test/project/include/playground.h \
  C:/Program\ Files/JetBrains/CLion\ 2024.3/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/vector \
  C:/Program\ Files/JetBrains/CLion\ 2024.3/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_uninitialized.h \
  C:/Program\ Files/JetBrains/CLion\ 2024.3/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_vector.h \
@@ -338,9 +338,9 @@ CMakeFiles/my_Final_project_game.dir/src/character.cpp.obj: \
  C:/Program\ Files/JetBrains/CLion\ 2024.3/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/ranges_algobase.h \
  C:/Program\ Files/JetBrains/CLion\ 2024.3/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/pstl/glue_memory_defs.h \
  C:/Program\ Files/JetBrains/CLion\ 2024.3/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/pstl/execution_defs.h \
- C:/Users/jacob/Desktop/Final\ Project/include/character.h \
- C:/Users/jacob/Desktop/Final\ Project/include/constants.h \
- C:/Users/jacob/Desktop/Final\ Project/include/tool.h \
- C:/Users/jacob/Desktop/Final\ Project/include/obstacle.h \
- C:/Users/jacob/Desktop/Final\ Project/include/table.h \
- C:/Users/jacob/Desktop/Final\ Project/include/bookshelf.h
+ C:/Users/jacob/Desktop/test/project/include/character.h \
+ C:/Users/jacob/Desktop/test/project/include/constants.h \
+ C:/Users/jacob/Desktop/test/project/include/tool.h \
+ C:/Users/jacob/Desktop/test/project/include/obstacle.h \
+ C:/Users/jacob/Desktop/test/project/include/table.h \
+ C:/Users/jacob/Desktop/test/project/include/bookshelf.h

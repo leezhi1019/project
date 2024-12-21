@@ -952,8 +952,8 @@
 	"kind" : "cmakeFiles",
 	"paths" : 
 	{
-		"build" : "C:/Users/jacob/Desktop/Final Project/cmake-build-debug",
-		"source" : "C:/Users/jacob/Desktop/Final Project"
+		"build" : "C:/Users/jacob/Desktop/test/project/cmake-build-debug",
+		"source" : "C:/Users/jacob/Desktop/test/project"
 	},
 	"version" : 
 	{
