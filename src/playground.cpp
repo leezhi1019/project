@@ -55,13 +55,13 @@ playground::playground(const std::string& backgroundPath, SDL_Renderer* renderer
     obstacles.push_back(std::make_unique<Bookshelf>(renderer, 15, 12, 2, 4, BOOKSHELF_TEXTURE_4x2));
     SDL_Log("Bookshelf obstacle added.");
 
-    obstacles.push_back(std::make_unique<Bookshelf>(renderer, 0, 0, 1, 14, BOOKSHELF_TEXTURE_LEFT));
+    obstacles.push_back(std::make_unique<Bookshelf>(renderer, 0, 0, 1, 17, BOOKSHELF_TEXTURE_LEFT));
     SDL_Log("Bookshelf-left obstacle added.");
 
-    obstacles.push_back(std::make_unique<Bookshelf>(renderer, 1, 0, 14, 4, BOOKSHELF_TEXTURE_UP));
+    obstacles.push_back(std::make_unique<Bookshelf>(renderer, 1, 0, 20, 5, BOOKSHELF_TEXTURE_UP));
     SDL_Log("Bookshelf-up obstacle added.");
 
-    obstacles.push_back(std::make_unique<Bookshelf>(renderer, 15, 0, 1, 14, BOOKSHELF_TEXTURE_RIGHT));
+    obstacles.push_back(std::make_unique<Bookshelf>(renderer, 21, 0, 1, 17, BOOKSHELF_TEXTURE_RIGHT));
     SDL_Log("Bookshelf-right obstacle added.");
 
 
@@ -301,13 +301,13 @@ void playground::reset() {
     obstacles.push_back(std::make_unique<Bookshelf>(renderer, 15, 12, 2, 4, BOOKSHELF_TEXTURE_4x2));
     SDL_Log("Bookshelf obstacle added.");
 
-    obstacles.push_back(std::make_unique<Bookshelf>(renderer, 0, 0, 1, 14, BOOKSHELF_TEXTURE_LEFT));
+    obstacles.push_back(std::make_unique<Bookshelf>(renderer, 0, 0, 1, 17, BOOKSHELF_TEXTURE_LEFT));
     SDL_Log("Bookshelf-left obstacle added.");
 
-    obstacles.push_back(std::make_unique<Bookshelf>(renderer, 1, 0, 14, 4, BOOKSHELF_TEXTURE_UP));
+    obstacles.push_back(std::make_unique<Bookshelf>(renderer, 1, 0, 20, 5, BOOKSHELF_TEXTURE_UP));
     SDL_Log("Bookshelf-up obstacle added.");
 
-    obstacles.push_back(std::make_unique<Bookshelf>(renderer, 15, 0, 1, 14, BOOKSHELF_TEXTURE_RIGHT));
+    obstacles.push_back(std::make_unique<Bookshelf>(renderer, 21, 0, 1, 17, BOOKSHELF_TEXTURE_RIGHT));
     SDL_Log("Bookshelf-right obstacle added.");
     
     // Reset any other game-specific variables
