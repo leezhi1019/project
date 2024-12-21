@@ -5,6 +5,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/my_Final_project_game.dir/src/bookshelf.cpp.obj.d"
   "CMakeFiles/my_Final_project_game.dir/src/character.cpp.obj"
   "CMakeFiles/my_Final_project_game.dir/src/character.cpp.obj.d"
+  "CMakeFiles/my_Final_project_game.dir/src/enemy.cpp.obj"
+  "CMakeFiles/my_Final_project_game.dir/src/enemy.cpp.obj.d"
   "CMakeFiles/my_Final_project_game.dir/src/engine.cpp.obj"
   "CMakeFiles/my_Final_project_game.dir/src/engine.cpp.obj.d"
   "CMakeFiles/my_Final_project_game.dir/src/menu.cpp.obj"

@@ -8,7 +8,8 @@
 // Forward declaration
 class playground;
 
-class Character {
+class Character
+{
 private:
     int gridX;
     int gridY;
@@ -19,25 +20,25 @@ private:
     SDL_Color hairColor;
     int hairStyle;
     bool facingRight;
-    SDL_Texture* sprite;
-    SDL_Renderer* renderer;
-    
+    SDL_Texture *sprite;
+    SDL_Renderer *renderer;
+
     // Name related members
     std::string name;
-    TTF_Font* nameFont;
-    SDL_Texture* nameTexture;
+    TTF_Font *nameFont;
+    SDL_Texture *nameTexture;
     SDL_Color nameColor;
-    
+
 private:
     // Add this private helper function
     void updateNameTexture();
-    const playground* gamePlayground;  // Reference to playground for collision checking
+    const playground *gamePlayground; // Reference to playground for collision checking
 
 public:
-    Character(SDL_Renderer* renderer, const std::string& name, 
-             const playground* playground, int startX = 0, int startY = 0);
+    Character(SDL_Renderer *renderer, const std::string &name,
+              const playground *playground, int startX = 0, int startY = 0);
     ~Character();
-    
+
     // Movement methods
     void moveLeft();
     void moveRight();
@@ -51,8 +52,10 @@ public:
     void setHairStyle(int style);
 
     // Add name setter
-    void setName(const std::string& newName);
-
+    void setName(const std::string &newName);
+    // Position getters
+    int getX() const { return gridX; }
+    int getY() const { return gridY; }
     // Core methods
     void render();
     void update();
