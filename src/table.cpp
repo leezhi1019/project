@@ -6,7 +6,7 @@
 Table::Table(SDL_Renderer* renderer, int x, int y, int w, int h)
     : Obstacle(renderer, x, y, w, h) {
     // Try to load texture, but don't require it
-    texture = loadTexture("../imgs/table.png", renderer);
+    texture = loadTexture(TABLE_TEXTURE, renderer);  // Use TABLE_TEXTURE instead of BOOKSHELF_TEXTURE
     if (!texture) {
         SDL_Log("Using fallback rendering for table");
     }
@@ -20,7 +20,17 @@ void Table::render() {
         height * GRID_SIZE
     };
     
-    // Always use fallback colored rectangle for now
-    SDL_SetRenderDrawColor(renderer, 139, 69, 19, 255); // Brown color
-    SDL_RenderFillRect(renderer, &destRect);
+    if (texture) {
+        // Use the loaded texture if available
+        SDL_RenderCopy(renderer, texture, nullptr, &destRect);
+    } else {
+        // Fallback to colored rectangle if texture not available
+        SDL_SetRenderDrawColor(renderer, 139, 69, 19, 255); // Brown color
+        SDL_RenderFillRect(renderer, &destRect);
+    }
+}
+
+bool Table::canPlaceItem() const {
+    // Add logic for checking if items can be placed on the table
+    return true;  // Default implementation
 }

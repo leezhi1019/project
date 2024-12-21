@@ -100,14 +100,24 @@ void setup() {
 // 在迴圈裡
 void process_input() {
     SDL_Event event;
-    SDL_PollEvent(&event);
-    if (event.type==SDL_QUIT) game_is_running = FALSE;
-    if (PAGE_ID == MENUID) {
-        PAGE_ID = MenuPage->process_input(&event);
-    }else if (PAGE_ID == PLAYGROUNDID) {
-        PAGE_ID = PlayPage->process_input(&event);
-    } else if (PAGE_ID == SETTINGSID) {
-        PAGE_ID = SettingsPage->process_input(&event);
+    while (SDL_PollEvent(&event)) {
+        if (event.type == SDL_QUIT) {
+            game_is_running = FALSE;
+        } else if (PAGE_ID == MENUID) {
+            int result = MenuPage->process_input(&event);
+            if (result == PLAYGROUNDID) {
+                // Start new game when moving from menu to playground
+                if (PlayPage) {
+                    delete PlayPage;
+                }
+                PlayPage = new playground(PLAYGROUND_BACKGROUND, renderer, "Player1");
+            }
+            PAGE_ID = result;
+            GameState = result;
+        } else if (PAGE_ID == PLAYGROUNDID) {
+            PAGE_ID = PlayPage->process_input(&event);
+            GameState = PAGE_ID;
+        }
     }
 }
 

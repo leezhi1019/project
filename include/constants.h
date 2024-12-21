@@ -21,8 +21,10 @@ const int FALSE = 0;
 #define PLAYER_H 100
 #define PLAYER_SPEED 3000
 #define MENU_BACKGROUND "../imgs/background.jpg"
-#define PLAYGROUND_BACKGROUND "../imgs/background2.jpg"
+#define PLAYGROUND_BACKGROUND "../imgs/playground_background.jpg"
 #define SETTINGS_BACKGROUND "../imgs/settings_background.jpg"
+#define BOOKSHELF_TEXTURE "../imgs/bookshelf_image.jpg"
+#define TABLE_TEXTURE "../imgs/table1x2.png"
 
 // Grid size for game world
 #define GRID_SIZE 40  // Size of each grid cell in pixels
