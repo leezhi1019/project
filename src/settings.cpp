@@ -63,6 +63,25 @@ void settings::initializeSections() {
     settingsSection.rect = {2 * sectionWidth, 0, sectionWidth, sectionHeight};
     settingsSection.title = "Settings";
     settingsSection.isActive = true;
+
+    // Add volume control button below avatars
+    int buttonWidth = 240;
+    int buttonHeight = 40;
+    int spacing = 20;  // Spacing between buttons
+    int buttonX = settingsSection.rect.x + (sectionWidth - buttonWidth) / 2 ;
+    int buttonY = settingsSection.rect.y + 300;  // Position below avatars
+
+    // Create volume control button
+    createButton("Username", buttonX, buttonY, buttonWidth, buttonHeight);
+
+    // Add username button below volume control
+    buttonY += buttonHeight + spacing*5;  // Move down by button height plus spacing
+    createButton("Volume", buttonX, buttonY, buttonWidth, buttonHeight);
+
+    // Add volume controls below volume label
+    buttonY += buttonHeight + spacing;
+    createVolumeControls(buttonX, buttonY, buttonWidth, buttonHeight);
+
     sections.push_back(settingsSection);
 }
 
@@ -76,15 +95,18 @@ settings::settings(const std::string& path, SDL_Renderer* renderer) {
         SDL_Log("Failed to load font: %s", TTF_GetError());
         return;
     }
-
+    
     // Initialize sections
     initializeSections();
     
     // Initialize avatar buttons
     initializeAvatarButtons();
     
-    // Create back button last so it appears on top
+    // Create back button
     createButton("Back to Menu", WINDOW_WIDTH/2 - 120, WINDOW_HEIGHT - 80, 240, 40);
+    
+    // Create save button next to back button
+    createButton("Save Changes", WINDOW_WIDTH/2 + 320, WINDOW_HEIGHT - 80, 240, 40);
 
     SDL_StartTextInput();
 }
@@ -137,74 +159,53 @@ void settings::createButton(const char* text, int x, int y, int width, int heigh
 }
 
 int settings::process_input(SDL_Event* event) {
-    switch (event->type) {
-        case SDL_MOUSEMOTION:
-            handleMouseMotion(event->motion.x, event->motion.y);
-            break;
+    if (event->type == SDL_MOUSEBUTTONDOWN) {
+        if (event->button.button == SDL_BUTTON_LEFT) {
+            int mouseX = event->button.x;
+            int mouseY = event->button.y;
             
-        case SDL_MOUSEBUTTONDOWN:
-            if (event->button.button == SDL_BUTTON_LEFT) {
-                return handleMouseClick(event->button.x, event->button.y);
-            }
-            break;
-            
-        case SDL_TEXTINPUT:
-            // Add text input to active section
-            for (auto& section : sections) {
-                if (section.isActive && section.title == "Game Rules") {
-                    // Add the typed text
-                    section.textContent += event->text.text;
-                    SDL_Log("Text content updated: %s", section.textContent.c_str());
+            // Handle back button click
+            for (const auto& button : buttons) {
+                if (mouseX >= button.rect.x && 
+                    mouseX <= button.rect.x + button.rect.w &&
+                    mouseY >= button.rect.y && 
+                    mouseY <= button.rect.y + button.rect.h) {
                     
-                    // Clean up old texture
-                    if (section.textTexture) {
-                        SDL_DestroyTexture(section.textTexture);
-                        section.textTexture = nullptr;
-                    }
+                    SDL_Log("Button clicked: %s", button.text.c_str());
                     
-                    // Create new texture with error checking
-                    SDL_Color textColor = {0, 0, 0, 255};  // Black text
-                    SDL_Surface* surface = TTF_RenderText_Solid(font, 
-                        section.textContent.c_str(), textColor);
-                        
-                    if (!surface) {
-                        SDL_Log("Failed to create text surface: %s", TTF_GetError());
-                        continue;
+                    // Handle different button actions
+                    if (button.text == "Back to Menu") {
+                        return MENUID;
                     }
-                    
-                    section.textTexture = SDL_CreateTextureFromSurface(renderer, surface);
-                    if (!section.textTexture) {
-                        SDL_Log("Failed to create texture: %s", SDL_GetError());
+                    else if (button.text == "+") {
+                        volumeLevel = std::min(100, volumeLevel + 1);
+                        updateVolumeDisplay();
                     }
-                    SDL_FreeSurface(surface);
-                }
-            }
-            break;
-            
-        case SDL_KEYDOWN:
-            if (event->key.keysym.sym == SDLK_BACKSPACE) {
-                // Handle backspace
-                for (auto& section : sections) {
-                    if (section.isActive && section.title == "Game Rules") {
-                        if (!section.textContent.empty()) {
-                            section.textContent.pop_back();
-                            // Recreate texture
-                            if (section.textTexture) {
-                                SDL_DestroyTexture(section.textTexture);
-                            }
-                            SDL_Color textColor = {0, 0, 0, 255};
-                            SDL_Surface* surface = TTF_RenderText_Solid(font, 
-                                section.textContent.c_str(), textColor);
-                            if (surface) {
-                                section.textTexture = SDL_CreateTextureFromSurface(renderer, surface);
-                                SDL_FreeSurface(surface);
-                            }
-                        }
+                    else if (button.text == "-") {
+                        volumeLevel = std::max(0, volumeLevel - 1);
+                        updateVolumeDisplay();
                     }
                 }
             }
-            break;
+            
+            // Handle avatar button clicks
+            for (size_t i = 0; i < avatarButtons.size(); i++) {
+                if (mouseX >= avatarButtons[i].rect.x && 
+                    mouseX <= avatarButtons[i].rect.x + avatarButtons[i].rect.w &&
+                    mouseY >= avatarButtons[i].rect.y && 
+                    mouseY <= avatarButtons[i].rect.y + avatarButtons[i].rect.h) {
+                    
+                    // Deselect all other avatars
+                    for (auto& button : avatarButtons) {
+                        button.isSelected = false;
+                    }
+                    avatarButtons[i].isSelected = true;
+                    break;
+                }
+            }
+        }
     }
+    
     return SETTINGSID;
 }
 
@@ -408,10 +409,10 @@ int settings::handleMouseClick(int x, int y) {
 
 void settings::initializeAvatarButtons() {
     int sectionWidth = WINDOW_WIDTH / 3;
-    int buttonSize = 100;
-    int spacing = 20;
-    int startX = 2 * sectionWidth + (sectionWidth - 3 * buttonSize - 2 * spacing) / 2;
-    int startY = 100;
+    int buttonSize = 100;  // Avatar button size
+    int spacing = 20;      // Space between buttons
+    int startX = (2 * sectionWidth) + (sectionWidth - (3 * buttonSize + 2 * spacing)) / 2;
+    int startY = 150;      // Avatar buttons Y position
 
     // Clear existing buttons if any
     avatarButtons.clear();
@@ -438,5 +439,48 @@ void settings::initializeAvatarButtons() {
         
         button.isSelected = (i == 0);
         avatarButtons.push_back(button);
+    }
+}
+
+void settings::createVolumeControls(int x, int y, int width, int height) {
+    // Constants for control layout
+    int controlWidth = 60;  // Width of +/- buttons
+    int volumeDisplayWidth = width - (2 * controlWidth);  // Width for volume number
+    
+    // Create minus (-) button
+    createButton("-", x, y, controlWidth, height);
+    
+    // Create centered volume number display
+    std::string volumeText = std::to_string(volumeLevel) + "%";
+    createButton(volumeText.c_str(), 
+                x + controlWidth, y, 
+                volumeDisplayWidth, height);
+    
+    // Create plus (+) button
+    createButton("+", 
+                x + controlWidth + volumeDisplayWidth, y, 
+                controlWidth, height);
+}
+
+void settings::updateVolumeDisplay() {
+    // Find and update volume number button
+    for (auto& button : buttons) {
+        if (button.text != "+" && button.text != "-" && 
+            button.text.find_first_not_of("0123456789") == std::string::npos) {
+            // Update volume display
+            if (button.textTexture) {
+                SDL_DestroyTexture(button.textTexture);
+            }
+            button.text = std::to_string(volumeLevel);
+            
+            // Create new texture for updated number
+            SDL_Color textColor = {255, 255, 255, 255};
+            SDL_Surface* surface = TTF_RenderText_Solid(font, button.text.c_str(), textColor);
+            if (surface) {
+                button.textTexture = SDL_CreateTextureFromSurface(renderer, surface);
+                SDL_FreeSurface(surface);
+            }
+            break;
+        }
     }
 }

@@ -44,12 +44,15 @@ private:
     std::vector<AvatarButton> avatarButtons;
     SDL_Rect separatorLine;    // 分隔線
     Button backButton;         // 返回選單按鈕
+    int volumeLevel = 50;  // Default volume level
 
     // Private helper methods
     void createButton(const char* text, int x, int y, int width, int height);
     void handleMouseMotion(int x, int y);
     int handleMouseClick(int x, int y);
     void initializeAvatarButtons();
+    void createVolumeControls(int x, int y, int width, int height);
+    void updateVolumeDisplay();
 
 public:
     settings(const std::string& path, SDL_Renderer* renderer);
