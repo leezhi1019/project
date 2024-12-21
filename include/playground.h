@@ -36,6 +36,12 @@ private:
     SDL_Color buttonHoverColor;
     bool isGameEnded;  // Add this to track game end state
 
+    Uint32 countdownStart;
+    Uint32 countdownDuration;  // in milliseconds
+    TTF_Font* timerFont;
+    Uint32 startTime;
+    bool isTimerRunning;
+
     void createPauseButton(const char* text, int x, int y, int width, int height);
     void handleMouseMotion(int x, int y);
     int handleMouseClick(int x, int y);
