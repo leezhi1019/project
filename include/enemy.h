@@ -10,6 +10,8 @@ class Vision
 public:
     Vision(int range, int angle);
     bool isCharacterInSight(const Character &character, int enemyX, int enemyY, int enemyAngle) const;
+    int getRange() const { return range; } // Add getter for range
+    int getAngle() const { return angle; } // Add getter for angle
 
 private:
     int range;
@@ -32,10 +34,14 @@ public:
     int getX() const { return x; }
     int getY() const { return y; }
     float getMoveSpeed() const { return moveSpeed; }
+    int getVisionRange() const; // Add getter for vision range
+    int getVisionAngle() const; // Add getter for vision angle
+    int getAngle() const;       // Add getter for angle
 
     // Setters
     void setPosition(float newX, float newY);
     void setMoveSpeed(float speed) { moveSpeed = speed; }
+    void setAngle(float newAngle); // Add setter for angle
 
 private:
     SDL_Renderer *renderer;

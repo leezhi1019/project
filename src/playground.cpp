@@ -248,6 +248,25 @@ void playground::render()
     if (enemy != nullptr)
     {
         enemy->render();
+
+        // Render enemy vision as a sector
+        SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
+        SDL_SetRenderDrawColor(renderer, 255, 0, 0, 128); // Red translucent color
+
+        int visionRange = enemy->getVisionRange();
+        int visionAngle = enemy->getVisionAngle();
+        int enemyX = static_cast<int>(enemy->getX());
+        int enemyY = static_cast<int>(enemy->getY());
+        int startAngle = enemy->getAngle() - visionAngle / 2;
+        int endAngle = enemy->getAngle() + visionAngle / 2;
+
+        for (int angle = startAngle; angle <= endAngle; ++angle)
+        {
+            float rad = angle * M_PI / 180.0f;
+            int x = enemyX + visionRange * std::cos(rad);
+            int y = enemyY + visionRange * std::sin(rad);
+            SDL_RenderDrawLine(renderer, enemyX, enemyY, x, y);
+        }
     }
 
     // Render pause menu if paused
@@ -377,27 +396,30 @@ void playground::updateEnemyPatrol()
     if (enemy == nullptr)
         return;
 
-    static size_t currentWaypoint = 0;
     static const float moveSpeed = 2.0f;
+    static int collisionCooldown = 0; // Cooldown counter for collision
+    static int detectionCooldown = 0; // Cooldown counter for detection
 
-    auto target = patrolWaypoints[currentWaypoint];
-    float dx = target.first - enemy->getX();
-    float dy = target.second - enemy->getY();
-    float distance = std::sqrt(dx * dx + dy * dy);
-
-    if (distance < moveSpeed)
+    if (collisionCooldown > 0)
     {
-        currentWaypoint = (currentWaypoint + 1) % patrolWaypoints.size();
+        collisionCooldown--;
     }
-    else
+
+    if (detectionCooldown > 0)
     {
-        dx /= distance;
-        dy /= distance;
+        detectionCooldown--;
+        return; // Skip movement and detection while in detection cooldown
+    }
 
-        float newX = enemy->getX() + dx * moveSpeed;
-        float newY = enemy->getY() + dy * moveSpeed;
+    float dx = std::cos(enemy->getAngle() * M_PI / 180.0f);
+    float dy = std::sin(enemy->getAngle() * M_PI / 180.0f);
 
-        bool collision = false;
+    float newX = enemy->getX() + dx * moveSpeed;
+    float newY = enemy->getY() + dy * moveSpeed;
+
+    bool collision = false;
+    if (collisionCooldown == 0)
+    {
         for (const auto &obstacle : obstacles)
         {
             if (obstacle->isBlocking(newX / 32, newY / 32))
@@ -407,9 +429,36 @@ void playground::updateEnemyPatrol()
             }
         }
 
-        if (!collision)
+        // Check for map boundaries (assuming map size is 675 * 2 by 386 * 2)
+        if (newX < 0 || newX > 675 * 2 || newY < 0 || newY > 386 * 2)
         {
-            enemy->setPosition(newX, newY);
+            collision = true;
         }
+    }
+
+    if (!collision)
+    {
+        enemy->setPosition(newX, newY);
+    }
+    else
+    {
+        // Randomly turn left or right if collision detected and start cooldown
+        float currentAngle = enemy->getAngle();
+        if (rand() % 2 == 0)
+        {
+            enemy->setAngle(currentAngle + 90.0f);
+        }
+        else
+        {
+            enemy->setAngle(currentAngle - 90.0f);
+        }
+        collisionCooldown = 30; // Set cooldown period
+    }
+
+    // Check if the main character is in the vision of the enemy
+    if (enemy->detectCharacter(*mainCharacter))
+    {
+        SDL_Log("Main character detected by enemy!");
+        detectionCooldown = 120; // Stop for 2 seconds (assuming 60 FPS)
     }
 }
