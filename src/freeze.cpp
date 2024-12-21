@@ -11,6 +11,11 @@ Freeze::Freeze(SDL_Renderer* renderer, int x, int y)
     SDL_Point spawn = CollectibleManager::getRandomSpawnPoint();
     position.x = spawn.x * GRID_SIZE;
     position.y = spawn.y * GRID_SIZE;
+
+    // Initialize glow parameters
+    glowColor = {0, 255, 255, 255};  // Cyan glow
+    glowIntensity = 1.2f;
+    glowTime = 0.0f;
 }
 
 void Freeze::collect() {
@@ -30,4 +35,9 @@ void Freeze::update(float deltaTime) {
             isActive = false;
         }
     }
+}
+
+void Freeze::renderGlow() {
+    if (!m_isVisible) return;
+    drawCircularGlow(2.2f, 4, 2.5f, 2.0f);  // Icy effect glow
 }
