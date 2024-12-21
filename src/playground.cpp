@@ -22,7 +22,7 @@ playground::playground(const std::string& backgroundPath, SDL_Renderer* renderer
     }
 
     // Initialize character
-    mainCharacter = new Character(renderer, playerName, this, 2, 8);
+    mainCharacter = new Character(renderer, playerName, this, 1, 8);
     if (!mainCharacter) {
         SDL_Log("Failed to create main character!");
         // Handle error appropriately
@@ -273,7 +273,7 @@ void playground::reset() {
     if (mainCharacter) {
         delete mainCharacter;
     }
-    mainCharacter = new Character(renderer, "Player1", this, 2, 8);
+    mainCharacter = new Character(renderer, "Player1", this, 1, 8);
     
     // Clear and reinitialize obstacles
     obstacles.clear();
