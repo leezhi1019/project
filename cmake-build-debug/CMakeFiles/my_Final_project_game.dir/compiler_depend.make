@@ -641,6 +641,7 @@ CMakeFiles/my_Final_project_game.dir/src/bookshelf.cpp.obj: C:/Users/leezhi/FINA
   C:/Users/leezhi/FINAL/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/SDL_video.h \
   C:/Users/leezhi/FINAL/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/begin_code.h \
   C:/Users/leezhi/FINAL/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/close_code.h \
+  C:/Users/leezhi/FINAL/project/SDL_lib/SDL2_image-2.8.2/x86_64-w64-mingw32/include/SDL2/SDL_image.h \
   C:/Users/leezhi/FINAL/project/include/bookshelf.h \
   C:/Users/leezhi/FINAL/project/include/constants.h \
   C:/Users/leezhi/FINAL/project/include/obstacle.h \
@@ -979,6 +980,7 @@ CMakeFiles/my_Final_project_game.dir/src/character.cpp.obj: C:/Users/leezhi/FINA
   C:/Users/leezhi/FINAL/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/SDL_video.h \
   C:/Users/leezhi/FINAL/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/begin_code.h \
   C:/Users/leezhi/FINAL/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/close_code.h \
+  C:/Users/leezhi/FINAL/project/SDL_lib/SDL2_image-2.8.2/x86_64-w64-mingw32/include/SDL2/SDL_image.h \
   C:/Users/leezhi/FINAL/project/SDL_lib/SDL2_ttf-2.22.0/x86_64-w64-mingw32/include/SDL2/SDL_ttf.h \
   C:/Users/leezhi/FINAL/project/include/bookshelf.h \
   C:/Users/leezhi/FINAL/project/include/character.h \
@@ -1653,6 +1655,7 @@ CMakeFiles/my_Final_project_game.dir/src/menu.cpp.obj: C:/Users/leezhi/FINAL/pro
   C:/Users/leezhi/FINAL/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/SDL_video.h \
   C:/Users/leezhi/FINAL/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/begin_code.h \
   C:/Users/leezhi/FINAL/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/close_code.h \
+  C:/Users/leezhi/FINAL/project/SDL_lib/SDL2_image-2.8.2/x86_64-w64-mingw32/include/SDL2/SDL_image.h \
   C:/Users/leezhi/FINAL/project/SDL_lib/SDL2_ttf-2.22.0/x86_64-w64-mingw32/include/SDL2/SDL_ttf.h \
   C:/Users/leezhi/FINAL/project/include/constants.h \
   C:/Users/leezhi/FINAL/project/include/menu.h \
@@ -2184,6 +2187,7 @@ CMakeFiles/my_Final_project_game.dir/src/playground.cpp.obj: C:/Users/leezhi/FIN
   C:/Users/leezhi/FINAL/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/SDL_video.h \
   C:/Users/leezhi/FINAL/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/begin_code.h \
   C:/Users/leezhi/FINAL/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/close_code.h \
+  C:/Users/leezhi/FINAL/project/SDL_lib/SDL2_image-2.8.2/x86_64-w64-mingw32/include/SDL2/SDL_image.h \
   C:/Users/leezhi/FINAL/project/SDL_lib/SDL2_ttf-2.22.0/x86_64-w64-mingw32/include/SDL2/SDL_ttf.h \
   C:/Users/leezhi/FINAL/project/include/bookshelf.h \
   C:/Users/leezhi/FINAL/project/include/character.h \
@@ -2241,6 +2245,8 @@ CMakeFiles/my_Final_project_game.dir/src/settings.cpp.obj: C:/Users/leezhi/FINAL
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bit \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/alloc_traits.h \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/allocator.h \
+  C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/basic_ios.h \
+  C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/basic_ios.tcc \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/basic_string.h \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/basic_string.tcc \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/char_traits.h \
@@ -2248,19 +2254,29 @@ CMakeFiles/my_Final_project_game.dir/src/settings.cpp.obj: C:/Users/leezhi/FINAL
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/concept_check.h \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/cpp_type_traits.h \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/cxxabi_forced.h \
+  C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/cxxabi_init_exception.h \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/exception.h \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/exception_defines.h \
+  C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/exception_ptr.h \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/functexcept.h \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/functional_hash.h \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/hash_bytes.h \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/invoke.h \
+  C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/ios_base.h \
+  C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/istream.tcc \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/iterator_concepts.h \
+  C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/locale_classes.h \
+  C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/locale_classes.tcc \
+  C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/locale_facets.h \
+  C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/locale_facets.tcc \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/localefwd.h \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/max_size_type.h \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/memory_resource.h \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/memoryfwd.h \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/move.h \
+  C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/nested_exception.h \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/new_allocator.h \
+  C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/ostream.tcc \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/ostream_insert.h \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/postypes.h \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/predefined_ops.h \
@@ -2282,6 +2298,8 @@ CMakeFiles/my_Final_project_game.dir/src/settings.cpp.obj: C:/Users/leezhi/FINAL
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_pair.h \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_uninitialized.h \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_vector.h \
+  C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/streambuf.tcc \
+  C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/streambuf_iterator.h \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/string_view.tcc \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stringfwd.h \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/uses_allocator.h \
@@ -2297,27 +2315,44 @@ CMakeFiles/my_Final_project_game.dir/src/settings.cpp.obj: C:/Users/leezhi/FINAL
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/cstdio \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/cstdlib \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/cwchar \
+  C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/cwctype \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/debug/assertions.h \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/debug/debug.h \
+  C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/exception \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/ext/alloc_traits.h \
+  C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/ext/atomicity.h \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/ext/numeric_traits.h \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/ext/string_conversions.h \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/ext/type_traits.h \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/initializer_list \
+  C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/ios \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/iosfwd \
+  C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/iostream \
+  C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/istream \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/new \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/numbers \
+  C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/ostream \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/pstl/pstl_config.h \
+  C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/stdexcept \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/stdlib.h \
+  C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/streambuf \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/string \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/string_view \
+  C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/system_error \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/tuple \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/type_traits \
+  C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/typeinfo \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/vector \
+  C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32/bits/atomic_word.h \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32/bits/c++allocator.h \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32/bits/c++config.h \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32/bits/c++locale.h \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32/bits/cpu_defines.h \
+  C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32/bits/ctype_base.h \
+  C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32/bits/ctype_inline.h \
+  C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32/bits/error_constants.h \
+  C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32/bits/gthr-default.h \
+  C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32/bits/gthr.h \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32/bits/os_defines.h \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/cetintrin.h \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/cldemoteintrin.h \
@@ -2387,6 +2422,7 @@ CMakeFiles/my_Final_project_game.dir/src/settings.cpp.obj: C:/Users/leezhi/FINAL
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/x86_64-w64-mingw32/include/_mingw_secapi.h \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/x86_64-w64-mingw32/include/_mingw_stat64.h \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/x86_64-w64-mingw32/include/_mingw_stdarg.h \
+  C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/x86_64-w64-mingw32/include/_timeval.h \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/x86_64-w64-mingw32/include/corecrt.h \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/x86_64-w64-mingw32/include/corecrt_startup.h \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/x86_64-w64-mingw32/include/corecrt_stdio_config.h \
@@ -2400,21 +2436,31 @@ CMakeFiles/my_Final_project_game.dir/src/settings.cpp.obj: C:/Users/leezhi/FINAL
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/x86_64-w64-mingw32/include/malloc.h \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/x86_64-w64-mingw32/include/process.h \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/x86_64-w64-mingw32/include/psdk_inc/intrin-impl.h \
+  C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/x86_64-w64-mingw32/include/pthread.h \
+  C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/x86_64-w64-mingw32/include/pthread_compat.h \
+  C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/x86_64-w64-mingw32/include/pthread_signal.h \
+  C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/x86_64-w64-mingw32/include/pthread_time.h \
+  C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/x86_64-w64-mingw32/include/pthread_unistd.h \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/x86_64-w64-mingw32/include/sdkddkver.h \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/x86_64-w64-mingw32/include/sdks/_mingw_ddk.h \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/x86_64-w64-mingw32/include/sec_api/stdio_s.h \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/x86_64-w64-mingw32/include/sec_api/stdlib_s.h \
+  C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/x86_64-w64-mingw32/include/sec_api/sys/timeb_s.h \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/x86_64-w64-mingw32/include/sec_api/wchar_s.h \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/x86_64-w64-mingw32/include/setjmp.h \
+  C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/x86_64-w64-mingw32/include/signal.h \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/x86_64-w64-mingw32/include/stdarg.h \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/x86_64-w64-mingw32/include/stddef.h \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/x86_64-w64-mingw32/include/stdint.h \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/x86_64-w64-mingw32/include/stdio.h \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/x86_64-w64-mingw32/include/stdlib.h \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/x86_64-w64-mingw32/include/swprintf.inl \
+  C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/x86_64-w64-mingw32/include/sys/timeb.h \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/x86_64-w64-mingw32/include/sys/types.h \
+  C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/x86_64-w64-mingw32/include/time.h \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/x86_64-w64-mingw32/include/vadefs.h \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/x86_64-w64-mingw32/include/wchar.h \
+  C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/x86_64-w64-mingw32/include/wctype.h \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/x86_64-w64-mingw32/include/winapifamily.h \
   C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/x86_64-w64-mingw32/include/winsdkver.h \
   C:/Users/leezhi/FINAL/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/SDL.h \
@@ -2467,6 +2513,7 @@ CMakeFiles/my_Final_project_game.dir/src/settings.cpp.obj: C:/Users/leezhi/FINAL
   C:/Users/leezhi/FINAL/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/SDL_video.h \
   C:/Users/leezhi/FINAL/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/begin_code.h \
   C:/Users/leezhi/FINAL/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/close_code.h \
+  C:/Users/leezhi/FINAL/project/SDL_lib/SDL2_image-2.8.2/x86_64-w64-mingw32/include/SDL2/SDL_image.h \
   C:/Users/leezhi/FINAL/project/SDL_lib/SDL2_ttf-2.22.0/x86_64-w64-mingw32/include/SDL2/SDL_ttf.h \
   C:/Users/leezhi/FINAL/project/include/constants.h \
   C:/Users/leezhi/FINAL/project/include/settings.h \
@@ -2741,6 +2788,7 @@ CMakeFiles/my_Final_project_game.dir/src/table.cpp.obj: C:/Users/leezhi/FINAL/pr
   C:/Users/leezhi/FINAL/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/SDL_video.h \
   C:/Users/leezhi/FINAL/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/begin_code.h \
   C:/Users/leezhi/FINAL/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/close_code.h \
+  C:/Users/leezhi/FINAL/project/SDL_lib/SDL2_image-2.8.2/x86_64-w64-mingw32/include/SDL2/SDL_image.h \
   C:/Users/leezhi/FINAL/project/include/constants.h \
   C:/Users/leezhi/FINAL/project/include/obstacle.h \
   C:/Users/leezhi/FINAL/project/include/table.h \

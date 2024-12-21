@@ -28,7 +28,7 @@ int initialize_window() {
     mywindow = SDL_CreateWindow("Game",
         SDL_WINDOWPOS_CENTERED,
         SDL_WINDOWPOS_CENTERED,
-         675 * 2, 386 * 2,  // Doubled resolution while maintaining ratio
+        1320, 760,  // Doubled resolution while maintaining ratio
         SDL_WINDOW_SHOWN | SDL_WINDOW_FULLSCREEN_DESKTOP  // Add fullscreen flag
     );
 
@@ -47,7 +47,7 @@ int initialize_window() {
     }
 
     // Set logical size to maintain aspect ratio
-    SDL_RenderSetLogicalSize(renderer, 675 * 2, 386 * 2);
+    SDL_RenderSetLogicalSize(renderer, 1320, 720);
 
     // Rest of your initialization code...
     if (TTF_Init() == -1) {
@@ -82,14 +82,14 @@ void setup() {
     }
     SDL_Log("PlayPage created.");
 
-    SettingsPage = new settings(SETTINGS_BACKGROUND, renderer);
+    SettingsPage = new settings(PLAYGROUND_BACKGROUND, renderer);
     if (!SettingsPage) {
         SDL_Log("Failed to create SettingsPage!");
         return;
     }
     SDL_Log("SettingsPage created.");
 
-    background = loadTexture("../imgs/background2.jpg", renderer);
+    background = loadTexture("../imgs/playground_background.jpg", renderer);
     if (!background) {
         SDL_Log("Failed to load background image!");
     } else {
@@ -103,6 +103,13 @@ void process_input() {
     while (SDL_PollEvent(&event)) {
         if (event.type == SDL_QUIT) {
             game_is_running = FALSE;
+        } else if (PAGE_ID == SETTINGSID) {
+            int result = SettingsPage->process_input(&event);
+            if (result == MENUID) {
+                SDL_Log("Returning to menu from settings");
+                PAGE_ID = MENUID;
+                GameState = MENUID;
+            }
         } else if (PAGE_ID == MENUID) {
             int result = MenuPage->process_input(&event);
             if (result == EXIT) {

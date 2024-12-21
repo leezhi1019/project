@@ -7,8 +7,8 @@
 
 #include <SDL.h>
 #include <string>
+#include <SDL2/SDL_image.h>
 
-SDL_Texture* loadTexture(const std::string& filePath, SDL_Renderer* renderer);
+SDL_Texture* loadTexture(const std::string& path, SDL_Renderer* renderer);
 
 #endif
-

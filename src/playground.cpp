@@ -48,8 +48,8 @@ playground::playground(const std::string& backgroundPath, SDL_Renderer* renderer
     SDL_Log("Reading area tables added.");
 
     // Keep existing bookshelf
-    obstacles.push_back(std::make_unique<Bookshelf>(renderer, 27, 9, 1, 2, BOOKSHELF_TEXTURE_2x1));
-    obstacles.push_back(std::make_unique<Bookshelf>(renderer, 17, 8, 1, 3, BOOKSHELF_TEXTURE_3x1));
+    obstacles.push_back(std::make_unique<Bookshelf>(renderer, 27, 10, 1, 2, BOOKSHELF_TEXTURE_2x1));
+    obstacles.push_back(std::make_unique<Bookshelf>(renderer, 17, 9, 1, 3, BOOKSHELF_TEXTURE_3x1));
     obstacles.push_back(std::make_unique<Bookshelf>(renderer, 12, 10, 1, 4, BOOKSHELF_TEXTURE_4x1));
     obstacles.push_back(std::make_unique<Bookshelf>(renderer, 22, 9, 2, 4, BOOKSHELF_TEXTURE_4x2));
     
@@ -86,7 +86,7 @@ void playground::initializePauseMenu() {
     
     // Calculate center positions based on window dimensions (675 * 2, 386 * 2)
     int screenWidth = 1320;
-    int screenHeight = 760;
+    int screenHeight = 720;
     
     // Center horizontally by subtracting half the button width from half the screen width
     int centerX = (screenWidth - baseWidth) / 2;
@@ -245,7 +245,7 @@ void playground::render() {
     // Create a rectangle frame
     int rightSideX = 0; 
     int frameWidth = GRID_SIZE * 7;      
-    int frameHeight = 18 * GRID_SIZE;    
+    int frameHeight = 19 * GRID_SIZE;    
     int lineThickness = 4;  // Adjust thickness as needed
 
     // Draw multiple frames to create thickness
@@ -319,8 +319,8 @@ void playground::reset() {
     SDL_Log("Reading area tables added.");
 
     // Keep existing bookshelf
-    obstacles.push_back(std::make_unique<Bookshelf>(renderer, 27, 9, 1, 2, BOOKSHELF_TEXTURE_2x1));
-    obstacles.push_back(std::make_unique<Bookshelf>(renderer, 17, 8, 1, 3, BOOKSHELF_TEXTURE_3x1));
+    obstacles.push_back(std::make_unique<Bookshelf>(renderer, 27, 10, 1, 2, BOOKSHELF_TEXTURE_2x1));
+    obstacles.push_back(std::make_unique<Bookshelf>(renderer, 17, 9, 1, 3, BOOKSHELF_TEXTURE_3x1));
     obstacles.push_back(std::make_unique<Bookshelf>(renderer, 12, 10, 1, 4, BOOKSHELF_TEXTURE_4x1));
     obstacles.push_back(std::make_unique<Bookshelf>(renderer, 22, 9, 2, 4, BOOKSHELF_TEXTURE_4x2));
     

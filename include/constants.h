@@ -2,20 +2,19 @@
 #define CONSTANTS_H
 
 // Game states/IDs
-const int MENUID = 0;
-const int PLAYGROUNDID = 1;
-// Add new state ID
-const int SETTINGSID = 2;
+#define MENUID 0       // Menu page ID
+#define SETTINGSID 1   // Settings page ID
+#define PLAYGROUNDID 2 // Playground page ID
+#define EXIT 3         // Exit game ID
 
 // Boolean constants
 const int TRUE = 1;
 const int FALSE = 0;
-const int EXIT = -1;
 
 // Add any other constants here
 // Window dimensions, frame rates, etc.
 // 修改視窗大小常數
-#define WINDOW_HEIGHT 760
+#define WINDOW_HEIGHT 720
 #define WINDOW_WIDTH 1320
 #define FPS 60
 #define FRAME_TARGET_TIME (1000 / FPS)

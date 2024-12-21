@@ -271,4 +271,8 @@ CMakeFiles/my_Final_project_game.dir/src/bookshelf.cpp.obj: \
  C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/uses_allocator_args.h \
  C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/tuple \
  C:/Users/leezhi/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/ranges_util.h \
+ C:/Users/leezhi/FINAL/project/SDL_lib/SDL2_image-2.8.2/x86_64-w64-mingw32/include/SDL2/SDL_image.h \
+ C:/Users/leezhi/FINAL/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/SDL_version.h \
+ C:/Users/leezhi/FINAL/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/begin_code.h \
+ C:/Users/leezhi/FINAL/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/close_code.h \
  C:/Users/leezhi/FINAL/project/include/constants.h
