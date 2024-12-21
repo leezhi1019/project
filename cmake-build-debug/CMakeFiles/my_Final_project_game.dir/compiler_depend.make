@@ -4316,6 +4316,7 @@ CMakeFiles/my_Final_project_game.dir/src/playground.cpp.obj: C:/Users/jacob/Desk
   C:/Users/jacob/Desktop/test/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/SDL_video.h \
   C:/Users/jacob/Desktop/test/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/begin_code.h \
   C:/Users/jacob/Desktop/test/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/close_code.h \
+  C:/Users/jacob/Desktop/test/project/SDL_lib/SDL2_image-2.8.2/x86_64-w64-mingw32/include/SDL2/SDL_image.h \
   C:/Users/jacob/Desktop/test/project/SDL_lib/SDL2_mixer-2.8.0/x86_64-w64-mingw32/include/SDL2/SDL_mixer.h \
   C:/Users/jacob/Desktop/test/project/SDL_lib/SDL2_ttf-2.22.0/x86_64-w64-mingw32/include/SDL2/SDL_ttf.h \
   C:/Users/jacob/Desktop/test/project/include/bookshelf.h \
@@ -4616,6 +4617,7 @@ CMakeFiles/my_Final_project_game.dir/src/score_page.cpp.obj: C:/Users/jacob/Desk
   C:/Users/jacob/Desktop/test/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/SDL_video.h \
   C:/Users/jacob/Desktop/test/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/begin_code.h \
   C:/Users/jacob/Desktop/test/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/close_code.h \
+  C:/Users/jacob/Desktop/test/project/SDL_lib/SDL2_image-2.8.2/x86_64-w64-mingw32/include/SDL2/SDL_image.h \
   C:/Users/jacob/Desktop/test/project/SDL_lib/SDL2_ttf-2.22.0/x86_64-w64-mingw32/include/SDL2/SDL_ttf.h \
   C:/Users/jacob/Desktop/test/project/include/game_management.h \
   C:/Users/jacob/Desktop/test/project/include/game_state.h \

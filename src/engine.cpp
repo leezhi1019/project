@@ -139,7 +139,18 @@ void process_input() {
                         newPageId = SettingsPage->process_input(&event);
                         break;
                     case SCOREID:
-                        newPageId = scorePage->handleMouseClick(event.button.x, event.button.y);
+                        newPageId = SCOREID;  // Default to staying on score page
+                        if (event.type == SDL_MOUSEMOTION) {
+                            scorePage->handleMouseMotion(event.motion.x, event.motion.y);
+                        }
+                        else if (event.type == SDL_MOUSEBUTTONDOWN) {
+                            if (event.button.button == SDL_BUTTON_LEFT) {
+                                newPageId = scorePage->handleMouseClick(event.button.x, event.button.y);
+                                if (newPageId == MENUID) {
+                                    GameManagement::resetCounts();  // Only reset counts when actually leaving score page
+                                }
+                            }
+                        }
                         break;
                     default:
                         newPageId = PAGE_ID;
