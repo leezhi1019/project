@@ -6,15 +6,12 @@
 
 class Bookshelf : public Obstacle {
 private:
-    int bookCount;
+    const char* currentTexturePath;  // 保留材質路徑成員
     
 public:
-    Bookshelf(SDL_Renderer* renderer, int x, int y, int w, int h);
+    // 建構函式，使用預設材質
+    Bookshelf(SDL_Renderer* renderer, int x, int y, int w, int h, const char* texturePath);
     void render() override;
-    // Bookshelf specific functionality
-    bool addBook();
-    bool removeBook();
-    int getBookCount() const;
 };
 
 #endif

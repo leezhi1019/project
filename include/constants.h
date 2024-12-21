@@ -24,7 +24,14 @@ const int EXIT = -1;
 #define MENU_BACKGROUND "../imgs/background.jpg"
 #define PLAYGROUND_BACKGROUND "../imgs/playground_background.jpg"
 #define SETTINGS_BACKGROUND "../imgs/settings_background.jpg"
+
+#define BOOKSHELF_TEXTURE_2x1 "../imgs/bookshelf-2x1.png"
+#define BOOKSHELF_TEXTURE_3x1 "../imgs/bookshelf-3x1.png"
+#define BOOKSHELF_TEXTURE_4x1 "../imgs/bookshelf-4x1.png"
 #define BOOKSHELF_TEXTURE_4x2 "../imgs/bookshelf-4x2.png"
+#define BOOKSHELF_TEXTURE_UP "../imgs/bookshelf-up-4x14.png"
+#define BOOKSHELF_TEXTURE_LEFT "../imgs/bookshelf-left-1x14.png"
+#define BOOKSHELF_TEXTURE_RIGHT "../imgs/boobshelf-right-1x14.png"
 
 #define TABLE_TEXTURE_1x1bag "../imgs/table-bag-1x1.png"
 #define TABLE_TEXTURE_2x2bag "../imgs/table-bag-2x2.png"

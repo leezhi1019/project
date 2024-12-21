@@ -53,7 +53,7 @@ playground::playground(const std::string& backgroundPath, SDL_Renderer* renderer
 
     // Keep existing bookshelf
     obstacles.push_back(std::make_unique<Bookshelf>(renderer, 15, 12, 2, 4));
-    SDL_Log("Bookshelf obstacle added.");
+    //SDL_Log("Bookshelf obstacle added.");
 
     initializePauseMenu();
     SDL_Log("Playground initialized.");
