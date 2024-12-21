@@ -64,9 +64,10 @@ playground::playground(const std::string& backgroundPath, SDL_Renderer* renderer
     obstacles.push_back(std::make_unique<Bookshelf>(renderer, 25, 0, 1, 18, BOOKSHELF_TEXTURE_RIGHT));
     SDL_Log("Bookshelf-right obstacle added.");
 
-
     initializePauseMenu();
     SDL_Log("Playground initialized.");
+
+    
 }
 
 void playground::initializePauseMenu() {
@@ -238,6 +239,30 @@ void playground::render() {
         }
     }
 
+    // Draw vertical lines on the right side
+    SDL_SetRenderDrawColor(renderer, LINE_COLOR_R, LINE_COLOR_G, LINE_COLOR_B, LINE_COLOR_A);
+
+    // Create a rectangle frame
+    int rightSideX = 26 * GRID_SIZE; 
+    int frameWidth = GRID_SIZE * 5;      
+    int frameHeight = 18 * GRID_SIZE;    
+    int lineThickness = 4;  // Adjust thickness as needed
+
+    // Draw multiple frames to create thickness
+    for(int i = 0; i < lineThickness; i++) {
+        SDL_Rect frame = {
+            rightSideX + i,          // x position
+            i,                       // y position
+            frameWidth - (i * 2),    // width
+            frameHeight - (i * 2)    // height
+        };
+        SDL_RenderDrawRect(renderer, &frame);
+    }
+
+    // After drawing the frame
+    // Draw countdown timer
+    
+    
     SDL_RenderPresent(renderer);
 }
 
@@ -321,4 +346,6 @@ playground::~playground() {
 
     // Delete the mainCharacter
     delete mainCharacter;
+
+    
 }

@@ -31,7 +31,7 @@ const int EXIT = -1;
 #define BOOKSHELF_TEXTURE_4x2 "../imgs/bookshelf-4x2.png"
 #define BOOKSHELF_TEXTURE_UP "../imgs/bookshelf-up-4x14.png"
 #define BOOKSHELF_TEXTURE_LEFT "../imgs/bookshelf-left-1x14.png"
-#define BOOKSHELF_TEXTURE_RIGHT "../image/bookshelf-right-1x14.png"
+#define BOOKSHELF_TEXTURE_RIGHT "../imgs/bookshelf-right-1x14.png"
 #define DEFAULT_BOOKSHELF_TEXTURE BOOKSHELF_TEXTURE_LEFT  // Add this line
 
 
@@ -43,5 +43,12 @@ const int EXIT = -1;
 
 // Grid size for game world
 #define GRID_SIZE 40  // Size of each grid cell in pixels
+
+// Define line properties
+#define LINE_COLOR_R 0     // Red component
+#define LINE_COLOR_G 0     // Green component
+#define LINE_COLOR_B 0     // Black component
+#define LINE_COLOR_A 255   // Alpha (opacity)
+#define LINE_WIDTH 2       // Width of the line in pixels
 
 #endif // STUDYSNATCHER_CONSTANTS_H
