@@ -10,32 +10,34 @@ class playground;
 
 class Character {
 private:
-    int gridX;
-    int gridY;
-    int pixelX;
-    int pixelY;
+    SDL_Renderer* renderer;
+    SDL_Texture* sprite;
+    SDL_Rect position;
+    std::string name;
+    bool facingRight;
+    int gridX, gridY;
+    
+    // Colors
     SDL_Color skinColor;
     SDL_Color clothesColor;
     SDL_Color hairColor;
-    int hairStyle;
-    bool facingRight;
-    SDL_Texture* sprite;
-    SDL_Renderer* renderer;
     
-    // Name related members
-    std::string name;
+    // Hair style
+    int hairStyle;  // Add this member variable
+    
+    // Text rendering
     TTF_Font* nameFont;
     SDL_Texture* nameTexture;
     SDL_Color nameColor;
+    const playground* gamePlayground;  // Reference to playground for collision checking
     
 private:
-    // Add this private helper function
     void updateNameTexture();
-    const playground* gamePlayground;  // Reference to playground for collision checking
 
 public:
+    // Single constructor with default values
     Character(SDL_Renderer* renderer, const std::string& name, 
-             const playground* playground, int startX = 0, int startY = 0);
+             playground* pg, int startX = 0, int startY = 0);
     ~Character();
     
     // Movement methods
@@ -43,6 +45,7 @@ public:
     void moveRight();
     void moveUp();
     void moveDown();
+    void move(int dx, int dy);
 
     // Appearance setters
     void setSkinColor(Uint8 r, Uint8 g, Uint8 b);
@@ -56,6 +59,7 @@ public:
     // Core methods
     void render();
     void update();
+    SDL_Rect getPosition() const { return position; }
 };
 
 #endif

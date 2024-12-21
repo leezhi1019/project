@@ -27,10 +27,20 @@ add_executable(my_Final_project_game
     src/tool.cpp
     src/obstacle.cpp    
     src/table.cpp      
-    src/bookshelf.cpp  
+    src/bookshelf.cpp
+    src/collectible.cpp        
+    src/collectible_manager.cpp
+    src/note.cpp              
+    src/coffee.cpp            
+    src/freeze.cpp            
+    src/pastexam.cpp
+    src/game_management.cpp    # Add this line
+)
+
+target_sources(${PROJECT_NAME} PRIVATE
+    src/freeze.cpp
+    src/collectible_manager.cpp
+    # ... other source files
 )
 
 target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARIES} ${SDL2_TTF_LIBRARIES} ${SDL2_MIXER_LIBRARIES})
-
-
-

@@ -39,7 +39,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "my_Final_project_game::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-my_Final_project_game-Debug-a15ff86ef87932d2dc2a.json",
+					"jsonFile" : "target-my_Final_project_game-Debug-d6b2cb10ef45db33db39.json",
 					"name" : "my_Final_project_game",
 					"projectIndex" : 0
 				}
@@ -49,8 +49,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "C:/Users/leezhi/final project/project/cmake-build-debug",
-		"source" : "C:/Users/leezhi/final project/project"
+		"build" : "C:/Users/jacob/Desktop/test/project/cmake-build-debug",
+		"source" : "C:/Users/jacob/Desktop/test/project"
 	},
 	"version" : 
 	{

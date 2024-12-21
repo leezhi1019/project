@@ -6,11 +6,17 @@
 #include "../include/character.h"
 #include "../include/tool.h"
 #include "../include/constants.h"
+#include "../include/freeze.h"
+#include "../include/collectible_manager.h"
+#include "../include/game_management.h"
 
 playground::playground(const std::string& backgroundPath, SDL_Renderer* renderer, const std::string& playerName)
-    : renderer(renderer), isPaused(false)
+    : renderer(renderer), isPaused(false), collectTimer(0), isCollecting(false)
 {
     SDL_Log("Initializing playground...");
+    
+    // Initialize game management system
+    GameManagement::initialize();
 
     // Load background texture
     background = loadTexture(backgroundPath.c_str(), renderer);
@@ -54,8 +60,17 @@ playground::playground(const std::string& backgroundPath, SDL_Renderer* renderer
     obstacles.push_back(std::make_unique<Bookshelf>(renderer, 15, 12, 2, 3));
     SDL_Log("Bookshelf obstacle added.");
 
+    // Initialize test coffee collectible
+    collectibles.push_back(std::make_unique<Coffee>(renderer, 10, 10));  // Place at grid position 10,10
+    SDL_Log("Test coffee collectible added to playground");
+
     initializePauseMenu();
     SDL_Log("Playground initialized.");
+
+    // In playground initialization
+    GameManagement::initialize();
+
+    initializeCollectibles();  // Initialize collectibles
 }
 
 void playground::initializePauseMenu() {
@@ -137,9 +152,20 @@ int playground::process_input(SDL_Event* event) {
                     case SDLK_d:
                         mainCharacter->moveRight();
                         break;
+                    case SDLK_e:  // Start collecting when E is pressed
+                        isCollecting = true;
+                        SDL_Log("Started collecting attempt");  // Add debug log
+                        break;
                     case SDLK_ESCAPE:
                         isPaused = true;  // Enter pause state
                         break;
+                }
+                break;
+            case SDL_KEYUP:
+                if (event->key.keysym.sym == SDLK_e) {
+                    isCollecting = false;
+                    collectTimer = 0;
+                    SDL_Log("Stopped collecting attempt");  // Add debug log
                 }
                 break;
         }
@@ -176,26 +202,50 @@ int playground::handleMouseClick(int x, int y) {
     return PLAYGROUNDID;
 }
 
-int playground::update() {
+int playground::update(float deltaTime) {
+    // Update collectibles
+    for (auto& collectible : collectibles) {
+        collectible->update(deltaTime);
+    }
+
+    // Add debug logging to verify timing
+    for (const auto& collectible : collectibles) {
+        if (auto coffee = dynamic_cast<Coffee*>(collectible.get())) {
+            if (coffee->isBoostActive()) {
+                SDL_Log("Coffee power-up time remaining: %.2f", coffee->getBoostDuration());
+            }
+        }
+    }
+    
+    // Check for collection
+    if (isCollecting) {
+        checkCollectibles();
+    }
+    
     return TRUE;
 }
 
 void playground::render() {
     SDL_RenderClear(renderer);
-
-    // Render game
+    
+    // Render background
     if (background) {
         SDL_RenderCopy(renderer, background, nullptr, nullptr);
     }
-
+    
     // Render obstacles
     for (const auto& obstacle : obstacles) {
         obstacle->render();
     }
 
-    // Render main character
-    mainCharacter->render();
+    // Render collectibles
+    for (const auto& collectible : collectibles) {
+        collectible->render();
+    }
 
+    // Render character
+    mainCharacter->render();
+    
     // Render pause menu if paused
     if (isPaused) {
         // Dim background
@@ -251,6 +301,9 @@ void playground::endGame() {
     isGameEnded = true;
     // You can add score calculation here or call another class's method
     // For example: ScoreManager::getInstance()->calculateFinalScore();
+
+    // When game ends or for debugging
+    GameManagement::printStats();
 }
 
 void playground::reset() {
@@ -291,6 +344,85 @@ void playground::reset() {
     SDL_Log("Bookshelf obstacle added.");
     
     // Reset any other game-specific variables
+
+    collectibles.clear();
+    initializeCollectibles();  // Reinitialize collectibles after clear
+}
+//collectibles test
+void playground::initializeCollectibles() {
+    // Use grid coordinates (divide by GRID_SIZE)
+    collectibles.push_back(std::make_unique<Note>(renderer, 3, 3));       // Position at (3,3) on grid
+    collectibles.push_back(std::make_unique<Coffee>(renderer, 6, 6));     // Position at (6,6) on grid
+    collectibles.push_back(std::make_unique<PastExam>(renderer, 9, 9));   // Position at (9,9) on grid
+    collectibles.push_back(std::make_unique<Freeze>(renderer, 12, 12));   // Position at (12,12) on grid
+}
+
+void playground::updateCollectibles(float deltaTime) {
+    for (auto& collectible : collectibles) {
+        collectible->update(deltaTime);
+    }
+}
+
+void playground::renderCollectibles() {
+    for (auto& collectible : collectibles) {
+        collectible->render();
+    }
+}
+//collectibles test end
+
+bool playground::isAdjacentToCollectible(SDL_Rect playerPos, SDL_Rect collectiblePos) const {
+    // Convert pixel positions to grid positions
+    int gridPlayerX = playerPos.x / GRID_SIZE;
+    int gridPlayerY = playerPos.y / GRID_SIZE;
+    
+    // Collectible position should only be divided by GRID_SIZE once
+    int gridCollectibleX = collectiblePos.x / GRID_SIZE;  // Remove extra GRID_SIZE multiplication
+    int gridCollectibleY = collectiblePos.y / GRID_SIZE;  // Remove extra GRID_SIZE multiplication
+    
+    // Add debug logging
+    SDL_Log("Raw positions - Player: (%d,%d), Collectible: (%d,%d)", 
+            playerPos.x, playerPos.y, collectiblePos.x, collectiblePos.y);
+    SDL_Log("Grid positions - Player: (%d,%d), Collectible: (%d,%d)", 
+            gridPlayerX, gridPlayerY, gridCollectibleX, gridCollectibleY);
+    
+    bool isLeftOrRight = (abs(gridPlayerX - gridCollectibleX) == 1) && 
+                        (gridPlayerY == gridCollectibleY);
+    bool isAboveOrBelow = (abs(gridPlayerY - gridCollectibleY) == 1) && 
+                         (gridPlayerX == gridCollectibleX);
+                         
+    SDL_Log("Adjacent check: Left/Right=%s, Above/Below=%s", 
+            isLeftOrRight ? "true" : "false",
+            isAboveOrBelow ? "true" : "false");
+            
+    return isLeftOrRight || isAboveOrBelow;
+}
+
+void playground::checkCollectibles() {
+    SDL_Rect playerPos = mainCharacter->getPosition();
+    
+    for (auto& collectible : collectibles) {
+        if (collectible->isVisible()) {
+            SDL_Rect collectiblePos = collectible->getPosition();
+            bool isAdjacent = isAdjacentToCollectible(playerPos, collectiblePos);
+            
+            SDL_Log("Checking collectible - Player pos: (%d,%d), Collectible pos: (%d,%d), Adjacent: %s",
+                   playerPos.x, playerPos.y, collectiblePos.x, collectiblePos.y, 
+                   isAdjacent ? "true" : "false");  // Add debug log
+            
+            if (isAdjacent) {
+                collectTimer += 1.0f/60.0f;
+                SDL_Log("Collection timer: %.2f", collectTimer);  // Add debug log
+                
+                if (collectTimer >= 0.5f) {
+                    collectible->collect();
+                    collectTimer = 0;
+                    isCollecting = false;
+                    SDL_Log("Collectible collected!");
+                }
+                break;
+            }
+        }
+    }
 }
 
 playground::~playground() {

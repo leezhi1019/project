@@ -127,13 +127,19 @@ void process_input() {
 
 int update() {
     if(!game_is_running) return FALSE;
+    
+    // Calculate delta time
     while (!SDL_TICKS_PASSED(SDL_GetTicks(), last_frame_time + FRAME_TARGET_TIME));
     float delta_time = (SDL_GetTicks() - last_frame_time) / 1000.0f;
     last_frame_time = SDL_GetTicks();
+
+    // Call appropriate page update with delta_time
     if (PAGE_ID == MENUID) {
         return MenuPage->update();
-    }else if (PAGE_ID == PLAYGROUNDID) {
-        return PlayPage->update();
+    } else if (PAGE_ID == PLAYGROUNDID) {
+        return PlayPage->update(delta_time);  // Pass delta_time here
+    } else if (PAGE_ID == SETTINGSID) {
+        return SettingsPage->update();
     }
     return game_is_running;
 }

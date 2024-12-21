@@ -149,3 +149,8 @@ int settings::handleMouseClick(int x, int y) {
     }
     return SETTINGSID;
 }
+
+int settings::update() {
+    // Basic update implementation
+    return SETTINGSID;  // Return current page ID
+}

@@ -47,19 +47,19 @@ cmake_force:
 SHELL = cmd.exe
 
 # The CMake executable.
-CMAKE_COMMAND = "C:\Users\leezhi\CLion 2024.3.1.1\bin\cmake\win\x64\bin\cmake.exe"
+CMAKE_COMMAND = "C:\Program Files\JetBrains\CLion 2024.3\bin\cmake\win\x64\bin\cmake.exe"
 
 # The command to remove a file.
-RM = "C:\Users\leezhi\CLion 2024.3.1.1\bin\cmake\win\x64\bin\cmake.exe" -E rm -f
+RM = "C:\Program Files\JetBrains\CLion 2024.3\bin\cmake\win\x64\bin\cmake.exe" -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "C:\Users\leezhi\final project\project"
+CMAKE_SOURCE_DIR = C:\Users\jacob\Desktop\test\project
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "C:\Users\leezhi\final project\project\cmake-build-debug"
+CMAKE_BINARY_DIR = C:\Users\jacob\Desktop\test\project\cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -67,7 +67,7 @@ CMAKE_BINARY_DIR = "C:\Users\leezhi\final project\project\cmake-build-debug"
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "No interactive CMake dialog available..."
-	"C:\Users\leezhi\CLion 2024.3.1.1\bin\cmake\win\x64\bin\cmake.exe" -E echo "No interactive CMake dialog available."
+	"C:\Program Files\JetBrains\CLion 2024.3\bin\cmake\win\x64\bin\cmake.exe" -E echo "No interactive CMake dialog available."
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -77,7 +77,7 @@ edit_cache/fast: edit_cache
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Running CMake to regenerate build system..."
-	"C:\Users\leezhi\CLion 2024.3.1.1\bin\cmake\win\x64\bin\cmake.exe" --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	"C:\Program Files\JetBrains\CLion 2024.3\bin\cmake\win\x64\bin\cmake.exe" --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -86,9 +86,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "C:\Users\leezhi\final project\project\cmake-build-debug\CMakeFiles" "C:\Users\leezhi\final project\project\cmake-build-debug\\CMakeFiles\progress.marks"
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\jacob\Desktop\test\project\cmake-build-debug\CMakeFiles C:\Users\jacob\Desktop\test\project\cmake-build-debug\\CMakeFiles\progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start "C:\Users\leezhi\final project\project\cmake-build-debug\CMakeFiles" 0
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\jacob\Desktop\test\project\cmake-build-debug\CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -200,6 +200,78 @@ src/character.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\my_Final_project_game.dir\build.make CMakeFiles/my_Final_project_game.dir/src/character.cpp.s
 .PHONY : src/character.cpp.s
 
+src/coffee.obj: src/coffee.cpp.obj
+.PHONY : src/coffee.obj
+
+# target to build an object file
+src/coffee.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\my_Final_project_game.dir\build.make CMakeFiles/my_Final_project_game.dir/src/coffee.cpp.obj
+.PHONY : src/coffee.cpp.obj
+
+src/coffee.i: src/coffee.cpp.i
+.PHONY : src/coffee.i
+
+# target to preprocess a source file
+src/coffee.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\my_Final_project_game.dir\build.make CMakeFiles/my_Final_project_game.dir/src/coffee.cpp.i
+.PHONY : src/coffee.cpp.i
+
+src/coffee.s: src/coffee.cpp.s
+.PHONY : src/coffee.s
+
+# target to generate assembly for a file
+src/coffee.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\my_Final_project_game.dir\build.make CMakeFiles/my_Final_project_game.dir/src/coffee.cpp.s
+.PHONY : src/coffee.cpp.s
+
+src/collectible.obj: src/collectible.cpp.obj
+.PHONY : src/collectible.obj
+
+# target to build an object file
+src/collectible.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\my_Final_project_game.dir\build.make CMakeFiles/my_Final_project_game.dir/src/collectible.cpp.obj
+.PHONY : src/collectible.cpp.obj
+
+src/collectible.i: src/collectible.cpp.i
+.PHONY : src/collectible.i
+
+# target to preprocess a source file
+src/collectible.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\my_Final_project_game.dir\build.make CMakeFiles/my_Final_project_game.dir/src/collectible.cpp.i
+.PHONY : src/collectible.cpp.i
+
+src/collectible.s: src/collectible.cpp.s
+.PHONY : src/collectible.s
+
+# target to generate assembly for a file
+src/collectible.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\my_Final_project_game.dir\build.make CMakeFiles/my_Final_project_game.dir/src/collectible.cpp.s
+.PHONY : src/collectible.cpp.s
+
+src/collectible_manager.obj: src/collectible_manager.cpp.obj
+.PHONY : src/collectible_manager.obj
+
+# target to build an object file
+src/collectible_manager.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\my_Final_project_game.dir\build.make CMakeFiles/my_Final_project_game.dir/src/collectible_manager.cpp.obj
+.PHONY : src/collectible_manager.cpp.obj
+
+src/collectible_manager.i: src/collectible_manager.cpp.i
+.PHONY : src/collectible_manager.i
+
+# target to preprocess a source file
+src/collectible_manager.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\my_Final_project_game.dir\build.make CMakeFiles/my_Final_project_game.dir/src/collectible_manager.cpp.i
+.PHONY : src/collectible_manager.cpp.i
+
+src/collectible_manager.s: src/collectible_manager.cpp.s
+.PHONY : src/collectible_manager.s
+
+# target to generate assembly for a file
+src/collectible_manager.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\my_Final_project_game.dir\build.make CMakeFiles/my_Final_project_game.dir/src/collectible_manager.cpp.s
+.PHONY : src/collectible_manager.cpp.s
+
 src/engine.obj: src/engine.cpp.obj
 .PHONY : src/engine.obj
 
@@ -223,6 +295,54 @@ src/engine.s: src/engine.cpp.s
 src/engine.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\my_Final_project_game.dir\build.make CMakeFiles/my_Final_project_game.dir/src/engine.cpp.s
 .PHONY : src/engine.cpp.s
+
+src/freeze.obj: src/freeze.cpp.obj
+.PHONY : src/freeze.obj
+
+# target to build an object file
+src/freeze.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\my_Final_project_game.dir\build.make CMakeFiles/my_Final_project_game.dir/src/freeze.cpp.obj
+.PHONY : src/freeze.cpp.obj
+
+src/freeze.i: src/freeze.cpp.i
+.PHONY : src/freeze.i
+
+# target to preprocess a source file
+src/freeze.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\my_Final_project_game.dir\build.make CMakeFiles/my_Final_project_game.dir/src/freeze.cpp.i
+.PHONY : src/freeze.cpp.i
+
+src/freeze.s: src/freeze.cpp.s
+.PHONY : src/freeze.s
+
+# target to generate assembly for a file
+src/freeze.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\my_Final_project_game.dir\build.make CMakeFiles/my_Final_project_game.dir/src/freeze.cpp.s
+.PHONY : src/freeze.cpp.s
+
+src/game_management.obj: src/game_management.cpp.obj
+.PHONY : src/game_management.obj
+
+# target to build an object file
+src/game_management.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\my_Final_project_game.dir\build.make CMakeFiles/my_Final_project_game.dir/src/game_management.cpp.obj
+.PHONY : src/game_management.cpp.obj
+
+src/game_management.i: src/game_management.cpp.i
+.PHONY : src/game_management.i
+
+# target to preprocess a source file
+src/game_management.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\my_Final_project_game.dir\build.make CMakeFiles/my_Final_project_game.dir/src/game_management.cpp.i
+.PHONY : src/game_management.cpp.i
+
+src/game_management.s: src/game_management.cpp.s
+.PHONY : src/game_management.s
+
+# target to generate assembly for a file
+src/game_management.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\my_Final_project_game.dir\build.make CMakeFiles/my_Final_project_game.dir/src/game_management.cpp.s
+.PHONY : src/game_management.cpp.s
 
 src/menu.obj: src/menu.cpp.obj
 .PHONY : src/menu.obj
@@ -248,6 +368,30 @@ src/menu.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\my_Final_project_game.dir\build.make CMakeFiles/my_Final_project_game.dir/src/menu.cpp.s
 .PHONY : src/menu.cpp.s
 
+src/note.obj: src/note.cpp.obj
+.PHONY : src/note.obj
+
+# target to build an object file
+src/note.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\my_Final_project_game.dir\build.make CMakeFiles/my_Final_project_game.dir/src/note.cpp.obj
+.PHONY : src/note.cpp.obj
+
+src/note.i: src/note.cpp.i
+.PHONY : src/note.i
+
+# target to preprocess a source file
+src/note.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\my_Final_project_game.dir\build.make CMakeFiles/my_Final_project_game.dir/src/note.cpp.i
+.PHONY : src/note.cpp.i
+
+src/note.s: src/note.cpp.s
+.PHONY : src/note.s
+
+# target to generate assembly for a file
+src/note.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\my_Final_project_game.dir\build.make CMakeFiles/my_Final_project_game.dir/src/note.cpp.s
+.PHONY : src/note.cpp.s
+
 src/obstacle.obj: src/obstacle.cpp.obj
 .PHONY : src/obstacle.obj
 
@@ -271,6 +415,30 @@ src/obstacle.s: src/obstacle.cpp.s
 src/obstacle.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\my_Final_project_game.dir\build.make CMakeFiles/my_Final_project_game.dir/src/obstacle.cpp.s
 .PHONY : src/obstacle.cpp.s
+
+src/pastexam.obj: src/pastexam.cpp.obj
+.PHONY : src/pastexam.obj
+
+# target to build an object file
+src/pastexam.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\my_Final_project_game.dir\build.make CMakeFiles/my_Final_project_game.dir/src/pastexam.cpp.obj
+.PHONY : src/pastexam.cpp.obj
+
+src/pastexam.i: src/pastexam.cpp.i
+.PHONY : src/pastexam.i
+
+# target to preprocess a source file
+src/pastexam.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\my_Final_project_game.dir\build.make CMakeFiles/my_Final_project_game.dir/src/pastexam.cpp.i
+.PHONY : src/pastexam.cpp.i
+
+src/pastexam.s: src/pastexam.cpp.s
+.PHONY : src/pastexam.s
+
+# target to generate assembly for a file
+src/pastexam.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\my_Final_project_game.dir\build.make CMakeFiles/my_Final_project_game.dir/src/pastexam.cpp.s
+.PHONY : src/pastexam.cpp.s
 
 src/playground.obj: src/playground.cpp.obj
 .PHONY : src/playground.obj
@@ -386,15 +554,36 @@ help:
 	@echo ... src/character.obj
 	@echo ... src/character.i
 	@echo ... src/character.s
+	@echo ... src/coffee.obj
+	@echo ... src/coffee.i
+	@echo ... src/coffee.s
+	@echo ... src/collectible.obj
+	@echo ... src/collectible.i
+	@echo ... src/collectible.s
+	@echo ... src/collectible_manager.obj
+	@echo ... src/collectible_manager.i
+	@echo ... src/collectible_manager.s
 	@echo ... src/engine.obj
 	@echo ... src/engine.i
 	@echo ... src/engine.s
+	@echo ... src/freeze.obj
+	@echo ... src/freeze.i
+	@echo ... src/freeze.s
+	@echo ... src/game_management.obj
+	@echo ... src/game_management.i
+	@echo ... src/game_management.s
 	@echo ... src/menu.obj
 	@echo ... src/menu.i
 	@echo ... src/menu.s
+	@echo ... src/note.obj
+	@echo ... src/note.i
+	@echo ... src/note.s
 	@echo ... src/obstacle.obj
 	@echo ... src/obstacle.i
 	@echo ... src/obstacle.s
+	@echo ... src/pastexam.obj
+	@echo ... src/pastexam.i
+	@echo ... src/pastexam.s
 	@echo ... src/playground.obj
 	@echo ... src/playground.i
 	@echo ... src/playground.s

@@ -3,14 +3,21 @@
 #include "../include/playground.h"  // Add this include
 
 Character::Character(SDL_Renderer* renderer, const std::string& name, 
-                    const playground* playground, int startX, int startY)
-    : renderer(renderer), name(name), gamePlayground(playground),
-      gridX(startX), gridY(startY), facingRight(true),
-      sprite(nullptr), nameFont(nullptr), nameTexture(nullptr), // Initialize all pointers
+                    playground* pg, int startX, int startY)
+    : renderer(renderer), 
+      name(name), 
+      gamePlayground(pg),
+      gridX(startX), 
+      gridY(startY), 
+      facingRight(true),
+      sprite(nullptr), 
+      nameFont(nullptr), 
+      nameTexture(nullptr),
       skinColor{255, 200, 150, 255},  // Default skin color
       clothesColor{50, 50, 200, 255}, // Default clothes color
       hairColor{100, 50, 0, 255},     // Default hair color
-      nameColor{255, 255, 255, 255}   // Default name color
+      nameColor{255, 255, 255, 255},  // Default name color
+      hairStyle(0)  // Add default hair style
 {
     SDL_Log("Initializing character...");
 
