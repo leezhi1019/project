@@ -9,14 +9,7 @@
 
 int main(int argc, char *argv[]) {
     game_is_running = initialize_window();
-    SDL_Window* window = SDL_CreateWindow(
-        "Game Title",
-        SDL_WINDOWPOS_CENTERED,
-        SDL_WINDOWPOS_CENTERED,
-        WINDOW_WIDTH,    // 使用新的寬度
-        WINDOW_HEIGHT,   // 使用新的高度
-        SDL_WINDOW_SHOWN // 移除 SDL_WINDOW_FULLSCREEN 或 SDL_WINDOW_FULLSCREEN_DESKTOP 標誌
-    );
+    
     setup();
     while (game_is_running) {
         // SDL_Log("Game is running...");
