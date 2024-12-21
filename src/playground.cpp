@@ -37,7 +37,6 @@ playground::playground(const std::string& backgroundPath, SDL_Renderer* renderer
 
     // Add more tables around the playground
     // Study area tables
-    obstacles.push_back(std::make_unique<Table>(renderer, 5, 5, 2, 2));
     obstacles.push_back(std::make_unique<Table>(renderer, 5, 8, 2, 2));
     SDL_Log("Study area tables added.");
 
