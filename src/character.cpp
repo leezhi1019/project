@@ -21,6 +21,14 @@ Character::Character(SDL_Renderer* renderer, const std::string& name,
 {
     SDL_Log("Initializing character...");
 
+    // Convert grid position to screen position
+    position = {
+        gridX * GRID_SIZE,
+        gridY * GRID_SIZE,
+        GRID_SIZE,
+        GRID_SIZE
+    };
+
     // Initialize font for name tag
     nameFont = TTF_OpenFont("../fonts/Action_Man_Bold.ttf", 16);
     if (!nameFont) {
@@ -55,6 +63,7 @@ Character::~Character() {
 void Character::moveLeft() {
     if (gridX > 0 && !gamePlayground->isPositionBlocked(gridX - 1, gridY)) {
         gridX--;
+        position.x = gridX * GRID_SIZE;
         facingRight = false;
     }
 }
@@ -62,6 +71,7 @@ void Character::moveLeft() {
 void Character::moveRight() {
     if (gridX < 31 && !gamePlayground->isPositionBlocked(gridX + 1, gridY)) {
         gridX++;
+        position.x = gridX * GRID_SIZE;
         facingRight = true;
     }
 }
@@ -69,12 +79,14 @@ void Character::moveRight() {
 void Character::moveUp() {
     if (gridY > 0 && !gamePlayground->isPositionBlocked(gridX, gridY - 1)) {
         gridY--;
+        position.y = gridY * GRID_SIZE;
     }
 }
 
 void Character::moveDown() {
     if (gridY < 17 && !gamePlayground->isPositionBlocked(gridX, gridY + 1)) {
         gridY++;
+        position.y = gridY * GRID_SIZE;
     }
 }
 

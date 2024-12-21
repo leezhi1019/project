@@ -374,26 +374,17 @@ bool playground::isAdjacentToCollectible(SDL_Rect playerPos, SDL_Rect collectibl
     // Convert pixel positions to grid positions
     int gridPlayerX = playerPos.x / GRID_SIZE;
     int gridPlayerY = playerPos.y / GRID_SIZE;
+    int gridCollectibleX = collectiblePos.x / GRID_SIZE;
+    int gridCollectibleY = collectiblePos.y / GRID_SIZE;
     
-    // Collectible position should only be divided by GRID_SIZE once
-    int gridCollectibleX = collectiblePos.x / GRID_SIZE;  // Remove extra GRID_SIZE multiplication
-    int gridCollectibleY = collectiblePos.y / GRID_SIZE;  // Remove extra GRID_SIZE multiplication
-    
-    // Add debug logging
-    SDL_Log("Raw positions - Player: (%d,%d), Collectible: (%d,%d)", 
-            playerPos.x, playerPos.y, collectiblePos.x, collectiblePos.y);
-    SDL_Log("Grid positions - Player: (%d,%d), Collectible: (%d,%d)", 
+    SDL_Log("Grid comparison - Player: (%d,%d), Collectible: (%d,%d)", 
             gridPlayerX, gridPlayerY, gridCollectibleX, gridCollectibleY);
     
     bool isLeftOrRight = (abs(gridPlayerX - gridCollectibleX) == 1) && 
                         (gridPlayerY == gridCollectibleY);
     bool isAboveOrBelow = (abs(gridPlayerY - gridCollectibleY) == 1) && 
                          (gridPlayerX == gridCollectibleX);
-                         
-    SDL_Log("Adjacent check: Left/Right=%s, Above/Below=%s", 
-            isLeftOrRight ? "true" : "false",
-            isAboveOrBelow ? "true" : "false");
-            
+    
     return isLeftOrRight || isAboveOrBelow;
 }
 

@@ -4,6 +4,7 @@
 #include <SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include <string>
+#include "constants.h"
 
 // Forward declaration
 class playground;
@@ -12,10 +13,10 @@ class Character {
 private:
     SDL_Renderer* renderer;
     SDL_Texture* sprite;
-    SDL_Rect position;
+    int gridX, gridY;  // Grid-based position
+    SDL_Rect position; // Screen position (pixels)
     std::string name;
     bool facingRight;
-    int gridX, gridY;
     
     // Colors
     SDL_Color skinColor;
@@ -59,7 +60,14 @@ public:
     // Core methods
     void render();
     void update();
-    SDL_Rect getPosition() const { return position; }
+    SDL_Rect getPosition() const { 
+        return SDL_Rect{
+            gridX * GRID_SIZE,  // Convert grid to pixel coordinates
+            gridY * GRID_SIZE,
+            GRID_SIZE,
+            GRID_SIZE
+        }; 
+    }
 };
 
 #endif
