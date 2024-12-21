@@ -22,7 +22,7 @@ playground::playground(const std::string& backgroundPath, SDL_Renderer* renderer
     }
 
     // Initialize character
-    mainCharacter = new Character(renderer, playerName, this, 5, 5);
+    mainCharacter = new Character(renderer, playerName, this, 2, 8);
     if (!mainCharacter) {
         SDL_Log("Failed to create main character!");
         // Handle error appropriately
