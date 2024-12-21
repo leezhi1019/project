@@ -354,4 +354,20 @@ CMakeFiles/my_Final_project_game.dir/src/playground.cpp.obj: \
  C:/finalproject/project/include/character.h \
  C:/finalproject/project/include/tool.h \
  C:/finalproject/project/include/constants.h \
- C:/finalproject/project/include/enemy.h
+ C:/finalproject/project/include/enemy.h \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/cmath \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/x86_64-w64-mingw32/include/math.h \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/bits/specfun.h \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/limits \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/tr1/gamma.tcc \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/tr1/special_function_util.h \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/tr1/bessel_function.tcc \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/tr1/beta_function.tcc \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/tr1/ell_integral.tcc \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/tr1/exp_integral.tcc \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/tr1/hypergeometric.tcc \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/tr1/legendre_function.tcc \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/tr1/modified_bessel_func.tcc \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/tr1/poly_hermite.tcc \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/tr1/poly_laguerre.tcc \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/tr1/riemann_zeta.tcc

@@ -7,9 +7,12 @@
 #include "../include/tool.h"
 #include "../include/constants.h"
 #include "../include/enemy.h"
+#include <cmath>
 
 playground::playground(const std::string &backgroundPath, SDL_Renderer *renderer, const std::string &playerName)
-    : renderer(renderer), isPaused(false)
+    : renderer(renderer),
+      isPaused(false),
+      enemy(nullptr) // Initialize the unique_ptr as nullptr first
 {
     SDL_Log("Initializing playground...");
 
@@ -61,7 +64,13 @@ playground::playground(const std::string &backgroundPath, SDL_Renderer *renderer
     obstacles.push_back(std::make_unique<Bookshelf>(renderer, 15, 12, 2, 3));
     SDL_Log("Bookshelf obstacle added.");
 
-    enemy = std::make_unique<Enemy>(renderer, "../textures/enemy.png", 100, 100);
+    // Initialize patrol waypoints
+    patrolWaypoints = {
+        {100, 100}, {300, 100}, {300, 300}, {100, 300}};
+
+    // Create enemy after initializing other members
+    enemy = std::make_unique<Enemy>(renderer, "enemy", 100, 100);
+    SDL_Log("Enemy initialized.");
 
     initializePauseMenu();
     SDL_Log("Playground initialized.");
@@ -209,8 +218,11 @@ int playground::handleMouseClick(int x, int y)
 
 int playground::update()
 {
-    enemy->update();
-    return TRUE;
+    if (!isPaused)
+    {
+        updateEnemyPatrol();
+    }
+    return PLAYGROUNDID;
 }
 
 void playground::render()
@@ -233,7 +245,10 @@ void playground::render()
     mainCharacter->render();
 
     // Render enemy
-    enemy->render();
+    if (enemy != nullptr)
+    {
+        enemy->render();
+    }
 
     // Render pause menu if paused
     if (isPaused)
@@ -352,4 +367,49 @@ playground::~playground()
 
     // Delete the mainCharacter
     delete mainCharacter;
+
+    // Remove this line as enemy is now managed by unique_ptr
+    // SDL_DestroyTexture(enemy.texture);
+}
+
+void playground::updateEnemyPatrol()
+{
+    if (enemy == nullptr)
+        return;
+
+    static size_t currentWaypoint = 0;
+    static const float moveSpeed = 2.0f;
+
+    auto target = patrolWaypoints[currentWaypoint];
+    float dx = target.first - enemy->getX();
+    float dy = target.second - enemy->getY();
+    float distance = std::sqrt(dx * dx + dy * dy);
+
+    if (distance < moveSpeed)
+    {
+        currentWaypoint = (currentWaypoint + 1) % patrolWaypoints.size();
+    }
+    else
+    {
+        dx /= distance;
+        dy /= distance;
+
+        float newX = enemy->getX() + dx * moveSpeed;
+        float newY = enemy->getY() + dy * moveSpeed;
+
+        bool collision = false;
+        for (const auto &obstacle : obstacles)
+        {
+            if (obstacle->isBlocking(newX / 32, newY / 32))
+            {
+                collision = true;
+                break;
+            }
+        }
+
+        if (!collision)
+        {
+            enemy->setPosition(newX, newY);
+        }
+    }
 }

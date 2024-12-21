@@ -19,7 +19,7 @@ private:
 class Enemy
 {
 public:
-    Enemy(SDL_Renderer *renderer, const std::string &texturePath, int x, int y);
+    Enemy(SDL_Renderer *renderer, const std::string &name, int startX, int startY);
     ~Enemy();
 
     void render();
@@ -28,10 +28,23 @@ public:
 
     bool detectCharacter(const Character &character) const;
 
+    // Getters
+    int getX() const { return x; }
+    int getY() const { return y; }
+    float getMoveSpeed() const { return moveSpeed; }
+
+    // Setters
+    void setPosition(float newX, float newY);
+    void setMoveSpeed(float speed) { moveSpeed = speed; }
+
 private:
     SDL_Renderer *renderer;
     SDL_Texture *texture;
-    int x, y;
+    std::string name;
+    float x, y;
+    float moveSpeed;
+    int size;
+    int currentWaypoint;
     int angle; // Direction the enemy is facing
     Vision vision;
     void (*movementPattern)(Enemy &); // Function pointer for movement pattern

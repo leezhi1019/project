@@ -24,10 +24,23 @@ bool Vision::isCharacterInSight(const Character &character, int enemyX, int enem
     return angleDifference <= angle / 2;
 }
 
-Enemy::Enemy(SDL_Renderer *renderer, const std::string &texturePath, int x, int y)
-    : renderer(renderer), x(x), y(y), angle(0), vision(100, 90), movementPattern(nullptr)
+Enemy::Enemy(SDL_Renderer *renderer, const std::string &name, int startX, int startY)
+    : renderer(renderer),
+      name(name),
+      x(startX),
+      y(startY),
+      moveSpeed(2.0f),
+      size(32),
+      currentWaypoint(0),
+      angle(0),
+      vision(100, 45), // Initialize vision with 100 range and 45 degree angle
+      movementPattern(nullptr)
 {
-    texture = loadTexture(texturePath.c_str(), renderer);
+    // Create red square texture
+    SDL_Surface *surface = SDL_CreateRGBSurface(0, size, size, 32, 0, 0, 0, 0);
+    SDL_FillRect(surface, NULL, SDL_MapRGB(surface->format, 255, 0, 0));
+    texture = SDL_CreateTextureFromSurface(renderer, surface);
+    SDL_FreeSurface(surface);
 }
 
 Enemy::~Enemy()
@@ -40,8 +53,8 @@ Enemy::~Enemy()
 
 void Enemy::render()
 {
-    SDL_Rect dstRect = {x, y, 50, 50}; // Assuming the enemy is 50x50 pixels
-    SDL_RenderCopyEx(renderer, texture, nullptr, &dstRect, angle, nullptr, SDL_FLIP_NONE);
+    SDL_Rect destRect = {static_cast<int>(x), static_cast<int>(y), size, size};
+    SDL_RenderCopy(renderer, texture, nullptr, &destRect);
 }
 
 void Enemy::update()
@@ -60,4 +73,10 @@ void Enemy::setMovementPattern(void (*movementPattern)(Enemy &))
 bool Enemy::detectCharacter(const Character &character) const
 {
     return vision.isCharacterInSight(character, x, y, angle);
+}
+
+void Enemy::setPosition(float newX, float newY)
+{
+    x = newX;
+    y = newY;
 }

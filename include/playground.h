@@ -37,8 +37,11 @@ private:
     std::vector<Button> pauseButtons;
     SDL_Color buttonColor;
     SDL_Color buttonHoverColor;
-    bool isGameEnded;             // Add this to track game end state
-    std::unique_ptr<Enemy> enemy; // Add unique pointer to Enemy
+    bool isGameEnded;                                 // Add this to track game end state
+    std::unique_ptr<Enemy> enemy;                     // Change from Enemy enemy; to unique_ptr
+    std::vector<std::pair<int, int>> patrolWaypoints; // Add these to the private section:
+
+    void updateEnemyPatrol(); // Add this method instead
 
     void createPauseButton(const char *text, int x, int y, int width, int height);
     void handleMouseMotion(int x, int y);
