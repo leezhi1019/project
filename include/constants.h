@@ -31,7 +31,7 @@ const int EXIT = -1;
 #define BOOKSHELF_TEXTURE_4x2 "../imgs/bookshelf-4x2.png"
 #define BOOKSHELF_TEXTURE_UP "../imgs/bookshelf-up-4x14.png"
 #define BOOKSHELF_TEXTURE_LEFT "../imgs/bookshelf-left-1x14.png"
-#define BOOKSHELF_TEXTURE_RIGHT "../imgs/bookshelf-right-1x14.png"
+#define BOOKSHELF_TEXTURE_RIGHT "../image/bookshelf-right-1x14.png"
 #define DEFAULT_BOOKSHELF_TEXTURE BOOKSHELF_TEXTURE_LEFT  // Add this line
 
 
