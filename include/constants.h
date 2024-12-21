@@ -22,8 +22,8 @@ const int EXIT = -1;
 #define PLAYER_H 100
 #define PLAYER_SPEED 3000
 #define MENU_BACKGROUND "../imgs/background.jpg"
-#define PLAYGROUND_BACKGROUND "../imgs/playground-background.jpg"
-#define SETTINGS_BACKGROUND "../imgs/settings_background.png"
+#define PLAYGROUND_BACKGROUND "../imgs/playground-background.png"
+#define SETTINGS_BACKGROUND "../imgs/settings_background.jpg"
 
 #define BOOKSHELF_TEXTURE_2x1 "../imgs/bookshelf-2x1.png"
 #define BOOKSHELF_TEXTURE_3x1 "../imgs/bookshelf-3x1.png"
