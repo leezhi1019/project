@@ -1,3 +1,3 @@
-C:/Users/leezhi/final project/project/cmake-build-debug/CMakeFiles/my_Final_project_game.dir
-C:/Users/leezhi/final project/project/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/leezhi/final project/project/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/Users/jacob/Desktop/test/project/cmake-build-debug/CMakeFiles/my_Final_project_game.dir
+C:/Users/jacob/Desktop/test/project/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/jacob/Desktop/test/project/cmake-build-debug/CMakeFiles/rebuild_cache.dir
