@@ -143,6 +143,7 @@ int settings::handleMouseClick(int x, int y) {
                 case 1:  // Character 2 
                     return SETTINGSID;
                 case 2:  // Back to Menu
+                    SDL_Log("Exit button clicked, closing game...");
                     return MENUID;
             }
         }
