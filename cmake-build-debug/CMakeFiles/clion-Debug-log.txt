@@ -1,23 +1,23 @@
-"C:\Users\leezhi\CLion 2024.3.1.1\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -G "MinGW Makefiles" -S C:\Users\leezhi\FINAL\project -B C:\Users\leezhi\FINAL\project\cmake-build-debug
--- The C compiler identification is GNU 13.1.0
--- The CXX compiler identification is GNU 13.1.0
+"C:\Program Files\JetBrains\CLion 2024.3.1.1\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=C:\Users\ROG\Downloads\winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2\mingw64\bin\mingw32-make.exe -G "MinGW Makefiles" -S C:\finalproject\project -B C:\finalproject\project\cmake-build-debug
+-- The C compiler identification is GNU 14.2.0
+-- The CXX compiler identification is GNU 14.2.0
 -- Detecting C compiler ABI info
 -- Detecting C compiler ABI info - done
--- Check for working C compiler: C:/Users/leezhi/CLion 2024.3.1.1/bin/mingw/bin/gcc.exe - skipped
+-- Check for working C compiler: C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/bin/gcc.exe - skipped
 -- Detecting C compile features
 -- Detecting C compile features - done
 -- Detecting CXX compiler ABI info
 -- Detecting CXX compiler ABI info - done
--- Check for working CXX compiler: C:/Users/leezhi/CLion 2024.3.1.1/bin/mingw/bin/g++.exe - skipped
+-- Check for working CXX compiler: C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/bin/c++.exe - skipped
 -- Detecting CXX compile features
 -- Detecting CXX compile features - done
 -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
 -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
 -- Found Threads: TRUE
--- Found SDL2: mingw32;-mwindows;C:/Users/leezhi/FINAL/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/lib/libSDL2main.a;C:/Users/leezhi/FINAL/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/lib/libSDL2.dll.a
--- Found SDL2_image: C:/Users/leezhi/FINAL/project/SDL_lib/SDL2_image-2.8.2/x86_64-w64-mingw32/lib/libSDL2_image.dll.a (found version "2.8.2")
--- Found SDL2_ttf: C:/Users/leezhi/FINAL/project/SDL_lib/SDL2_ttf-2.22.0/x86_64-w64-mingw32/lib/libSDL2_ttf.dll.a (found version "2.22.0")
--- Found SDL2_mixer: C:/Users/leezhi/FINAL/project/SDL_lib/SDL2_mixer-2.8.0/x86_64-w64-mingw32/lib/libSDL2_mixer.dll.a (found version "2.8.0")
--- Configuring done (4.1s)
+-- Found SDL2: mingw32;-mwindows;C:/finalproject/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/lib/libSDL2main.a;C:/finalproject/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/lib/libSDL2.dll.a
+-- Found SDL2_image: C:/finalproject/project/SDL_lib/SDL2_image-2.8.2/x86_64-w64-mingw32/lib/libSDL2_image.dll.a (found version "2.8.2")
+-- Found SDL2_ttf: C:/finalproject/project/SDL_lib/SDL2_ttf-2.22.0/x86_64-w64-mingw32/lib/libSDL2_ttf.dll.a (found version "2.22.0")
+-- Found SDL2_mixer: C:/finalproject/project/SDL_lib/SDL2_mixer-2.8.0/x86_64-w64-mingw32/lib/libSDL2_mixer.dll.a (found version "2.8.0")
+-- Configuring done (3.1s)
 -- Generating done (0.0s)
--- Build files have been written to: C:/Users/leezhi/FINAL/project/cmake-build-debug
+-- Build files have been written to: C:/finalproject/project/cmake-build-debug

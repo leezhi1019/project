@@ -1,5 +1,4 @@
-ToolSet: 11.0 w64 (local)@C:\Users\leezhi\CLion 2024.3.1.1\bin\mingw
-Ninja: 1.12.1@C:\Users\leezhi\CLion 2024.3.1.1\bin\ninja\win\x64\ninja.exe
+ToolSet: 12.0 w64 (local)@C:\Users\ROG\Downloads\winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2\mingw64
 Options: 
 
-Options:
+Options:-DCMAKE_MAKE_PROGRAM=C:\Users\ROG\Downloads\winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2\mingw64\bin\mingw32-make.exe

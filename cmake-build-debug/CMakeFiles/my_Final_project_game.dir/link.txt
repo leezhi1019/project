@@ -1,3 +1,3 @@
-"C:\Users\leezhi\CLion 2024.3.1.1\bin\cmake\win\x64\bin\cmake.exe" -E rm -f CMakeFiles\my_Final_project_game.dir/objects.a
-C:\Users\leezhi\CLION2~1.1\bin\mingw\bin\ar.exe qc CMakeFiles\my_Final_project_game.dir/objects.a @CMakeFiles\my_Final_project_game.dir\objects1.rsp
-C:\Users\leezhi\CLION2~1.1\bin\mingw\bin\G__~1.EXE -g -Wl,--whole-archive CMakeFiles\my_Final_project_game.dir/objects.a -Wl,--no-whole-archive -o my_Final_project_game.exe -Wl,--out-implib,libmy_Final_project_game.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\my_Final_project_game.dir\linkLibs.rsp
+"C:\Program Files\JetBrains\CLion 2024.3.1.1\bin\cmake\win\x64\bin\cmake.exe" -E rm -f CMakeFiles\my_Final_project_game.dir/objects.a
+C:\Users\ROG\Downloads\winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2\mingw64\bin\ar.exe qc CMakeFiles\my_Final_project_game.dir/objects.a @CMakeFiles\my_Final_project_game.dir\objects1.rsp
+C:\Users\ROG\Downloads\winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2\mingw64\bin\c++.exe -g -Wl,--whole-archive CMakeFiles\my_Final_project_game.dir/objects.a -Wl,--no-whole-archive -o my_Final_project_game.exe -Wl,--out-implib,libmy_Final_project_game.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\my_Final_project_game.dir\linkLibs.rsp
