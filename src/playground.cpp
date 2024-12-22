@@ -6,6 +6,7 @@
 #include "../include/character.h"
 #include "../include/tool.h"
 #include "../include/constants.h"
+#include <SDL2/SDL_image.h>
 
 playground::playground(const std::string& backgroundPath, SDL_Renderer* renderer, const std::string& playerName)
     : renderer(renderer), isPaused(false)
