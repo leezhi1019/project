@@ -1,1 +1,38 @@
-cmaka-build-debug/
+# Ignore build directories
+/build/
+cmake-build-*/
+
+# Ignore compiled object files
+*.o
+*.obj
+
+# Ignore compiled libraries
+*.lib
+*.a
+*.so
+*.dylib
+*.dll
+
+# Ignore executables
+*.exe
+*.out
+*.app
+
+# Ignore CMake files
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# Ignore logs and temporary files
+*.log
+*.tmp
+*.swp
+*.swo
+
+# Ignore user-specific files
+*.user
+*.sublime-workspace
+*.sublime-project
+.idea/
+.vscode/
