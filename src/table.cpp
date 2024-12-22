@@ -3,12 +3,16 @@
 #include "../include/tool.h"
 #include "../include/constants.h"
 
-Table::Table(SDL_Renderer* renderer, int x, int y, int w, int h)
+Table::Table(SDL_Renderer* renderer, int x, int y, int w, int h, const char* texturePath)
     : Obstacle(renderer, x, y, w, h) {
-    // Try to load texture, but don't require it
-    texture = loadTexture(TABLE_TEXTURE, renderer);  // Use TABLE_TEXTURE instead of BOOKSHELF_TEXTURE
+    SDL_Log("Attempting to load table texture from: %s", texturePath);
+    texture = loadTexture(texturePath, renderer);
     if (!texture) {
-        SDL_Log("Using fallback rendering for table");
+        SDL_Log("Failed to load table texture from: %s", texturePath);
+        SDL_Log("SDL Error: %s", SDL_GetError());
+        SDL_Log("Falling back to colored rectangle");
+    } else {
+        SDL_Log("Successfully loaded table texture");
     }
 }
 
@@ -21,10 +25,12 @@ void Table::render() {
     };
     
     if (texture) {
-        // Use the loaded texture if available
         SDL_RenderCopy(renderer, texture, nullptr, &destRect);
+        
+        // Debug outline
+        SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+        SDL_RenderDrawRect(renderer, &destRect);
     } else {
-        // Fallback to colored rectangle if texture not available
         SDL_SetRenderDrawColor(renderer, 139, 69, 19, 255); // Brown color
         SDL_RenderFillRect(renderer, &destRect);
     }
