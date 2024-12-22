@@ -6,6 +6,7 @@ int GameManagement::examCount = 0;
 int GameManagement::coffeeCount = 0;
 int GameManagement::freezeCount = 0;
 bool GameManagement::initialized = false;
+bool GameManagement::isCoffeePowerupActive = false;
 
 void GameManagement::initialize() {
     if (!initialized) {
@@ -17,11 +18,21 @@ void GameManagement::initialize() {
 
 void GameManagement::incrementCount(const std::string& type) {
     if (type == "note") {
-        noteCount++;
+        // Double points during coffee power-up
+        if (isCoffeePowerupActive) {
+            noteCount += 2;
+        } else {
+            noteCount++;
+        }
         SDL_Log("Note collected! Total notes: %d", noteCount);
     }
     else if (type == "exam") {
-        examCount++;
+        // Double points during coffee power-up
+        if (isCoffeePowerupActive) {
+            examCount += 2;
+        } else {
+            examCount++;
+        }
         SDL_Log("Past Exam collected! Total exams: %d", examCount);
     }
     else if (type == "coffee") {

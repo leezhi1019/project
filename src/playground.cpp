@@ -15,6 +15,9 @@
 playground::playground(const std::string& backgroundPath, SDL_Renderer* renderer, const std::string& playerName)
     : renderer(renderer), isPaused(false), collectTimer(0), isCollecting(false)
 {
+    // Set this playground instance as current
+    CollectibleManager::setCurrentPlayground(this);
+    
     SDL_Log("Initializing playground...");
     
     // Initialize game management system
@@ -24,7 +27,7 @@ playground::playground(const std::string& backgroundPath, SDL_Renderer* renderer
     background = loadTexture(backgroundPath.c_str(), renderer);
     if (!background) {
         SDL_Log("Failed to load playground background!");
-        // Handle error appropriately
+        // Handle error appropriatel
     } else {
         SDL_Log("Playground background loaded.");
     }
@@ -32,7 +35,7 @@ playground::playground(const std::string& backgroundPath, SDL_Renderer* renderer
     // Initialize character
     mainCharacter = new Character(renderer, playerName, this, 5, 5);
     if (!mainCharacter) {
-        SDL_Log("Failed to create main character!");
+        SDL_Log("Failed to creat main character!");
         // Handle error appropriately
     } else {
         SDL_Log("Main character created.");
@@ -65,34 +68,54 @@ playground::playground(const std::string& backgroundPath, SDL_Renderer* renderer
     GameManagement::initialize();
 
     initializeCollectibles();  // Initialize collectibles
+
+    // Initialize timer
+    currentTime = gameTime;
+    timerFont = TTF_OpenFont("../fonts/Action_Man_Bold.ttf", 128);  // Larger font for timer
+    timerColor = {255, 255, 255, 255};  // White color
+    timerRect = {20, 20, 150, 50};  // Position in top-left corner
+    isTimerWarning = false;
+
+    // Initialize powerup icons
+    initializePowerupIcons();
+
+    // Set icon background color
+    iconBackgroundColor = {50, 50, 50, 200};  // Semi-transparent dark gray
+
+    // Initialize score display
+    scoreFont = TTF_OpenFont("../fonts/Action_Man_Bold.ttf", 48);
+    scoreColor = {255, 215, 0, 255};  // Gold color
+    scoreRect = {1100, 20, 200, 50};  // Position in top-right corner
+    currentScore = 0;
 }
 
 void playground::initializePauseMenu() {
-    font = TTF_OpenFont("../fonts/Action_Man_Bold.ttf", 36);
+    // Increase font size to 36 for higher resolution
+    font = TTF_OpenFont("../fonts/Action_Man_Bold.ttf", 128);
     if (!font) {
         SDL_Log("Failed to load font for pause menu: %s", TTF_GetError());
         return;
     }
 
-    buttonColor = {100, 100, 100, 255};
-    buttonHoverColor = {150, 150, 150, 255};
+    // Enhanced button colors
+    buttonColor = {80, 80, 80, 255};          // Darker gray for better contrast
+    buttonHoverColor = {120, 120, 120, 255};  // Lighter gray for hover state
 
-    int scale = 2;
-    int baseWidth = 150 * scale;
-    int baseHeight = 35 * scale;
+    // Calculate center positions based on window dimensions
+    int screenWidth = 1350;   // 675 * 2
+    int screenHeight = 772;   // 386 * 2
     
-    // Calculate center positions based on window dimensions (675 * 2, 386 * 2)
-    int screenWidth = 675 * 2;
-    int screenHeight = 386 * 2;
+    // Slightly larger button dimensions
+    int buttonWidth = 400;    // Increased from 300
+    int buttonHeight = 100;   // Increased from 80
+    int buttonSpacing = 50;   // Increased from 40
     
-    // Center horizontally by subtracting half the button width from half the screen width
-    int centerX = (screenWidth - baseWidth) / 2;
+    // Center horizontally and move up vertically
+    int centerX = (screenWidth - buttonWidth) / 2;
+    int startY = (screenHeight - (buttonHeight * 2 + buttonSpacing)) / 2 - 50;
     
-    // Center vertically and space buttons apart
-    int startY = (screenHeight - (baseHeight * 2 + 20)) / 2;  // 20 pixels spacing between buttons
-    
-    createPauseButton("Resume", centerX, startY, baseWidth, baseHeight);
-    createPauseButton("Surrender", centerX, startY + baseHeight + 20, baseWidth, baseHeight);
+    createPauseButton("Resume", centerX, startY, buttonWidth, buttonHeight);
+    createPauseButton("Surrender", centerX, startY + buttonHeight + buttonSpacing, buttonWidth, buttonHeight);
 }
 
 void playground::createPauseButton(const char* text, int x, int y, int width, int height) {
@@ -216,6 +239,7 @@ int playground::update(float deltaTime) {
         checkCollectibles();
     }
     
+    updateTimer(deltaTime);
     return TRUE;
 }
 
@@ -227,50 +251,47 @@ void playground::render() {
         SDL_RenderCopy(renderer, background, nullptr, nullptr);
     }
     
-    // Render obstacles
+    // Render game elements
     for (const auto& obstacle : obstacles) {
         obstacle->render();
     }
-
-    // Render collectibles
-    for (const auto& collectible : collectibles) {
-        collectible->render();
-    }
-
-    // Render character
+    renderCollectibles();
     mainCharacter->render();
+    
+    // Render timer
+    renderTimer();
+    
+    // Render powerup icons
+    renderPowerupIcons();
     
     // Render pause menu if paused
     if (isPaused) {
-        // Dim background
+        // Add semi-transparent overlay
         SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 128);
-        SDL_Rect fullscreen = {0, 0, 675 * 2, 386 * 2};
+        SDL_Rect fullscreen = {0, 0, 1350, 772};
         SDL_RenderFillRect(renderer, &fullscreen);
-
+        
         // Render pause buttons
         for (const auto& button : pauseButtons) {
+            // Render button background
             SDL_SetRenderDrawColor(renderer,
                 button.isHovered ? buttonHoverColor.r : buttonColor.r,
                 button.isHovered ? buttonHoverColor.g : buttonColor.g,
                 button.isHovered ? buttonHoverColor.b : buttonColor.b,
                 255);
             SDL_RenderFillRect(renderer, &button.rect);
-
+            
+            // Render button text
             if (button.textTexture) {
-                int textWidth, textHeight;
-                SDL_QueryTexture(button.textTexture, nullptr, nullptr, &textWidth, &textHeight);
-                SDL_Rect textRect = {
-                    button.rect.x + (button.rect.w - textWidth) / 2,
-                    button.rect.y + (button.rect.h - textHeight) / 2,
-                    textWidth,
-                    textHeight
-                };
-                SDL_RenderCopy(renderer, button.textTexture, nullptr, &textRect);
+                SDL_RenderCopy(renderer, button.textTexture, nullptr, &button.rect);
             }
         }
     }
-
+    
+    // Add score rendering
+    renderScore();
+    
     SDL_RenderPresent(renderer);
 }
 
@@ -305,6 +326,10 @@ void playground::reset() {
     isPaused = false;
     isGameEnded = false;
     
+    // Reset timer
+    currentTime = gameTime;  // Reset to 60 seconds (defined in playground.h)
+    isTimerWarning = false;
+
     // Reset character position
     if (mainCharacter) {
         delete mainCharacter;
@@ -315,24 +340,19 @@ void playground::reset() {
     obstacles.clear();
     // Center table
     obstacles.push_back(std::make_unique<Table>(renderer, 10, 10, 2, 2));  
+    // ... rest of obstacle initialization ...
 
-    // Add more tables around the playground
-    
-    // Group work tables
-    obstacles.push_back(std::make_unique<Table>(renderer, 20, 5, 2, 2));
-    obstacles.push_back(std::make_unique<Table>(renderer, 20, 8, 2, 2));
-
-    // Reading area tables
-    obstacles.push_back(std::make_unique<Table>(renderer, 15, 15, 2, 2));
-    obstacles.push_back(std::make_unique<Table>(renderer, 20, 15, 2, 2));
-
-    // Keep existing bookshelf
-    obstacles.push_back(std::make_unique<Bookshelf>(renderer, 15, 12, 2, 3));
-
-    // Reset any other game-specific variables
-
+    // Reset collectibles
     collectibles.clear();
-    initializeCollectibles();  // Reinitialize collectibles after clear
+    initializeCollectibles();
+
+    // Reset collection state
+    isCollecting = false;
+    collectTimer = 0;
+    
+    // Reset powerup icons
+    coffeeIcon.isActive = false;
+    freezeIcon.isActive = false;
 }
 //collectibles test
 void playground::initializeCollectibles() {
@@ -376,27 +396,159 @@ bool playground::isAdjacentToCollectible(SDL_Rect playerPos, SDL_Rect collectibl
 
 void playground::checkCollectibles() {
     SDL_Rect playerPos = mainCharacter->getPosition();
-
+    
+    bool foundAdjacentCollectible = false;
     for (auto& collectible : collectibles) {
-        if (!collectible->isVisible()) continue;
-
-        SDL_Rect collectiblePos = collectible->getPosition();
-        bool adjacent = isAdjacentToCollectible(playerPos, collectiblePos);
-
-        if (adjacent) {
-            if (isCollecting && !collectible->getIsBeingCollected()) {
-                collectible->startCollection();
-            }
-            if (isCollecting) {
-                collectible->updateCollection(1.0f/60.0f);
+        if (collectible->isVisible()) {
+            SDL_Rect collectiblePos = collectible->getPosition();
+            bool isAdjacent = isAdjacentToCollectible(playerPos, collectiblePos);
+            
+            if (isAdjacent) {
+                foundAdjacentCollectible = true;
+                if (isCollecting) {
+                    if (!collectible->getIsBeingCollected()) {
+                        collectible->startCollection();  // Start fresh collection
+                    }
+                    collectible->updateCollection(1.0f/60.0f);
+                } else {
+                    collectible->cancelCollection();  // Reset progress when E is released
+                }
             } else {
-                collectible->cancelCollection();
+                collectible->cancelCollection();  // Reset progress when moving away
             }
-        } else {
-            // Immediately cancel if player isn't adjacent
-            collectible->cancelCollection();
         }
     }
+    
+    // No need for the global reset since we handle each collectible individually
+}
+
+void playground::updateTimer(float deltaTime) {
+    if (!isPaused && !isGameEnded) {
+        currentTime -= deltaTime;
+        
+        // Check for timer warning state (less than 30 seconds)
+        isTimerWarning = currentTime <= 30.0f;
+        
+        // End game when timer reaches 0
+        if (currentTime <= 0) {
+            currentTime = 0;
+            endGame();
+        }
+    }
+}
+
+void playground::renderTimer() {
+    // Format time as MM:SS
+    std::string timeStr = formatTime(currentTime);
+    
+    // Create timer texture
+    SDL_Color textColor = timerColor;
+    if (isTimerWarning) {
+        // Pulse red color when time is low
+        Uint8 pulse = static_cast<Uint8>(127 + 128 * sin(SDL_GetTicks() * 0.005f));
+        textColor = {255, 0, 0, pulse};
+    }
+    
+    SDL_Surface* surface = TTF_RenderText_Solid(timerFont, timeStr.c_str(), textColor);
+    SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
+    
+    SDL_RenderCopy(renderer, texture, nullptr, &timerRect);
+    
+    SDL_FreeSurface(surface);
+    SDL_DestroyTexture(texture);
+}
+
+std::string playground::formatTime(float timeInSeconds) {
+    int minutes = static_cast<int>(timeInSeconds) / 60;
+    int seconds = static_cast<int>(timeInSeconds) % 60;
+    char buffer[6];
+    snprintf(buffer, sizeof(buffer), "%02d:%02d", minutes, seconds);
+    return std::string(buffer);
+}
+
+void playground::initializePowerupIcons() {
+    // Load icons
+    coffeeIcon.texture = loadTexture("../imgs/coffee.png", renderer);
+    freezeIcon.texture = loadTexture("../imgs/freeze.png", renderer);
+    
+    // Position icons on the right side of the screen
+    int iconSize = 48;  // Smaller than collectibles
+    int margin = 20;
+    int startY = 100;  // Below timer
+    
+    coffeeIcon.position = {1350 - margin - iconSize, startY, iconSize, iconSize};
+    freezeIcon.position = {1350 - margin - iconSize, startY + iconSize + margin, iconSize, iconSize};
+    
+    coffeeIcon.isActive = false;
+    freezeIcon.isActive = false;
+}
+
+void playground::renderPowerupIcons() {
+    if (coffeeIcon.isActive || freezeIcon.isActive) {
+        // Create timer font if not created yet
+        TTF_Font* iconFont = TTF_OpenFont("../fonts/Action_Man_Bold.ttf", 24);  // Smaller font for icons
+        
+        if (coffeeIcon.isActive) {
+            // Render background
+            SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
+            SDL_SetRenderDrawColor(renderer, 
+                iconBackgroundColor.r,
+                iconBackgroundColor.g, 
+                iconBackgroundColor.b,
+                iconBackgroundColor.a);
+            SDL_RenderFillRect(renderer, &coffeeIcon.position);
+            
+            // Render icon
+            SDL_RenderCopy(renderer, coffeeIcon.texture, nullptr, &coffeeIcon.position);
+            
+            // Render countdown timer
+            char timeBuffer[8];
+            snprintf(timeBuffer, sizeof(timeBuffer), "%.1fs", coffeeIcon.timeLeft);
+            SDL_Color timerColor = {255, 255, 255, 255};  // White text
+            SDL_Surface* timeSurface = TTF_RenderText_Solid(iconFont, timeBuffer, timerColor);
+            SDL_Texture* timeTexture = SDL_CreateTextureFromSurface(renderer, timeSurface);
+            
+            // Position timer text to the left of the icon
+            SDL_Rect timeRect = {
+                coffeeIcon.position.x - 60,  // Left of icon
+                coffeeIcon.position.y + 12,  // Vertically centered
+                50,                          // Width for time text
+                24                           // Height for time text
+            };
+            SDL_RenderCopy(renderer, timeTexture, nullptr, &timeRect);
+            
+            // Cleanup
+            SDL_FreeSurface(timeSurface);
+            SDL_DestroyTexture(timeTexture);
+        }
+        
+        // Similar for freeze icon...
+        if (freezeIcon.isActive) {
+            // Existing freeze icon rendering...
+        }
+        
+        TTF_CloseFont(iconFont);
+    }
+}
+
+void playground::renderScore() {
+    // Calculate current score using the same formula
+    currentScore = (GameManagement::getNoteCount() * 20) + 
+                  (GameManagement::getExamCount() * 40);
+
+    std::string scoreText = "Score: " + std::to_string(currentScore);
+    SDL_Surface* surface = TTF_RenderText_Solid(scoreFont, scoreText.c_str(), scoreColor);
+    SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
+    
+    // Add a semi-transparent background
+    SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 128);
+    SDL_RenderFillRect(renderer, &scoreRect);
+    
+    SDL_RenderCopy(renderer, texture, nullptr, &scoreRect);
+    
+    SDL_FreeSurface(surface);
+    SDL_DestroyTexture(texture);
 }
 
 playground::~playground() {
@@ -407,4 +559,14 @@ playground::~playground() {
 
     // Delete the mainCharacter
     delete mainCharacter;
+
+    // Existing cleanup...
+    if (timerFont) {
+        TTF_CloseFont(timerFont);
+        timerFont = nullptr;
+    }
+    if (scoreFont) {
+        TTF_CloseFont(scoreFont);
+        scoreFont = nullptr;
+    }
 }

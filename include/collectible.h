@@ -7,12 +7,17 @@
 
 class Collectible {
 protected:
-    SDL_Texture* texture;
     SDL_Renderer* renderer;
+    SDL_Texture* texture;
     SDL_Rect position;
-    bool m_isVisible;  // Renamed to m_isVisible with 'm_' prefix for member variable
+    bool m_isVisible;
     int spawnTimer;
     int respawnTime;
+    bool isBeingCollected = false;
+    float collectionProgress = 0.0f;
+
+    void drawProgressRing();
+
     float value;
 
     // Base glow parameters
@@ -21,8 +26,6 @@ protected:
     float glowTime;
 
     // Add these members
-    bool isBeingCollected;
-    float collectionProgress;  // 0.0f to 1.0f
     const float COLLECTION_TIME = 0.5f;  // Time to collect in seconds
 
     // Helper method for derived classes
@@ -30,8 +33,6 @@ protected:
                          int layerCount = 4, 
                          float baseRadius = 2.0f,
                          float radiusIncrement = 2.0f);
-
-    void drawProgressRing();  // New helper method
 
 public:
     Collectible(SDL_Renderer* renderer, const char* texturePath, int x, int y, int respawnTime);

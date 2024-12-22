@@ -27,7 +27,7 @@ void Collectible::update(float deltaTime) {
 
 void Collectible::render() {
     if (m_isVisible) {
-        renderGlow();  // First layer - glow
+        renderGlow();  // First layer - glow effect
         if (texture) {
             SDL_RenderCopy(renderer, texture, nullptr, &position);  // Second layer - texture
         }

@@ -4,12 +4,19 @@
 
 ScorePage::ScorePage(SDL_Renderer* renderer) : renderer(renderer), animationTimer(0) {
     font = TTF_OpenFont("../fonts/Action_Man_Bold.ttf", 36);
+    if (!font) {
+        SDL_Log("Failed to load font: %s", TTF_GetError());
+    }
     
-    // Initialize collectible icons
+    // Load textures with error checking
     SDL_Texture* noteIcon = loadTexture("../imgs/note.png", renderer);
     SDL_Texture* examIcon = loadTexture("../imgs/pastexam.png", renderer);
     SDL_Texture* coffeeIcon = loadTexture("../imgs/coffee.png", renderer);
     SDL_Texture* freezeIcon = loadTexture("../imgs/freeze.png", renderer);
+    
+    if (!noteIcon || !examIcon || !coffeeIcon || !freezeIcon) {
+        SDL_Log("Failed to load one or more collectible textures");
+    }
     
     // Position icons and counts in a grid
     int startX = 200;
@@ -173,16 +180,19 @@ void ScorePage::update(float deltaTime) {
 }
 
 SDL_Texture* ScorePage::loadTexture(const std::string& path, SDL_Renderer* renderer) {
-    // Use IMG_Load instead of SDL_LoadBMP for PNG files
     SDL_Surface* surface = IMG_Load(path.c_str());
     if (!surface) {
         SDL_Log("Failed to load image %s: %s", path.c_str(), IMG_GetError());
         return nullptr;
     }
+    
     SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
     if (!texture) {
-        SDL_Log("Failed to create texture: %s", SDL_GetError());
+        SDL_Log("Failed to create texture from %s: %s", path.c_str(), SDL_GetError());
+        SDL_FreeSurface(surface);
+        return nullptr;
     }
+    
     SDL_FreeSurface(surface);
     return texture;
 }

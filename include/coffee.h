@@ -1,13 +1,14 @@
 #pragma once
 #include "collectible.h"
 #include "collectible_manager.h"
-
+#include "playground.h"
 class Coffee : public Collectible {
 private:
     float speedBoostDuration;
     float speedBoostMultiplier;
     bool isActive;
     float powerupTimer;
+    float glowTime;  // Add this line
 
 protected:
     void renderGlow() override;

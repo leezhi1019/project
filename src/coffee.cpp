@@ -2,6 +2,8 @@
 #include "../include/collectible_manager.h"
 #include "../include/game_management.h"
 
+// Initialize static members
+
 Coffee::Coffee(SDL_Renderer* renderer, int x, int y)
     : Collectible(renderer, "../imgs/coffee.png", x, y, 15000) {
     speedBoostDuration = 10.0f;  // 10 seconds
@@ -14,30 +16,36 @@ Coffee::Coffee(SDL_Renderer* renderer, int x, int y)
     position.y = spawn.y * GRID_SIZE;
     glowColor = {0, 191, 255, 255};  // Deep Sky Blue
     glowIntensity = 1.0f;
-    glowTime = 0.0f;
+    glowTime = 0.0f;  // Add this line
 }
 
 void Coffee::collect() {
     GameManagement::incrementCount("coffee");
+    GameManagement::setCoffeePowerupActive(true);  // Add this
     CollectibleManager::playPowerupSound();
     CollectibleManager::createParticles(renderer, position.x, position.y);
     isActive = true;
-    powerupTimer = speedBoostDuration;
+    float boostDuration = 5.0f; // Define duration
+    powerupTimer = boostDuration;
+    // Update via static method or reference instead of direct access
+    CollectibleManager::setCoffeeIconActive(true, boostDuration);
     despawn();
 }
 
 void Coffee::update(float deltaTime) {
     Collectible::update(deltaTime);
-    glowTime += deltaTime;
-    if (glowTime > 2 * M_PI) {
-        glowTime -= 2 * M_PI;
+    glowTime += deltaTime;  // Add this line
+    if (glowTime > 2 * M_PI) {  // Add this line
+        glowTime -= 2 * M_PI;   // Add this line
     }
     if (isActive) {
         powerupTimer -= deltaTime;
-        SDL_Log("Coffee powerup timer: %.2f", powerupTimer); // Add debug logging
+        // Update icon with current time remaining
+        CollectibleManager::setCoffeeIconActive(true, powerupTimer);
         if (powerupTimer <= 0) {
             isActive = false;
-            SDL_Log("Coffee power-up expired");
+            GameManagement::setCoffeePowerupActive(false);  // Add this
+            CollectibleManager::setCoffeeIconActive(false, 0);
         }
     }
 }
@@ -56,5 +64,6 @@ void Coffee::render() {
         if (texture) {
             SDL_RenderCopy(renderer, texture, nullptr, &position);
         }
+        drawProgressRing();
     }
 }

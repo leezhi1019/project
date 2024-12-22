@@ -10,10 +10,12 @@ private:
     static int coffeeCount;
     static int freezeCount;
     static bool initialized;
+    static bool isCoffeePowerupActive;
 
 public:
     static void initialize();
     static void incrementCount(const std::string& type);
+    static void decrementCount(const std::string& type);  // Add this method
     static void resetCounts();
     static void printStats();
     
@@ -22,11 +24,23 @@ public:
     static int getExamCount() { return examCount; }
     static int getCoffeeCount() { return coffeeCount; }
     static int getFreezeCount() { return freezeCount; }
+    static void setCoffeePowerupActive(bool active) {
+        isCoffeePowerupActive = active;
+    }
+    static bool getCoffeePowerupActive() {
+        return isCoffeePowerupActive;
+    }
 
     static int calculateFinalScore() {
-        return (getNoteCount() * 20) + 
-               (getExamCount() * 30) + 
-               (getCoffeeCount() * 15) + 
-               (getFreezeCount() * 10);
+        // Past exam is now worth 40 points (increased from 30)
+        // Notes are worth 20 points base
+        // Coffee/freeze themselves are worth 0 points
+        // Notes and exams collected during coffee powerup get 2x points
+        int baseScore = (getNoteCount() * 20) + 
+                       (getExamCount() * 40);
+
+        // If items were collected during coffee powerup, they would have been 
+        // counted with the bonus in the increment function already
+        return baseScore;
     }
 };

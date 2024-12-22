@@ -33,6 +33,7 @@ void PastExam::render() {
         if (texture) {
             SDL_RenderCopy(renderer, texture, nullptr, &position);
         }
+        drawProgressRing();
     }
 }
 

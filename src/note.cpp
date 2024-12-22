@@ -11,17 +11,6 @@ Note::Note(SDL_Renderer* renderer, int x, int y)
     glowTime = 0.0f;
 }
 
-void Note::render() {
-    if (m_isVisible) {
-        // Render glow effect first (behind the collectible)
-        renderGlow();
-        
-        // Then render the collectible texture
-        if (texture) {
-            SDL_RenderCopy(renderer, texture, nullptr, &position);
-        }
-    }
-}
 
 void Note::update(float deltaTime) {
     Collectible::update(deltaTime);
@@ -41,4 +30,17 @@ void Note::collect() {
     CollectibleManager::playCollectSound();
     CollectibleManager::createParticles(renderer, position.x, position.y);
     despawn();
+}
+
+void Note::render() {
+    if (m_isVisible) {
+        // Render glow effect first (behind the collectible)
+        renderGlow();
+        
+        // Then render the collectible texture
+        if (texture) {
+            SDL_RenderCopy(renderer, texture, nullptr, &position);
+        }
+        drawProgressRing();
+    }
 }

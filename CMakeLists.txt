@@ -45,3 +45,20 @@ target_sources(${PROJECT_NAME} PRIVATE
 )
 
 target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARIES} ${SDL2_TTF_LIBRARIES} ${SDL2_MIXER_LIBRARIES})
+
+
+set(SDL2_DLLS
+        "${CMAKE_SOURCE_DIR}/bin/SDL2.dll"
+        "${CMAKE_SOURCE_DIR}/bin/SDL2_image.dll"
+        "${CMAKE_SOURCE_DIR}/bin/SDL2_mixer.dll"
+        "${CMAKE_SOURCE_DIR}/bin/SDL2_ttf.dll"
+)
+
+# Copy the DLLs to the build directory
+add_custom_command(
+        TARGET my_Final_project_game POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        ${SDL2_DLLS}
+        $<TARGET_FILE_DIR:my_Final_project_game>
+        COMMENT "Copying SDL2 DLLs to the build directory"
+)

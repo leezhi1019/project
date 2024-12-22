@@ -5,7 +5,7 @@
 Freeze::Freeze(SDL_Renderer* renderer, int x, int y)
     : Collectible(renderer, "../imgs/freeze.png", x, y, 30000) {  // 30 second respawn
     freezeDuration = 5.0f;  // 5 seconds freeze
-    isActive = false;
+    m_active = false;  // Use m_active
     powerupTimer = 0.0f;
     
     SDL_Point spawn = CollectibleManager::getRandomSpawnPoint();
@@ -22,17 +22,22 @@ void Freeze::collect() {
     GameManagement::incrementCount("freeze");
     CollectibleManager::playPowerupSound();
     CollectibleManager::createParticles(renderer, position.x, position.y);
-    isActive = true;
+    m_active = true;
     powerupTimer = freezeDuration;
+    // Update via static method or reference
+    CollectibleManager::setFreezeIconActive(true, freezeDuration);
     despawn();
 }
 
 void Freeze::update(float deltaTime) {
     Collectible::update(deltaTime);
-    if (isActive) {
+    if (m_active) {
         powerupTimer -= deltaTime;
+        // Update icon with current time remaining
+        CollectibleManager::setFreezeIconActive(true, powerupTimer);
         if (powerupTimer <= 0) {
-            isActive = false;
+            m_active = false;
+            CollectibleManager::setFreezeIconActive(false, 0);
         }
     }
 }
@@ -40,4 +45,13 @@ void Freeze::update(float deltaTime) {
 void Freeze::renderGlow() {
     if (!m_isVisible) return;
     drawCircularGlow(2.2f, 4, 2.5f, 2.0f);  // Icy effect glow
+}
+
+void Freeze::render() {
+    if (!m_isVisible) return;
+    renderGlow();  // First layer - glow effect
+    if (texture) {
+        SDL_RenderCopy(renderer, texture, nullptr, &position);  // Second layer - texture
+    }
+    drawProgressRing();  // Final layer - progress ring
 }

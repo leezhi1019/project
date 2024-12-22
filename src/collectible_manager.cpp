@@ -8,6 +8,7 @@ Mix_Chunk* CollectibleManager::collectSound = nullptr;
 Mix_Chunk* CollectibleManager::powerupSound = nullptr;
 SDL_Texture* CollectibleManager::particleTexture = nullptr;
 bool CollectibleManager::initialized = false;
+playground* CollectibleManager::currentPlayground = nullptr;  // Add this line
 
 void CollectibleManager::initialize() {
     if (!initialized) {
@@ -64,5 +65,17 @@ void CollectibleManager::cleanup() {
     if (powerupSound) {
         Mix_FreeChunk(powerupSound);
         powerupSound = nullptr;
+    }
+}
+
+void CollectibleManager::setCoffeeIconActive(bool active, float duration) {
+    if (playground* currentPlayground = getCurrentPlayground()) {
+        currentPlayground->setCoffeeIconState(active, duration);
+    }
+}
+
+void CollectibleManager::setFreezeIconActive(bool active, float duration) {
+    if (playground* currentPlayground = getCurrentPlayground()) {
+        currentPlayground->setFreezeIconState(active, duration);
     }
 }
