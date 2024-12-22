@@ -13,32 +13,24 @@ Character::Character(SDL_Renderer *renderer, const std::string &name,
       clothesColor{255, 255, 255, 255},                         // Default clothes color
       hairColor{100, 50, 0, 255},                               // Default hair color
       nameColor{255, 255, 255, 255},                            // Default name color
-      upImage(upImage), downImage(downImage), leftImage(leftImage), rightImage(rightImage)
+      upImage(upImage), downImage(downImage), leftImage(leftImage), rightImage(rightImage),
+      currentTexture(nullptr) // Initialize currentTexture
 {
-    SDL_Log("Initializing character...");
+    // Load all textures once and store them
+    textures["up"] = loadTexture(upImage.c_str(), renderer);
+    textures["down"] = loadTexture(downImage.c_str(), renderer);
+    textures["left"] = loadTexture(leftImage.c_str(), renderer);
+    textures["right"] = loadTexture(rightImage.c_str(), renderer);
 
-    // Log the base path for debugging
-    SDL_Log("Base path: %s", SDL_GetBasePath());
+    // Set initial texture
+    currentTexture = textures["down"];
 
-    // Load initial sprite
-    if (!downImage.empty())
+    // Error checking
+    for (const auto &[key, texture] : textures)
     {
-        SDL_Log("Loading character sprite from: %s", downImage.c_str());
-        sprite = loadTexture(downImage.c_str(), renderer);
-        if (!sprite)
+        if (!texture)
         {
-            SDL_Log("Failed to load character sprite from %s: %s", downImage.c_str(), SDL_GetError());
-        }
-    }
-
-    // Ensure the sprite is loaded immediately after initialization
-    if (!sprite)
-    {
-        SDL_Log("Sprite is null after initialization, attempting to reload.");
-        sprite = loadTexture(downImage.c_str(), renderer);
-        if (!sprite)
-        {
-            SDL_Log("Failed to reload character sprite from %s: %s", downImage.c_str(), SDL_GetError());
+            SDL_Log("Failed to load %s texture", key.c_str());
         }
     }
 
@@ -49,25 +41,20 @@ Character::Character(SDL_Renderer *renderer, const std::string &name,
         SDL_Log("Failed to load name font: %s", TTF_GetError());
         return; // Early return on failure
     }
-    SDL_Log("Name font loaded.");
 
     // Create name texture
     updateNameTexture();
-    if (!nameTexture)
-    {
-        SDL_Log("Failed to create name texture!");
-        return;
-    }
-    SDL_Log("Name texture created.");
-
-    SDL_Log("Character initialized successfully.");
 }
 
 Character::~Character()
 {
-    if (sprite)
+    for (auto &[key, texture] : textures)
     {
-        SDL_DestroyTexture(sprite);
+        if (texture)
+        {
+            SDL_DestroyTexture(texture);
+            texture = nullptr;
+        }
     }
     if (nameTexture)
     {
@@ -85,20 +72,7 @@ void Character::moveLeft()
     {
         gridX--;
         facingRight = false;
-        if (!leftImage.empty())
-        {
-            SDL_Log("Loading character sprite from: %s", leftImage.c_str());
-            SDL_Texture *newSprite = loadTexture(leftImage.c_str(), renderer);
-            if (newSprite)
-            {
-                SDL_DestroyTexture(sprite);
-                sprite = newSprite;
-            }
-            else
-            {
-                SDL_Log("Failed to load character sprite from %s: %s", leftImage.c_str(), SDL_GetError());
-            }
-        }
+        currentTexture = textures["left"]; // Simply switch texture
     }
 }
 
@@ -108,20 +82,7 @@ void Character::moveRight()
     {
         gridX++;
         facingRight = true;
-        if (!rightImage.empty())
-        {
-            SDL_Log("Loading character sprite from: %s", rightImage.c_str());
-            SDL_Texture *newSprite = loadTexture(rightImage.c_str(), renderer);
-            if (newSprite)
-            {
-                SDL_DestroyTexture(sprite);
-                sprite = newSprite;
-            }
-            else
-            {
-                SDL_Log("Failed to load character sprite from %s: %s", rightImage.c_str(), SDL_GetError());
-            }
-        }
+        currentTexture = textures["right"]; // Simply switch texture
     }
 }
 
@@ -130,20 +91,7 @@ void Character::moveUp()
     if (gridY > 0 && !gamePlayground->isPositionBlocked(gridX, gridY - 1))
     {
         gridY--;
-        if (!upImage.empty())
-        {
-            SDL_Log("Loading character sprite from: %s", upImage.c_str());
-            SDL_Texture *newSprite = loadTexture(upImage.c_str(), renderer);
-            if (newSprite)
-            {
-                SDL_DestroyTexture(sprite);
-                sprite = newSprite;
-            }
-            else
-            {
-                SDL_Log("Failed to load character sprite from %s: %s", upImage.c_str(), SDL_GetError());
-            }
-        }
+        currentTexture = textures["up"]; // Simply switch texture
     }
 }
 
@@ -152,20 +100,7 @@ void Character::moveDown()
     if (gridY < 17 && !gamePlayground->isPositionBlocked(gridX, gridY + 1))
     {
         gridY++;
-        if (!downImage.empty())
-        {
-            SDL_Log("Loading character sprite from: %s", downImage.c_str());
-            SDL_Texture *newSprite = loadTexture(downImage.c_str(), renderer);
-            if (newSprite)
-            {
-                SDL_DestroyTexture(sprite);
-                sprite = newSprite;
-            }
-            else
-            {
-                SDL_Log("Failed to load character sprite from %s: %s", downImage.c_str(), SDL_GetError());
-            }
-        }
+        currentTexture = textures["down"]; // Simply switch texture
     }
 }
 
@@ -214,24 +149,12 @@ void Character::render()
         GRID_SIZE};
 
     // Render character sprite
-    if (!sprite)
+    if (currentTexture)
     {
-        SDL_Log("Sprite is null, attempting to reload.");
-        sprite = loadTexture(downImage.c_str(), renderer); // Attempt to reload image
-        if (!sprite)
-        {
-            SDL_Log("Failed to reload character sprite from %s: %s", downImage.c_str(), SDL_GetError());
-        }
-    }
-
-    if (sprite)
-    {
-        SDL_Log("Rendering character sprite.");
-        SDL_RenderCopy(renderer, sprite, nullptr, &destRect);
+        SDL_RenderCopy(renderer, currentTexture, nullptr, &destRect);
     }
     else
     {
-        SDL_Log("Rendering fallback rectangle.");
         // Fallback to colored rectangle if sprite is not loaded
         SDL_SetRenderDrawColor(renderer, clothesColor.r, clothesColor.g, clothesColor.b, clothesColor.a);
         SDL_RenderFillRect(renderer, &destRect);

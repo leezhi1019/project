@@ -1,5 +1,6 @@
 #include "../include/enemy.h"
 #include "../include/playground.h"
+#include "../include/audio_manager.h" // Add this include
 #include <cstdlib>
 #include <ctime>
 
@@ -34,6 +35,7 @@ void Enemy::update()
         SDL_Log("Character detected");
         characterDetected = true;
         detectionTime = currentTime;
+        AudioManager::playSoundEffect(); // Play detected sound effect
         return;
     }
 

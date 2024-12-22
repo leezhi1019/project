@@ -3,6 +3,7 @@
 
 #include <SDL.h>
 #include <SDL2/SDL_ttf.h>
+#include <map>
 #include <string>
 #include "constants.h" // Add this include
 
@@ -23,6 +24,8 @@ protected:
     bool facingRight;
     SDL_Texture *sprite;
     SDL_Renderer *renderer;
+    SDL_Texture *currentTexture;
+    std::map<std::string, SDL_Texture *> textures;
 
     // Name related members
     std::string name;
@@ -47,7 +50,7 @@ public:
               const playground *gamePlayground, int startX = 0, int startY = 0,
               const std::string &upImage = "", const std::string &downImage = "",
               const std::string &leftImage = "", const std::string &rightImage = "");
-    ~Character();
+    virtual ~Character();
 
     // Movement methods
     void moveLeft();
@@ -67,6 +70,11 @@ public:
     virtual void update(); // Declare update as virtual
 
     const playground *getGamePlayground() const { return gamePlayground; } // Move this getter method to public
+
+    // Add new method declarations
+    void loadTextures();
+    void setTexture(const std::string &direction);
+    SDL_Texture *getTexture(const std::string &direction);
 };
 
 #endif
