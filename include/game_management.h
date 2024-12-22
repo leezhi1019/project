@@ -32,12 +32,10 @@ public:
     }
 
     static int calculateFinalScore() {
-        // Past exam is now worth 40 points (increased from 30)
-        // Notes are worth 20 points base
-        // Coffee/freeze themselves are worth 0 points
-        // Notes and exams collected during coffee powerup get 2x points
-        int baseScore = (getNoteCount() * 20) + 
-                       (getExamCount() * 40);
+        // Change note score to 15 points
+        // Change exam score to 5 points
+        int baseScore = (getNoteCount() * 15) + 
+                       (getExamCount() * 5);
 
         // If items were collected during coffee powerup, they would have been 
         // counted with the bonus in the increment function already

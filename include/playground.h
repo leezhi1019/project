@@ -38,8 +38,8 @@ extern int PAGE_ID;
 class playground {
     friend class CollectibleManager;  // Allow CollectibleManager to access private members
 private:
-    static const int TOTAL_NOTES = 7;  // Number of notes to spawn initially
-    static const int TOTAL_EXAMS = 2;  // Add this constant
+    static const int TOTAL_NOTES = 2;  // Number of notes to spawn initially
+    static const int TOTAL_EXAMS = 7;  // Add this constant
 
     struct Button {
         SDL_Rect rect;
@@ -168,5 +168,7 @@ public:
     void queueCollectible(std::unique_ptr<Collectible> collectible) {
         queuedCollectibles.push_back(std::move(collectible));
     }
+
+    void reduceTimer(float seconds) { currentTime -= seconds; } // Add this method
 };
 #endif

@@ -18,6 +18,14 @@ private:
     bool characterDetected;                      // Track if character is detected
     Uint32 detectionTime;                        // Time when character was detected
 
+    SDL_Texture *textureRight;
+    SDL_Texture *textureLeft;
+    SDL_Texture *textureUp;
+    SDL_Texture *textureDown;
+    SDL_Texture *currentTexture;
+
+    void loadTextures(SDL_Renderer *renderer);
+
 public:
     Enemy(SDL_Renderer *renderer, const std::string &name, const playground *gamePlayground, int startX, int startY, const std::vector<std::pair<int, int>> &waypoints, int speed);
     void update() override; // Ensure this is marked as override

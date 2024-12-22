@@ -36,6 +36,14 @@ private:
     // Add this private helper function
     void updateNameTexture();
 
+    SDL_Texture *textureRight;
+    SDL_Texture *textureLeft;
+    SDL_Texture *textureUp;
+    SDL_Texture *textureDown;
+    SDL_Texture *currentTexture;
+
+    void loadTextures(SDL_Renderer *renderer);
+
 public:
     Character(SDL_Renderer *renderer, const std::string &name,
               const playground *gamePlayground, int startX = 0, int startY = 0);

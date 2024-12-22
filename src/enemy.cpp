@@ -8,6 +8,20 @@ Enemy::Enemy(SDL_Renderer *renderer, const std::string &name, const playground *
     : Character(renderer, name, gamePlayground, startX, startY), patrolWaypoints(waypoints), currentWaypointIndex(0), patrolSpeed(speed), lastMoveTime(0), vision(this, 5, M_PI / 4), characterDetected(false), detectionTime(0)
 {
     std::srand(std::time(nullptr)); // Seed for random direction changes
+    loadTextures(renderer); // Load textures for different directions
+}
+
+void Enemy::loadTextures(SDL_Renderer *renderer)
+{
+    textureRight = IMG_LoadTexture(renderer, "../imgs/character_right.png");
+    textureLeft = IMG_LoadTexture(renderer, "../imgs/character_left.png");
+    textureUp = IMG_LoadTexture(renderer, "../imgs/character_up.png");
+    textureDown = IMG_LoadTexture(renderer, "../imgs/character_down.png");
+
+    if (!textureRight || !textureLeft || !textureUp || !textureDown)
+    {
+        SDL_Log("Failed to load one or more enemy textures: %s", SDL_GetError());
+    }
 }
 
 void Enemy::update()
@@ -39,6 +53,7 @@ void Enemy::update()
         characterDetected = true;
         detectionTime = currentTime;
         AudioManager::playSoundEffect(); // Play detected sound effect
+        const_cast<playground*>(gamePlayground)->reduceTimer(10.0f); // Reduce timer by 10 seconds
         return;
     }
 
@@ -55,18 +70,22 @@ void Enemy::update()
     case 0:
         nextX += patrolSpeed;
         vision.setDirection(0); // Move right
+        currentTexture = textureRight;
         break;
     case 1:
         nextX -= patrolSpeed;
         vision.setDirection(M_PI); // Move left
+        currentTexture = textureLeft;
         break;
     case 2:
         nextY += patrolSpeed;
         vision.setDirection(M_PI / 2); // Move down
+        currentTexture = textureDown;
         break;
     case 3:
         nextY -= patrolSpeed;
         vision.setDirection(-M_PI / 2); // Move up
+        currentTexture = textureUp;
         break;
     }
 
@@ -85,6 +104,7 @@ void Enemy::update()
 
 void Enemy::render()
 {
-    Character::render();     // Call the base class render method
+    SDL_Rect destRect = {gridX * GRID_SIZE, gridY * GRID_SIZE, GRID_SIZE, GRID_SIZE};
+    SDL_RenderCopy(renderer, currentTexture, nullptr, &destRect);
     vision.render(renderer); // Render the vision area
 }

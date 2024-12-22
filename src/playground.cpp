@@ -35,7 +35,7 @@ playground::playground(const std::string& backgroundPath, SDL_Renderer* renderer
     }
 
     // Initialize character
-    mainCharacter = new Character(renderer, playerName, this, 5, 5);
+    mainCharacter = new Character(renderer, playerName, this, 16, 9);
     if (!mainCharacter) {
         SDL_Log("Failed to creat main character!");
         // Handle error appropriately
@@ -79,9 +79,13 @@ playground::playground(const std::string& backgroundPath, SDL_Renderer* renderer
 
     // Initialize enemies
     std::vector<std::pair<int, int>> waypoints = {{5, 5}, {10, 5}, {10, 10}, {5, 10}};
-    enemies.push_back(std::make_unique<Enemy>(renderer, "Enemy1", this, 5, 5, waypoints, 1));
-    enemies.push_back(std::make_unique<Enemy>(renderer, "Enemy2", this, 15, 15, waypoints, 1));
-    enemies.push_back(std::make_unique<Enemy>(renderer, "Enemy3", this, 25, 5, waypoints, 1));
+    std::vector<std::pair<int, int>> enemyPositions = {{5, 5}, {15, 15}, {25, 5}, {5, 15}, {25, 15}};
+    
+    for (const auto& pos : enemyPositions) {
+        if (pos.first != 16 || pos.second != 9) { // Ensure no overlap with main character
+            enemies.push_back(std::make_unique<Enemy>(renderer, "Enemy", this, pos.first, pos.second, waypoints, 1));
+        }
+    }
 }
 
 void playground::initializePauseMenu() {
@@ -337,7 +341,7 @@ void playground::reset() {
     if (mainCharacter) {
         delete mainCharacter;
     }
-    mainCharacter = new Character(renderer, "Player1", this, 5, 5);
+    mainCharacter = new Character(renderer, "Player1", this, 16, 9);
     
     obstacles.clear();
     obstacles.push_back(std::make_unique<Table>(renderer, 10, 10, 2, 2));
@@ -612,10 +616,11 @@ void playground::renderPowerupIcons() {
 }
 
 void playground::renderScore() {
-    // Calculate current score using the same formula
-    currentScore = (GameManagement::getNoteCount() * 20) + 
-                  (GameManagement::getExamCount() * 40);
-
+    // Update score calculation to match new values
+    currentScore = (GameManagement::getNoteCount() * 15) + 
+                  (GameManagement::getExamCount() * 5);
+    
+    // Rest of the function remains the same...
     std::string scoreText = "Score: " + std::to_string(currentScore);
     SDL_Surface* surface = TTF_RenderText_Solid(scoreFont, scoreText.c_str(), scoreColor);
     SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);

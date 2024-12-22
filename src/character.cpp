@@ -32,7 +32,23 @@ Character::Character(SDL_Renderer *renderer, const std::string &name,
     }
     SDL_Log("Name texture created.");
 
+    loadTextures(renderer); // Load textures for different directions
+
     SDL_Log("Character initialized successfully.");
+}
+
+void Character::loadTextures(SDL_Renderer *renderer)
+{
+    textureRight = IMG_LoadTexture(renderer, "../imgs/character_right.png");
+    textureLeft = IMG_LoadTexture(renderer, "../imgs/character_left.png");
+    textureUp = IMG_LoadTexture(renderer, "../imgs/character_up.png");
+    textureDown = IMG_LoadTexture(renderer, "../imgs/character_down.png");
+
+    if (!textureRight || !textureLeft || !textureUp || !textureDown)
+    {
+        SDL_Log("Failed to load one or more character textures: %s", SDL_GetError());
+    }
+    currentTexture = textureDown; // Default texture
 }
 
 Character::~Character()
@@ -49,6 +65,22 @@ Character::~Character()
     {
         TTF_CloseFont(nameFont);
     }
+    if (textureRight)
+    {
+        SDL_DestroyTexture(textureRight);
+    }
+    if (textureLeft)
+    {
+        SDL_DestroyTexture(textureLeft);
+    }
+    if (textureUp)
+    {
+        SDL_DestroyTexture(textureUp);
+    }
+    if (textureDown)
+    {
+        SDL_DestroyTexture(textureDown);
+    }
 }
 
 void Character::moveLeft()
@@ -57,6 +89,7 @@ void Character::moveLeft()
     {
         gridX--;
         facingRight = false;
+        currentTexture = textureLeft;
     }
 }
 
@@ -66,6 +99,7 @@ void Character::moveRight()
     {
         gridX++;
         facingRight = true;
+        currentTexture = textureRight;
     }
 }
 
@@ -74,6 +108,7 @@ void Character::moveUp()
     if (gridY > 0 && !gamePlayground->isPositionBlocked(gridX, gridY - 1))
     {
         gridY--;
+        currentTexture = textureUp;
     }
 }
 
@@ -82,6 +117,7 @@ void Character::moveDown()
     if (gridY < 17 && !gamePlayground->isPositionBlocked(gridX, gridY + 1))
     {
         gridY++;
+        currentTexture = textureDown;
     }
 }
 
@@ -143,16 +179,14 @@ void Character::updateNameTexture()
 
 void Character::render()
 {
-    // Draw character as a colored rectangle for now
     SDL_Rect destRect = {
         gridX * GRID_SIZE,
         gridY * GRID_SIZE,
         GRID_SIZE,
         GRID_SIZE};
 
-    // Render character body
-    SDL_SetRenderDrawColor(renderer, clothesColor.r, clothesColor.g, clothesColor.b, clothesColor.a);
-    SDL_RenderFillRect(renderer, &destRect);
+    // Render character texture
+    SDL_RenderCopy(renderer, currentTexture, nullptr, &destRect);
 
     // Render name if available
     if (nameTexture)
