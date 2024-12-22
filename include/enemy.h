@@ -17,6 +17,7 @@ private:
     Vision vision;                               // Add vision member
     bool characterDetected;                      // Track if character is detected
     Uint32 detectionTime;                        // Time when character was detected
+    int stepsInOneDirection;                     // Add this member variable
 
 public:
     Enemy(SDL_Renderer *renderer, const std::string &name, const playground *gamePlayground, int startX, int startY, const std::vector<std::pair<int, int>> &waypoints, int speed,

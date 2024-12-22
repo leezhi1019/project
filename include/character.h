@@ -55,12 +55,6 @@ public:
     void moveUp();
     void moveDown();
 
-    // Appearance setters
-    void setSkinColor(Uint8 r, Uint8 g, Uint8 b);
-    void setClothesColor(Uint8 r, Uint8 g, Uint8 b);
-    void setHairColor(Uint8 r, Uint8 g, Uint8 b);
-    void setHairStyle(int style);
-
     // Add name setter
     void setName(const std::string &newName);
     // Position getters

@@ -25,11 +25,12 @@ playground::playground(const std::string &backgroundPath, SDL_Renderer *renderer
     GameManagement::initialize();
 
     // Load background texture
+    SDL_Log("Loading background texture from: %s", backgroundPath.c_str());
     background = loadTexture(backgroundPath.c_str(), renderer);
     if (!background)
     {
-        SDL_Log("Failed to load playground background!");
-        // Handle error appropriatel
+        SDL_Log("Failed to load playground background from %s: %s", backgroundPath.c_str(), SDL_GetError());
+        // Handle error appropriately
     }
     else
     {
@@ -37,6 +38,11 @@ playground::playground(const std::string &backgroundPath, SDL_Renderer *renderer
     }
 
     // Initialize character with new images
+    SDL_Log("Initializing main character with images: %s, %s, %s, %s",
+            "../imgs/maincharacter_up.png",
+            "../imgs/maincharacter_down.png",
+            "../imgs/maincharacter_left.png",
+            "../imgs/maincharacter_right.png");
     mainCharacter = new Character(renderer, playerName, this, 5, 5,
                                   "../imgs/maincharacter_up.png",
                                   "../imgs/maincharacter_down.png",
@@ -324,6 +330,8 @@ void playground::render()
         obstacle->render();
     }
     renderCollectibles();
+
+    // Render main character
     mainCharacter->render();
 
     // Render timer

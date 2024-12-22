@@ -7,7 +7,7 @@ Enemy::Enemy(SDL_Renderer *renderer, const std::string &name, const playground *
              const std::string &upImage, const std::string &downImage,
              const std::string &leftImage, const std::string &rightImage)
     : Character(renderer, name, gamePlayground, startX, startY, upImage, downImage, leftImage, rightImage),
-      patrolWaypoints(waypoints), currentWaypointIndex(0), patrolSpeed(speed), lastMoveTime(0), vision(this, 5, M_PI / 4), characterDetected(false), detectionTime(0)
+      patrolWaypoints(waypoints), currentWaypointIndex(0), patrolSpeed(speed), lastMoveTime(0), vision(this, 5, M_PI / 4), characterDetected(false), detectionTime(0), stepsInOneDirection(0)
 {
     std::srand(std::time(nullptr)); // Seed for random direction changes
 }
@@ -28,7 +28,7 @@ void Enemy::update()
         }
     }
 
-    const playground *gamePlayground = getGamePlayground(); // Use the getter method
+    const playground *gamePlayground = getGamePlayground();
     if (vision.isCharacterInVision(gamePlayground->getMainCharacter()))
     {
         SDL_Log("Character detected");
@@ -45,40 +45,51 @@ void Enemy::update()
     int nextX = gridX;
     int nextY = gridY;
 
+    // Change direction after moving 5 steps in one direction
+    if (stepsInOneDirection >= 7)
+    {
+        currentWaypointIndex = std::rand() % 4; // Randomize direction
+        stepsInOneDirection = 0;                // Reset step count
+    }
+
+    // Move based on waypoint index
     switch (currentWaypointIndex)
     {
     case 0:
-        nextX += patrolSpeed;
-        vision.setDirection(0); // Move right
+        nextX += patrolSpeed; // Move right
+        vision.setDirection(0);
         sprite = loadTexture(rightImage.c_str(), renderer);
         break;
     case 1:
-        nextX -= patrolSpeed;
-        vision.setDirection(M_PI); // Move left
+        nextX -= patrolSpeed; // Move left
+        vision.setDirection(M_PI);
         sprite = loadTexture(leftImage.c_str(), renderer);
         break;
     case 2:
-        nextY += patrolSpeed;
-        vision.setDirection(M_PI / 2); // Move down
+        nextY += patrolSpeed; // Move down
+        vision.setDirection(M_PI / 2);
         sprite = loadTexture(downImage.c_str(), renderer);
         break;
     case 3:
-        nextY -= patrolSpeed;
-        vision.setDirection(-M_PI / 2); // Move up
+        nextY -= patrolSpeed; // Move up
+        vision.setDirection(-M_PI / 2);
         sprite = loadTexture(upImage.c_str(), renderer);
         break;
     }
 
-    if (nextX < 0 || nextX >= 32 || nextY < 0 || nextY >= 18 || gamePlayground->isPositionBlocked(nextX, nextY) || gamePlayground->isEnemyCollision(nextX, nextY))
+    // Check collisions and adjust position
+    if (nextX < 0 || nextX >= 32 || nextY < 0 || nextY >= 18 ||
+        gamePlayground->isPositionBlocked(nextX, nextY) || gamePlayground->isEnemyCollision(nextX, nextY))
     {
-        // Change direction randomly
-        currentWaypointIndex = std::rand() % 4;
+        currentWaypointIndex = std::rand() % 4; // Randomize direction if blocked
+        stepsInOneDirection = 0;                // Reset step count
     }
     else
     {
         gridX = nextX;
         gridY = nextY;
-        lastMoveTime = currentTime; // Update the last move time
+        lastMoveTime = currentTime; // Update movement time
+        stepsInOneDirection++;      // Increment step count
     }
 }
 
