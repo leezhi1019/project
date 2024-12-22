@@ -82,3 +82,28 @@ void CollectibleManager::setFreezeIconActive(bool active, float duration) {
         currentPlayground->setFreezeIconState(active, duration);
     }
 }
+
+void CollectibleManager::queueNoteSpawn() {
+    if (!currentPlayground) return;
+    
+    // Get currently used positions
+    std::set<SDL_Point, SDLPointCompare> usedPoints;
+    for (const auto& collectible : currentPlayground->collectibles) {
+        if (collectible->isVisible()) {
+            SDL_Rect pos = collectible->getPosition();
+            usedPoints.insert({pos.x / GRID_SIZE, pos.y / GRID_SIZE});
+        }
+    }
+    
+    // Find unused spawn point
+    SDL_Point spawnPoint;
+    do {
+        spawnPoint = getRandomSpawnPoint();
+    } while (usedPoints.count(spawnPoint) > 0);
+    
+    // Queue the new note
+    currentPlayground->queueCollectible(
+        std::make_unique<Note>(currentPlayground->renderer, 
+                              spawnPoint.x, spawnPoint.y)
+    );
+}

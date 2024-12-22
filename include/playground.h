@@ -36,8 +36,11 @@ extern settings* SettingsPage;
 extern int PAGE_ID;
 
 class playground {
-    friend class CollectibleManager;  // Add this to allow access
+    friend class CollectibleManager;  // Allow CollectibleManager to access private members
 private:
+    static const int TOTAL_NOTES = 7;  // Number of notes to spawn initially
+    static const int TOTAL_EXAMS = 2;  // Add this constant
+
     struct Button {
         SDL_Rect rect;
         const char* text;
@@ -107,6 +110,8 @@ private:
     void renderScore();
     void updateScore();
 
+    std::vector<std::unique_ptr<Collectible>> queuedCollectibles;  // Add this to store queued collectibles
+
 public:
     playground(const std::string& path, SDL_Renderer* renderer, const std::string& playerName);
     ~playground();
@@ -155,5 +160,13 @@ public:
     }
 
     void endGame(); // Just declare it here, don't define it
+
+    void spawnNewNote();  // Add this declaration
+    void spawnNewExam();  // Add this declaration
+    void spawnQueuedCollectibles();  // Add this declaration
+
+    void queueCollectible(std::unique_ptr<Collectible> collectible) {
+        queuedCollectibles.push_back(std::move(collectible));
+    }
 };
 #endif

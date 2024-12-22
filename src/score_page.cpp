@@ -74,41 +74,47 @@ void ScorePage::initialize()
     // Load and play the corresponding sound effect based on grade
     if (grade == "A+")
     {
-        AudioManager::loadMusic("../audio/score_aplus.mp3");
+        AudioManager::loadSoundEffect("../audio/score_aplus.mp3");
     }
     else if (grade == "A")
     {
-        AudioManager::loadMusic("../audio/score_a.mp3");
+        AudioManager::loadSoundEffect("../audio/score_a.mp3");
     }
     else if (grade == "A-")
     {
-        AudioManager::loadMusic("../audio/score_aminus.mp3");
+        AudioManager::loadSoundEffect("../audio/score_aminus.mp3");
     }
     else if (grade == "B+")
     {
-        AudioManager::loadMusic("../audio/score_bplus.mp3");
+        AudioManager::loadSoundEffect("../audio/score_bplus.mp3");
     }
     else if (grade == "B")
     {
-        AudioManager::loadMusic("../audio/score_b.mp3");
+        AudioManager::loadSoundEffect("../audio/score_b.mp3");
     }
     else if (grade == "B-")
     {
-        AudioManager::loadMusic("../audio/score_bminus.mp3");
+        AudioManager::loadSoundEffect("../audio/score_bminus.mp3");
     }
     else if (grade == "C+")
     {
-        AudioManager::loadMusic("../audio/score_cplus.mp3");
+        AudioManager::loadSoundEffect("../audio/score_cplus.mp3");
     }
     else if (grade == "C")
     {
-        AudioManager::loadMusic("../audio/score_c.mp3");
+        AudioManager::loadSoundEffect("../audio/score_c.mp3");
+    }
+    else if (grade == "C-")
+    {
+        AudioManager::loadSoundEffect("../audio/score_cminus.mp3");
     }
     else if (grade == "F")
     {
-        AudioManager::loadMusic("../audio/score_f.mp3");
+        AudioManager::loadSoundEffect("../audio/score_f.mp3");
     }
-    AudioManager::playMusic();
+
+    // Play the sound effect
+    AudioManager::playSoundEffect();
 
     animationTimer = 0;
     scoreBar.currentHeight = 0;

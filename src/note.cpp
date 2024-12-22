@@ -30,6 +30,7 @@ void Note::collect() {
     CollectibleManager::playCollectSound();
     CollectibleManager::createParticles(renderer, position.x, position.y);
     despawn();
+    CollectibleManager::queueNoteSpawn();  // This will now use the queuing system
 }
 
 void Note::render() {

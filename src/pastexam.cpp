@@ -22,6 +22,11 @@ void PastExam::collect() {
     CollectibleManager::playCollectSound();
     CollectibleManager::createParticles(renderer, position.x, position.y);
     despawn();
+    
+    // Spawn a new exam through the playground
+    if (CollectibleManager::getCurrentPlayground()) {
+        CollectibleManager::getCurrentPlayground()->spawnNewExam();
+    }
 }
 
 void PastExam::render() {

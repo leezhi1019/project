@@ -395,43 +395,55 @@ void playground::reset() {
 }
 //collectibles test
 // Define a custom comparator for SDL_Point
-struct SDLPointCompare {
-    bool operator()(const SDL_Point& a, const SDL_Point& b) const {
-        // Compare first by x, then by y if x values are equal
-        if (a.x != b.x) return a.x < b.x;
-        return a.y < b.y;
-    }
-};
 
-// In playground class, modify the initializeCollectibles() function
 void playground::initializeCollectibles() {
-    // Create a set with custom comparator
     std::set<SDL_Point, SDLPointCompare> usedSpawnPoints;
     
-    // Helper lambda to get unique spawn point
-    auto getUniqueSpawnPoint = [&usedSpawnPoints]() {
+    // Generate initial notes
+    for (int i = 0; i < TOTAL_NOTES; i++) {
         SDL_Point spawnPoint;
         do {
             spawnPoint = CollectibleManager::getRandomSpawnPoint();
         } while (usedSpawnPoints.count(spawnPoint) > 0);
+        
         usedSpawnPoints.insert(spawnPoint);
-        return spawnPoint;
-    };
+        collectibles.push_back(std::make_unique<Note>(renderer, spawnPoint.x, spawnPoint.y));
+    }
     
-    // Get unique spawn points for each collectible
-    SDL_Point noteSpawn = getUniqueSpawnPoint();
-    SDL_Point coffeeSpawn = getUniqueSpawnPoint();
-    SDL_Point examSpawn = getUniqueSpawnPoint();
-    SDL_Point freezeSpawn = getUniqueSpawnPoint();
+    // Generate initial past exams
+    for (int i = 0; i < TOTAL_EXAMS; i++) {
+        SDL_Point spawnPoint;
+        do {
+            spawnPoint = CollectibleManager::getRandomSpawnPoint();
+        } while (usedSpawnPoints.count(spawnPoint) > 0);
+        
+        usedSpawnPoints.insert(spawnPoint);
+        collectibles.push_back(std::make_unique<PastExam>(renderer, spawnPoint.x, spawnPoint.y));
+    }
     
-    // Create collectibles at unique spawn points
-    collectibles.push_back(std::make_unique<Note>(renderer, noteSpawn.x, noteSpawn.y));
+    // Get spawn points for other collectibles
+    SDL_Point coffeeSpawn, freezeSpawn;
+    
+    do {
+        coffeeSpawn = CollectibleManager::getRandomSpawnPoint();
+    } while (usedSpawnPoints.count(coffeeSpawn) > 0);
+    usedSpawnPoints.insert(coffeeSpawn);
+    
+    do {
+        freezeSpawn = CollectibleManager::getRandomSpawnPoint();
+    } while (usedSpawnPoints.count(freezeSpawn) > 0);
+    usedSpawnPoints.insert(freezeSpawn);
+    
+    // Create other collectibles
     collectibles.push_back(std::make_unique<Coffee>(renderer, coffeeSpawn.x, coffeeSpawn.y));
-    collectibles.push_back(std::make_unique<PastExam>(renderer, examSpawn.x, examSpawn.y));
     collectibles.push_back(std::make_unique<Freeze>(renderer, freezeSpawn.x, freezeSpawn.y));
 }
 
 void playground::updateCollectibles(float deltaTime) {
+    // First process any pending spawns
+    spawnQueuedCollectibles();
+    
+    // Then update existing collectibles
     for (auto& collectible : collectibles) {
         collectible->update(deltaTime);
     }
@@ -646,4 +658,54 @@ playground::~playground() {
         TTF_CloseFont(scoreFont);
         scoreFont = nullptr;
     }
+}
+
+void playground::spawnNewNote() {
+    std::set<SDL_Point, SDLPointCompare> usedPoints;
+    
+    // Get currently used positions
+    for (const auto& collectible : collectibles) {
+        if (collectible->isVisible()) {
+            SDL_Rect pos = collectible->getPosition();
+            usedPoints.insert({pos.x / GRID_SIZE, pos.y / GRID_SIZE});
+        }
+    }
+    
+    // Get a new spawn point that's not in use
+    SDL_Point spawnPoint;
+    do {
+        spawnPoint = CollectibleManager::getRandomSpawnPoint();
+    } while (usedPoints.count(spawnPoint) > 0);
+    
+    // Spawn new note
+    collectibles.push_back(std::make_unique<Note>(renderer, spawnPoint.x, spawnPoint.y));
+}
+
+void playground::spawnNewExam() {
+    std::set<SDL_Point, SDLPointCompare> usedPoints;
+    
+    // Get currently used positions
+    for (const auto& collectible : collectibles) {
+        if (collectible->isVisible()) {
+            SDL_Rect pos = collectible->getPosition();
+            usedPoints.insert({pos.x / GRID_SIZE, pos.y / GRID_SIZE});
+        }
+    }
+    
+    // Get a new spawn point that's not in use
+    SDL_Point spawnPoint;
+    do {
+        spawnPoint = CollectibleManager::getRandomSpawnPoint();
+    } while (usedPoints.count(spawnPoint) > 0);
+    
+    // Spawn new exam
+    collectibles.push_back(std::make_unique<PastExam>(renderer, spawnPoint.x, spawnPoint.y));
+}
+
+void playground::spawnQueuedCollectibles() {
+    // Move any queued collectibles into the main collection
+    for (auto& collectible : queuedCollectibles) {
+        collectibles.push_back(std::move(collectible));
+    }
+    queuedCollectibles.clear();
 }
