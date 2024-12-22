@@ -12,6 +12,7 @@
 #include "../include/freeze.h"
 #include "../include/game_state.h"
 #include "../include/score_page.h" // Add this include
+#include "../include/enemy.h" // Add this include
 playground::playground(const std::string& backgroundPath, SDL_Renderer* renderer, const std::string& playerName)
     : renderer(renderer), isPaused(false), collectTimer(0), isCollecting(false)
 {
@@ -87,6 +88,12 @@ playground::playground(const std::string& backgroundPath, SDL_Renderer* renderer
     scoreColor = {255, 215, 0, 255};  // Gold color
     scoreRect = {1100, 20, 200, 50};  // Position in top-right corner
     currentScore = 0;
+
+    // Initialize enemies
+    std::vector<std::pair<int, int>> waypoints = {{5, 5}, {10, 5}, {10, 10}, {5, 10}};
+    enemies.push_back(std::make_unique<Enemy>(renderer, "Enemy1", this, 5, 5, waypoints, 1));
+    enemies.push_back(std::make_unique<Enemy>(renderer, "Enemy2", this, 15, 15, waypoints, 1));
+    enemies.push_back(std::make_unique<Enemy>(renderer, "Enemy3", this, 25, 5, waypoints, 1));
 }
 
 void playground::initializePauseMenu() {
@@ -240,6 +247,12 @@ int playground::update(float deltaTime) {
     }
     
     updateTimer(deltaTime);
+
+    // Update enemies
+    for (auto& enemy : enemies) {
+        enemy->update();
+    }
+
     return TRUE;
 }
 
@@ -291,6 +304,11 @@ void playground::render() {
     
     // Add score rendering
     renderScore();
+
+    // Render enemies
+    for (const auto& enemy : enemies) {
+        enemy->render();
+    }
     
     SDL_RenderPresent(renderer);
 }
@@ -549,6 +567,15 @@ void playground::renderScore() {
     
     SDL_FreeSurface(surface);
     SDL_DestroyTexture(texture);
+}
+
+bool playground::isEnemyCollision(int x, int y) const {
+    for (const auto& enemy : enemies) {
+        if (enemy->getX() == x && enemy->getY() == y) {
+            return true;
+        }
+    }
+    return false;
 }
 
 playground::~playground() {

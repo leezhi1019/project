@@ -36,6 +36,8 @@ add_executable(my_Final_project_game
     src/pastexam.cpp
     src/game_management.cpp    # Add this line
     src/score_page.cpp         # Add this line
+    src/enemy.cpp              # Add this line
+    src/vision.cpp             # Add this line
 )
 
 target_sources(${PROJECT_NAME} PRIVATE
@@ -45,7 +47,6 @@ target_sources(${PROJECT_NAME} PRIVATE
 )
 
 target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARIES} ${SDL2_TTF_LIBRARIES} ${SDL2_MIXER_LIBRARIES})
-
 
 set(SDL2_DLLS
         "${CMAKE_SOURCE_DIR}/bin/SDL2.dll"

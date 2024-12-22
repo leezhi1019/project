@@ -15,6 +15,7 @@
 #include "obstacle.h"
 #include "table.h"
 #include "bookshelf.h"
+#include "enemy.h" // Add this include
 
 // For collectibles
 #include "collectible.h"  
@@ -45,6 +46,7 @@ private:
     Character* mainCharacter; // Declare mainCharacter here
     std::vector<std::unique_ptr<Obstacle>> obstacles;
     std::vector<std::unique_ptr<Collectible>> collectibles;  // Add this line
+    std::vector<std::unique_ptr<Enemy>> enemies; // Declare enemies vector
     bool isPaused;  // Add pause state
     TTF_Font* font; // Font for pause menu
     std::vector<Button> pauseButtons;
@@ -126,6 +128,9 @@ public:
         freezeIcon.isActive = active;
         freezeIcon.timeLeft = duration;
     }
-};
 
+    Character* getMainCharacter() const { return mainCharacter; } // Add this method
+
+    bool isEnemyCollision(int x, int y) const; // Add this method declaration
+};
 #endif

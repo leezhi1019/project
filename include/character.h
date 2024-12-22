@@ -4,49 +4,47 @@
 #include <SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include <string>
-#include "constants.h"
+#include "constants.h" // Add this include
 
 // Forward declaration
 class playground;
 
-class Character {
-private:
-    SDL_Renderer* renderer;
-    SDL_Texture* sprite;
-    int gridX, gridY;  // Grid-based position
-    SDL_Rect position; // Screen position (pixels)
-    std::string name;
-    bool facingRight;
-    
-    // Colors
+class Character
+{
+protected:
+    int gridX;
+    int gridY;
+    int pixelX;
+    int pixelY;
     SDL_Color skinColor;
     SDL_Color clothesColor;
     SDL_Color hairColor;
-    
-    // Hair style
-    int hairStyle;  // Add this member variable
-    
-    // Text rendering
-    TTF_Font* nameFont;
-    SDL_Texture* nameTexture;
+    int hairStyle;
+    bool facingRight;
+    SDL_Texture *sprite;
+    SDL_Renderer *renderer;
+
+    // Name related members
+    std::string name;
+    TTF_Font *nameFont;
+    SDL_Texture *nameTexture;
     SDL_Color nameColor;
-    const playground* gamePlayground;  // Reference to playground for collision checking
-    
+
 private:
+    // Add this private helper function
     void updateNameTexture();
+    const playground *gamePlayground; // Reference to playground for collision checking
 
 public:
-    // Single constructor with default values
-    Character(SDL_Renderer* renderer, const std::string& name, 
-             playground* pg, int startX = 0, int startY = 0);
+    Character(SDL_Renderer *renderer, const std::string &name,
+              const playground *gamePlayground, int startX = 0, int startY = 0);
     ~Character();
-    
+
     // Movement methods
     void moveLeft();
     void moveRight();
     void moveUp();
     void moveDown();
-    void move(int dx, int dy);
 
     // Appearance setters
     void setSkinColor(Uint8 r, Uint8 g, Uint8 b);
@@ -55,19 +53,17 @@ public:
     void setHairStyle(int style);
 
     // Add name setter
-    void setName(const std::string& newName);
-
+    void setName(const std::string &newName);
+    // Position getters
+    int getX() const { return gridX; }
+    int getY() const { return gridY; }
+    bool isFacingRight() const { return facingRight; } // Add this getter method
+    SDL_Rect getPosition() const { return {gridX * GRID_SIZE, gridY * GRID_SIZE, GRID_SIZE, GRID_SIZE}; } // Add this method
     // Core methods
-    void render();
-    void update();
-    SDL_Rect getPosition() const { 
-        return SDL_Rect{
-            gridX * GRID_SIZE,  // Convert grid to pixel coordinates
-            gridY * GRID_SIZE,
-            GRID_SIZE,
-            GRID_SIZE
-        }; 
-    }
+    virtual void render(); // Declare render as virtual
+    virtual void update(); // Declare update as virtual
+
+    const playground *getGamePlayground() const { return gamePlayground; } // Move this getter method to public
 };
 
 #endif
