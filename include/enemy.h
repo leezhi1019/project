@@ -19,7 +19,9 @@ private:
     Uint32 detectionTime;                        // Time when character was detected
 
 public:
-    Enemy(SDL_Renderer *renderer, const std::string &name, const playground *gamePlayground, int startX, int startY, const std::vector<std::pair<int, int>> &waypoints, int speed);
+    Enemy(SDL_Renderer *renderer, const std::string &name, const playground *gamePlayground, int startX, int startY, const std::vector<std::pair<int, int>> &waypoints, int speed,
+          const std::string &upImage, const std::string &downImage,
+          const std::string &leftImage, const std::string &rightImage);
     void update() override; // Ensure this is marked as override
     void render() override; // Ensure this is marked as override
 };

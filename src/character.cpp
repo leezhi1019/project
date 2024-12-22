@@ -3,16 +3,22 @@
 #include "../include/playground.h" // Add this include
 
 Character::Character(SDL_Renderer *renderer, const std::string &name,
-                     const playground *playground, int startX, int startY)
+                     const playground *playground, int startX, int startY,
+                     const std::string &upImage, const std::string &downImage,
+                     const std::string &leftImage, const std::string &rightImage)
     : renderer(renderer), name(name), gamePlayground(playground),
       gridX(startX), gridY(startY), facingRight(true),
       sprite(nullptr), nameFont(nullptr), nameTexture(nullptr), // Initialize all pointers
       skinColor{255, 200, 150, 255},                            // Default skin color
       clothesColor{50, 50, 200, 255},                           // Default clothes color
       hairColor{100, 50, 0, 255},                               // Default hair color
-      nameColor{255, 255, 255, 255}                             // Default name color
+      nameColor{255, 255, 255, 255},                            // Default name color
+      upImage(upImage), downImage(downImage), leftImage(leftImage), rightImage(rightImage)
 {
     SDL_Log("Initializing character...");
+
+    // Load initial sprite
+    sprite = loadTexture(downImage.c_str(), renderer);
 
     // Initialize font for name tag
     nameFont = TTF_OpenFont("../fonts/Action_Man_Bold.ttf", 16);
@@ -57,6 +63,7 @@ void Character::moveLeft()
     {
         gridX--;
         facingRight = false;
+        sprite = loadTexture(leftImage.c_str(), renderer);
     }
 }
 
@@ -66,6 +73,7 @@ void Character::moveRight()
     {
         gridX++;
         facingRight = true;
+        sprite = loadTexture(rightImage.c_str(), renderer);
     }
 }
 
@@ -74,6 +82,7 @@ void Character::moveUp()
     if (gridY > 0 && !gamePlayground->isPositionBlocked(gridX, gridY - 1))
     {
         gridY--;
+        sprite = loadTexture(upImage.c_str(), renderer);
     }
 }
 
@@ -82,6 +91,7 @@ void Character::moveDown()
     if (gridY < 17 && !gamePlayground->isPositionBlocked(gridX, gridY + 1))
     {
         gridY++;
+        sprite = loadTexture(downImage.c_str(), renderer);
     }
 }
 
@@ -143,16 +153,23 @@ void Character::updateNameTexture()
 
 void Character::render()
 {
-    // Draw character as a colored rectangle for now
     SDL_Rect destRect = {
         gridX * GRID_SIZE,
         gridY * GRID_SIZE,
         GRID_SIZE,
         GRID_SIZE};
 
-    // Render character body
-    SDL_SetRenderDrawColor(renderer, clothesColor.r, clothesColor.g, clothesColor.b, clothesColor.a);
-    SDL_RenderFillRect(renderer, &destRect);
+    // Render character sprite
+    if (sprite)
+    {
+        SDL_RenderCopy(renderer, sprite, nullptr, &destRect);
+    }
+    else
+    {
+        // Fallback to colored rectangle if sprite is not loaded
+        SDL_SetRenderDrawColor(renderer, clothesColor.r, clothesColor.g, clothesColor.b, clothesColor.a);
+        SDL_RenderFillRect(renderer, &destRect);
+    }
 
     // Render name if available
     if (nameTexture)

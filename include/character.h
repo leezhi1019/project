@@ -30,6 +30,13 @@ protected:
     SDL_Texture *nameTexture;
     SDL_Color nameColor;
 
+    // Image path
+    std::string imagePath;
+    std::string upImage;
+    std::string downImage;
+    std::string leftImage;
+    std::string rightImage;
+
 private:
     // Add this private helper function
     void updateNameTexture();
@@ -37,7 +44,9 @@ private:
 
 public:
     Character(SDL_Renderer *renderer, const std::string &name,
-              const playground *gamePlayground, int startX = 0, int startY = 0);
+              const playground *gamePlayground, int startX = 0, int startY = 0,
+              const std::string &upImage = "", const std::string &downImage = "",
+              const std::string &leftImage = "", const std::string &rightImage = "");
     ~Character();
 
     // Movement methods
@@ -57,7 +66,7 @@ public:
     // Position getters
     int getX() const { return gridX; }
     int getY() const { return gridY; }
-    bool isFacingRight() const { return facingRight; } // Add this getter method
+    bool isFacingRight() const { return facingRight; }                                                    // Add this getter method
     SDL_Rect getPosition() const { return {gridX * GRID_SIZE, gridY * GRID_SIZE, GRID_SIZE, GRID_SIZE}; } // Add this method
     // Core methods
     virtual void render(); // Declare render as virtual

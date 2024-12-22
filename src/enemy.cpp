@@ -3,8 +3,11 @@
 #include <cstdlib>
 #include <ctime>
 
-Enemy::Enemy(SDL_Renderer *renderer, const std::string &name, const playground *gamePlayground, int startX, int startY, const std::vector<std::pair<int, int>> &waypoints, int speed)
-    : Character(renderer, name, gamePlayground, startX, startY), patrolWaypoints(waypoints), currentWaypointIndex(0), patrolSpeed(speed), lastMoveTime(0), vision(this, 5, M_PI / 4), characterDetected(false), detectionTime(0)
+Enemy::Enemy(SDL_Renderer *renderer, const std::string &name, const playground *gamePlayground, int startX, int startY, const std::vector<std::pair<int, int>> &waypoints, int speed,
+             const std::string &upImage, const std::string &downImage,
+             const std::string &leftImage, const std::string &rightImage)
+    : Character(renderer, name, gamePlayground, startX, startY, upImage, downImage, leftImage, rightImage),
+      patrolWaypoints(waypoints), currentWaypointIndex(0), patrolSpeed(speed), lastMoveTime(0), vision(this, 5, M_PI / 4), characterDetected(false), detectionTime(0)
 {
     std::srand(std::time(nullptr)); // Seed for random direction changes
 }
@@ -47,18 +50,22 @@ void Enemy::update()
     case 0:
         nextX += patrolSpeed;
         vision.setDirection(0); // Move right
+        sprite = loadTexture(rightImage.c_str(), renderer);
         break;
     case 1:
         nextX -= patrolSpeed;
         vision.setDirection(M_PI); // Move left
+        sprite = loadTexture(leftImage.c_str(), renderer);
         break;
     case 2:
         nextY += patrolSpeed;
         vision.setDirection(M_PI / 2); // Move down
+        sprite = loadTexture(downImage.c_str(), renderer);
         break;
     case 3:
         nextY -= patrolSpeed;
         vision.setDirection(-M_PI / 2); // Move up
+        sprite = loadTexture(upImage.c_str(), renderer);
         break;
     }
 
