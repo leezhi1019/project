@@ -12,8 +12,9 @@
 #include "../include/freeze.h"
 #include "../include/game_state.h"
 #include "../include/score_page.h" // Add this include
+#include "../include/enemy.h" // Add this include
 playground::playground(const std::string& backgroundPath, SDL_Renderer* renderer, const std::string& playerName)
-    : renderer(renderer), isPaused(false), collectTimer(0), isCollecting(false)
+    : renderer(renderer), m_isPaused(false), collectTimer(0), isCollecting(false)
 {
     // Set this playground instance as current
     CollectibleManager::setCurrentPlayground(this);
@@ -87,10 +88,15 @@ playground::playground(const std::string& backgroundPath, SDL_Renderer* renderer
     scoreColor = {255, 215, 0, 255};  // Gold color
     scoreRect = {1100, 20, 200, 50};  // Position in top-right corner
     currentScore = 0;
+
+    // Initialize enemies
+    std::vector<std::pair<int, int>> waypoints = {{5, 5}, {10, 5}, {10, 10}, {5, 10}};
+    enemies.push_back(std::make_unique<Enemy>(renderer, "Enemy1", this, 5, 5, waypoints, 1));
+    enemies.push_back(std::make_unique<Enemy>(renderer, "Enemy2", this, 15, 15, waypoints, 1));
+    enemies.push_back(std::make_unique<Enemy>(renderer, "Enemy3", this, 25, 5, waypoints, 1));
 }
 
 void playground::initializePauseMenu() {
-    // Increase font size to 36 for higher resolution
     font = TTF_OpenFont("../fonts/Action_Man_Bold.ttf", 128);
     if (!font) {
         SDL_Log("Failed to load font for pause menu: %s", TTF_GetError());
@@ -136,7 +142,7 @@ void playground::createPauseButton(const char* text, int x, int y, int width, in
 }
 
 int playground::process_input(SDL_Event* event) {
-    if (isPaused) {
+    if (isPaused()) {
         switch (event->type) {
             case SDL_MOUSEMOTION:
                 handleMouseMotion(event->motion.x, event->motion.y);
@@ -148,7 +154,7 @@ int playground::process_input(SDL_Event* event) {
                 break;
             case SDL_KEYDOWN:
                 if (event->key.keysym.sym == SDLK_ESCAPE) {
-                    isPaused = false;  // Resume game if ESC is pressed again
+                    setPaused(false);  // Resume game if ESC is pressed again
                 }
                 break;
         }
@@ -174,7 +180,7 @@ int playground::process_input(SDL_Event* event) {
                         SDL_Log("Started collecting attempt");  // Add debug log
                         break;
                     case SDLK_ESCAPE:
-                        isPaused = true;  // Enter pause state
+                        setPaused(true);  // Enter pause state
                         break;
                 }
                 break;
@@ -191,7 +197,7 @@ int playground::process_input(SDL_Event* event) {
 }
 
 void playground::handleMouseMotion(int x, int y) {
-    if (!isPaused) return;
+    if (!isPaused()) return;
     
     for (auto& button : pauseButtons) {
         button.isHovered = (x >= button.rect.x && x <= button.rect.x + button.rect.w &&
@@ -200,7 +206,7 @@ void playground::handleMouseMotion(int x, int y) {
 }
 
 int playground::handleMouseClick(int x, int y) {
-    if (!isPaused) return PLAYGROUNDID;
+    if (!isPaused()) return PLAYGROUNDID;
 
     for (size_t i = 0; i < pauseButtons.size(); i++) {
         if (x >= pauseButtons[i].rect.x && x <= pauseButtons[i].rect.x + pauseButtons[i].rect.w &&
@@ -208,7 +214,7 @@ int playground::handleMouseClick(int x, int y) {
             
             switch(i) {
                 case 0:  // Resume
-                    isPaused = false;
+                    setPaused(false);
                     return PLAYGROUNDID;
                 case 1:  // Surrender
                     endGame();  // Call endGame before returning
@@ -240,6 +246,12 @@ int playground::update(float deltaTime) {
     }
     
     updateTimer(deltaTime);
+
+    // Update enemies
+    for (auto& enemy : enemies) {
+        enemy->update();
+    }
+
     return TRUE;
 }
 
@@ -265,7 +277,7 @@ void playground::render() {
     renderPowerupIcons();
     
     // Render pause menu if paused
-    if (isPaused) {
+    if (isPaused()) {
         // Add semi-transparent overlay
         SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 128);
@@ -291,6 +303,11 @@ void playground::render() {
     
     // Add score rendering
     renderScore();
+
+    // Render enemies
+    for (const auto& enemy : enemies) {
+        enemy->render();
+    }
     
     SDL_RenderPresent(renderer);
 }
@@ -322,24 +339,21 @@ void playground::endGame() {
 }
 
 void playground::reset() {
-    // Reset game state
-    isPaused = false;
+    setPaused(false);  // This line is correct
     isGameEnded = false;
     
     // Reset timer
     currentTime = gameTime;  // Reset to 60 seconds (defined in playground.h)
     isTimerWarning = false;
 
-    // Reset character position
+    // Rest of the reset function remains the same...
     if (mainCharacter) {
         delete mainCharacter;
     }
     mainCharacter = new Character(renderer, "Player1", this, 5, 5);
     
-    // Clear and reinitialize obstacles
     obstacles.clear();
-    // Center table
-    obstacles.push_back(std::make_unique<Table>(renderer, 10, 10, 2, 2));  
+    obstacles.push_back(std::make_unique<Table>(renderer, 10, 10, 2, 2));
     // ... rest of obstacle initialization ...
 
     // Reset collectibles
@@ -423,7 +437,7 @@ void playground::checkCollectibles() {
 }
 
 void playground::updateTimer(float deltaTime) {
-    if (!isPaused && !isGameEnded) {
+    if (!isPaused() && !isGameEnded) {
         currentTime -= deltaTime;
         
         // Check for timer warning state (less than 30 seconds)
@@ -549,6 +563,15 @@ void playground::renderScore() {
     
     SDL_FreeSurface(surface);
     SDL_DestroyTexture(texture);
+}
+
+bool playground::isEnemyCollision(int x, int y) const {
+    for (const auto& enemy : enemies) {
+        if (enemy->getX() == x && enemy->getY() == y) {
+            return true;
+        }
+    }
+    return false;
 }
 
 playground::~playground() {

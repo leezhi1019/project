@@ -26,6 +26,17 @@ private:
     SDL_Color buttonColor;
     SDL_Color buttonHoverColor;
 
+    struct CharacterOption {
+        SDL_Texture* texture;
+        SDL_Rect rect;
+        bool isSelected;
+    };
+    std::vector<CharacterOption> characterOptions;
+    int selectedCharacter = 0; // Track currently selected character
+
+    SDL_Texture* titleTexture = nullptr;
+    SDL_Rect titleRect;
+
 public:
     settings(const std::string& path, SDL_Renderer* renderer);
     ~settings();

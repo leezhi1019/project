@@ -11,11 +11,20 @@ settings::settings(const std::string& path, SDL_Renderer* renderer) {
     buttonColor = {100, 100, 100, 255};
     buttonHoverColor = {150, 150, 150, 255};
     
-    // Initialize font
-    font = TTF_OpenFont("../fonts/Action_Man_Bold.ttf", 36);
+    // Initialize font with larger size for title
+    font = TTF_OpenFont("../fonts/Action_Man_Bold.ttf", 48);  // Bigger font for title
     if (!font) {
         SDL_Log("Failed to load font: %s", TTF_GetError());
-        return;  // Don't create buttons if font failed to load
+        return;
+    }
+    
+    // Create title text texture
+    SDL_Color titleColor = {255, 255, 255, 255};  // White color
+    SDL_Surface* titleSurface = TTF_RenderText_Solid(font, "Choose your subject", titleColor);
+    if (titleSurface) {
+        titleTexture = SDL_CreateTextureFromSurface(renderer, titleSurface);
+        titleRect = {0, 0, titleSurface->w, titleSurface->h};
+        SDL_FreeSurface(titleSurface);
     }
     
     // Setup button dimensions
@@ -24,13 +33,54 @@ settings::settings(const std::string& path, SDL_Renderer* renderer) {
     int baseHeight = 35 * scale;
     int centerX = (675 * scale - baseWidth) / 2;
     
-    // Create settings buttons
-    createButton("Character 1", centerX-220, 125 * scale, baseWidth, baseHeight);
-    createButton("Character 2", centerX-220, 175 * scale, baseWidth, baseHeight);
-    createButton("Back to Menu", centerX-220, 275 * scale, baseWidth, baseHeight);  // Added lower position
+    // Create only the Back to Menu button
+    createButton("Back to Menu", centerX, 325 * scale, baseWidth + 50, baseHeight);
+
+    // Initialize character options
+    const char* characterPaths[] = {
+        "../imgs/character1.png",
+        "../imgs/character2.png", 
+        "../imgs/character3.png"
+    };
+    
+    // Calculate positions for character options
+    int screenWidth = 1350;
+    int screenHeight = 772;
+    int quarterWidth = screenWidth / 2;
+    int startX = screenWidth / 2;
+    int startY = 150;  // Increased from 20 to 150 to move options lower
+    
+    // Center the title above the character options
+    titleRect.x = startX + (quarterWidth - titleRect.w) / 2;
+    titleRect.y = startY - 80;  // Position title above the character options
+    
+    int optionWidth = 200;
+    int optionHeight = 250;
+    int spacing = 25;
+    
+    int totalWidth = (3 * optionWidth) + (2 * spacing);
+    startX = screenWidth/2 + (quarterWidth - totalWidth)/2;
+    
+    // Create character options
+    for (int i = 0; i < 3; i++) {
+        CharacterOption option;
+        option.texture = loadTexture(characterPaths[i], renderer);
+        option.rect = {
+            startX + (i * (optionWidth + spacing)),
+            startY,
+            optionWidth,
+            optionHeight
+        };
+        option.isSelected = (i == selectedCharacter);
+        characterOptions.push_back(option);
+    }
 }
 
 settings::~settings() {
+    if (titleTexture) {
+        SDL_DestroyTexture(titleTexture);
+        titleTexture = nullptr;
+    }
     // Clean up background texture
     if (background) {
         SDL_DestroyTexture(background);
@@ -91,7 +141,32 @@ void settings::render() {
         SDL_RenderCopy(renderer, background, nullptr, nullptr);
     }
     
-    // Render buttons
+    // Render title
+    if (titleTexture) {
+        SDL_RenderCopy(renderer, titleTexture, nullptr, &titleRect);
+    }
+    
+    // Render character options
+    for (const auto& option : characterOptions) {
+        // Render character image
+        SDL_RenderCopy(renderer, option.texture, nullptr, &option.rect);
+        
+        // If selected, render white bezel
+        if (option.isSelected) {
+            SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+            SDL_Rect bezel = option.rect;
+            // Draw thicker border
+            for (int i = 0; i < 4; i++) {
+                SDL_RenderDrawRect(renderer, &bezel);
+                bezel.x++;
+                bezel.y++;
+                bezel.w -= 2;
+                bezel.h -= 2;
+            }
+        }
+    }
+    
+    // Render back button
     for (const auto& button : buttons) {
         SDL_SetRenderDrawColor(renderer,
             button.isHovered ? buttonHoverColor.r : buttonColor.r,
@@ -127,24 +202,33 @@ void settings::handleMouseMotion(int x, int y) {
 int settings::handleMouseClick(int x, int y) {
     SDL_Log("Checking click at x:%d y:%d", x, y);
     
+    // Check character options first
+    for (size_t i = 0; i < characterOptions.size(); i++) {
+        const auto& option = characterOptions[i];
+        if (x >= option.rect.x && x <= option.rect.x + option.rect.w &&
+            y >= option.rect.y && y <= option.rect.y + option.rect.h) {
+            // Deselect all options
+            for (auto& opt : characterOptions) {
+                opt.isSelected = false;
+            }
+            // Select clicked option
+            characterOptions[i].isSelected = true;
+            selectedCharacter = i;
+            return SETTINGSID;
+        }
+    }
+    
+    // Check back button
     for (size_t i = 0; i < buttons.size(); i++) {
         const auto& button = buttons[i];
         bool isClicked = (x >= button.rect.x && x <= button.rect.x + button.rect.w &&
                          y >= button.rect.y && y <= button.rect.y + button.rect.h);
-                         
+        
         SDL_Log("Button %d: x:%d y:%d w:%d h:%d clicked:%d", 
                 (int)i, button.rect.x, button.rect.y, button.rect.w, button.rect.h, isClicked);
                 
         if (isClicked) {
-            SDL_Log("Button %d clicked!", (int)i);
-            switch(i) {
-                case 0:  // Character 1
-                    return SETTINGSID;
-                case 1:  // Character 2 
-                    return SETTINGSID;
-                case 2:  // Back to Menu
-                    return MENUID;
-            }
+            return MENUID;  // Since we only have one "Back to Menu" button
         }
     }
     return SETTINGSID;
