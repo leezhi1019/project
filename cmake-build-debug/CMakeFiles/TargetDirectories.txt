@@ -1,3 +1,0 @@
-C:/finalproject/project/cmake-build-debug/CMakeFiles/my_Final_project_game.dir
-C:/finalproject/project/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/finalproject/project/cmake-build-debug/CMakeFiles/rebuild_cache.dir
