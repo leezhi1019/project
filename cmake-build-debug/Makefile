@@ -392,6 +392,30 @@ src/tool.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\my_Final_project_game.dir\build.make CMakeFiles/my_Final_project_game.dir/src/tool.cpp.s
 .PHONY : src/tool.cpp.s
 
+src/vision.obj: src/vision.cpp.obj
+.PHONY : src/vision.obj
+
+# target to build an object file
+src/vision.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\my_Final_project_game.dir\build.make CMakeFiles/my_Final_project_game.dir/src/vision.cpp.obj
+.PHONY : src/vision.cpp.obj
+
+src/vision.i: src/vision.cpp.i
+.PHONY : src/vision.i
+
+# target to preprocess a source file
+src/vision.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\my_Final_project_game.dir\build.make CMakeFiles/my_Final_project_game.dir/src/vision.cpp.i
+.PHONY : src/vision.cpp.i
+
+src/vision.s: src/vision.cpp.s
+.PHONY : src/vision.s
+
+# target to generate assembly for a file
+src/vision.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\my_Final_project_game.dir\build.make CMakeFiles/my_Final_project_game.dir/src/vision.cpp.s
+.PHONY : src/vision.cpp.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -434,6 +458,9 @@ help:
 	@echo ... src/tool.obj
 	@echo ... src/tool.i
 	@echo ... src/tool.s
+	@echo ... src/vision.obj
+	@echo ... src/vision.i
+	@echo ... src/vision.s
 .PHONY : help
 
 

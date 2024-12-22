@@ -38,7 +38,7 @@ private:
     SDL_Color buttonColor;
     SDL_Color buttonHoverColor;
     bool isGameEnded;                                 // Add this to track game end state
-    std::unique_ptr<Enemy> enemy;                     // Change from Enemy enemy; to unique_ptr
+    std::vector<std::unique_ptr<Enemy>> enemies;      // Change to a vector of unique_ptr for multiple enemies
     std::vector<std::pair<int, int>> patrolWaypoints; // Add these to the private section:
 
     void updateEnemyPatrol(); // Add this method instead
@@ -55,12 +55,14 @@ public:
     int update();
     int process_input(SDL_Event *event);
     bool isPositionBlocked(int x, int y) const;
+    bool isEnemyCollision(int x, int y) const; // Move this method to public
 
     void addTable(int x, int y, int w, int h);
     void addBookshelf(int x, int y, int w, int h);
     void initializePauseMenu();
-    void endGame(); // Add method to handle game ending
-    void reset();   // Add method to reset/restart the game
+    void endGame();                                               // Add method to handle game ending
+    void reset();                                                 // Add method to reset/restart the game
+    Character *getMainCharacter() const { return mainCharacter; } // Add this method
 };
 
 #endif

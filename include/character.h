@@ -10,7 +10,7 @@ class playground;
 
 class Character
 {
-private:
+protected:
     int gridX;
     int gridY;
     int pixelX;
@@ -36,7 +36,7 @@ private:
 
 public:
     Character(SDL_Renderer *renderer, const std::string &name,
-              const playground *playground, int startX = 0, int startY = 0);
+              const playground *gamePlayground, int startX = 0, int startY = 0);
     ~Character();
 
     // Movement methods
@@ -56,9 +56,12 @@ public:
     // Position getters
     int getX() const { return gridX; }
     int getY() const { return gridY; }
+    bool isFacingRight() const { return facingRight; } // Add this getter method
     // Core methods
-    void render();
-    void update();
+    virtual void render(); // Declare render as virtual
+    virtual void update(); // Declare update as virtual
+
+    const playground *getGamePlayground() const { return gamePlayground; } // Move this getter method to public
 };
 
 #endif

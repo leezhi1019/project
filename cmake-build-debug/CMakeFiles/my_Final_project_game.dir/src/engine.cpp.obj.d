@@ -358,5 +358,8 @@ CMakeFiles/my_Final_project_game.dir/src/engine.cpp.obj: \
  C:/finalproject/project/include/table.h \
  C:/finalproject/project/include/bookshelf.h \
  C:/finalproject/project/include/enemy.h \
+ C:/finalproject/project/include/vision.h \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/utility \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/bits/stl_relops.h \
  C:/finalproject/project/include/settings.h \
  C:/finalproject/project/include/settings.h

@@ -29,6 +29,7 @@ add_executable(my_Final_project_game
     src/table.cpp      
     src/bookshelf.cpp  
     src/enemy.cpp
+    src/vision.cpp
 )
 
 target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARIES} ${SDL2_TTF_LIBRARIES} ${SDL2_MIXER_LIBRARIES})

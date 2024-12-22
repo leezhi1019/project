@@ -19,6 +19,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "C:/finalproject/project/src/settings.cpp" "CMakeFiles/my_Final_project_game.dir/src/settings.cpp.obj" "gcc" "CMakeFiles/my_Final_project_game.dir/src/settings.cpp.obj.d"
   "C:/finalproject/project/src/table.cpp" "CMakeFiles/my_Final_project_game.dir/src/table.cpp.obj" "gcc" "CMakeFiles/my_Final_project_game.dir/src/table.cpp.obj.d"
   "C:/finalproject/project/src/tool.cpp" "CMakeFiles/my_Final_project_game.dir/src/tool.cpp.obj" "gcc" "CMakeFiles/my_Final_project_game.dir/src/tool.cpp.obj.d"
+  "C:/finalproject/project/src/vision.cpp" "CMakeFiles/my_Final_project_game.dir/src/vision.cpp.obj" "gcc" "CMakeFiles/my_Final_project_game.dir/src/vision.cpp.obj.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

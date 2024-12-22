@@ -21,6 +21,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/my_Final_project_game.dir/src/table.cpp.obj.d"
   "CMakeFiles/my_Final_project_game.dir/src/tool.cpp.obj"
   "CMakeFiles/my_Final_project_game.dir/src/tool.cpp.obj.d"
+  "CMakeFiles/my_Final_project_game.dir/src/vision.cpp.obj"
+  "CMakeFiles/my_Final_project_game.dir/src/vision.cpp.obj.d"
   "libmy_Final_project_game.dll.a"
   "my_Final_project_game.exe"
   "my_Final_project_game.exe.manifest"

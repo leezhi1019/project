@@ -27,8 +27,9 @@ const int EXIT = -1;
 #define BOOKSHELF_TEXTURE "../imgs/bookshelf_image.jpg"
 #define TABLE_TEXTURE "../imgs/table-bag-2x2.png"
 
+const int TILE_SIZE = 32; // Define TILE_SIZE
+
 // Grid size for game world
-#define GRID_SIZE 40  // Size of each grid cell in pixels
+#define GRID_SIZE 40 // Size of each grid cell in pixels
 
 #endif // STUDYSNATCHER_CONSTANTS_H
-

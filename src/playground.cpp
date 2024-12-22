@@ -6,13 +6,11 @@
 #include "../include/character.h"
 #include "../include/tool.h"
 #include "../include/constants.h"
-#include "../include/enemy.h"
 #include <cmath>
 
 playground::playground(const std::string &backgroundPath, SDL_Renderer *renderer, const std::string &playerName)
     : renderer(renderer),
-      isPaused(false),
-      enemy(nullptr) // Initialize the unique_ptr as nullptr first
+      isPaused(false)
 {
     SDL_Log("Initializing playground...");
 
@@ -64,13 +62,12 @@ playground::playground(const std::string &backgroundPath, SDL_Renderer *renderer
     obstacles.push_back(std::make_unique<Bookshelf>(renderer, 15, 12, 2, 3));
     SDL_Log("Bookshelf obstacle added.");
 
-    // Initialize patrol waypoints
-    patrolWaypoints = {
-        {100, 100}, {300, 100}, {300, 300}, {100, 300}};
-
-    // Create enemy after initializing other members
-    enemy = std::make_unique<Enemy>(renderer, "enemy", 100, 100);
-    SDL_Log("Enemy initialized.");
+    // Initialize enemies
+    patrolWaypoints = {{5, 5}, {10, 10}, {15, 5}, {10, 0}};
+    enemies.push_back(std::make_unique<Enemy>(renderer, "Enemy1", this, 5, 5, patrolWaypoints, 1));
+    enemies.push_back(std::make_unique<Enemy>(renderer, "Enemy2", this, 10, 10, patrolWaypoints, 1));
+    enemies.push_back(std::make_unique<Enemy>(renderer, "Enemy3", this, 15, 15, patrolWaypoints, 1));
+    SDL_Log("Enemies created.");
 
     initializePauseMenu();
     SDL_Log("Playground initialized.");
@@ -218,9 +215,9 @@ int playground::handleMouseClick(int x, int y)
 
 int playground::update()
 {
-    if (!isPaused)
+    for (auto &enemy : enemies)
     {
-        updateEnemyPatrol();
+        enemy->update();
     }
     return PLAYGROUNDID;
 }
@@ -244,29 +241,10 @@ void playground::render()
     // Render main character
     mainCharacter->render();
 
-    // Render enemy
-    if (enemy != nullptr)
+    // Render enemies
+    for (const auto &enemy : enemies)
     {
         enemy->render();
-
-        // Render enemy vision as a sector
-        SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
-        SDL_SetRenderDrawColor(renderer, 255, 0, 0, 128); // Red translucent color
-
-        int visionRange = enemy->getVisionRange();
-        int visionAngle = enemy->getVisionAngle();
-        int enemyX = static_cast<int>(enemy->getX());
-        int enemyY = static_cast<int>(enemy->getY());
-        int startAngle = enemy->getAngle() - visionAngle / 2;
-        int endAngle = enemy->getAngle() + visionAngle / 2;
-
-        for (int angle = startAngle; angle <= endAngle; ++angle)
-        {
-            float rad = angle * M_PI / 180.0f;
-            int x = enemyX + visionRange * std::cos(rad);
-            int y = enemyY + visionRange * std::sin(rad);
-            SDL_RenderDrawLine(renderer, enemyX, enemyY, x, y);
-        }
     }
 
     // Render pause menu if paused
@@ -320,6 +298,18 @@ bool playground::isPositionBlocked(int x, int y) const
     for (const auto &obstacle : obstacles)
     {
         if (obstacle->isBlocking(x, y))
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool playground::isEnemyCollision(int x, int y) const
+{
+    for (const auto &enemy : enemies)
+    {
+        if (enemy->getX() == x && enemy->getY() == y)
         {
             return true;
         }
@@ -386,79 +376,4 @@ playground::~playground()
 
     // Delete the mainCharacter
     delete mainCharacter;
-
-    // Remove this line as enemy is now managed by unique_ptr
-    // SDL_DestroyTexture(enemy.texture);
-}
-
-void playground::updateEnemyPatrol()
-{
-    if (enemy == nullptr)
-        return;
-
-    static const float moveSpeed = 2.0f;
-    static int collisionCooldown = 0; // Cooldown counter for collision
-    static int detectionCooldown = 0; // Cooldown counter for detection
-
-    if (collisionCooldown > 0)
-    {
-        collisionCooldown--;
-    }
-
-    if (detectionCooldown > 0)
-    {
-        detectionCooldown--;
-        return; // Skip movement and detection while in detection cooldown
-    }
-
-    float dx = std::cos(enemy->getAngle() * M_PI / 180.0f);
-    float dy = std::sin(enemy->getAngle() * M_PI / 180.0f);
-
-    float newX = enemy->getX() + dx * moveSpeed;
-    float newY = enemy->getY() + dy * moveSpeed;
-
-    bool collision = false;
-    if (collisionCooldown == 0)
-    {
-        for (const auto &obstacle : obstacles)
-        {
-            if (obstacle->isBlocking(newX / 32, newY / 32))
-            {
-                collision = true;
-                break;
-            }
-        }
-
-        // Check for map boundaries (assuming map size is 675 * 2 by 386 * 2)
-        if (newX < 0 || newX > 675 * 2 || newY < 0 || newY > 386 * 2)
-        {
-            collision = true;
-        }
-    }
-
-    if (!collision)
-    {
-        enemy->setPosition(newX, newY);
-    }
-    else
-    {
-        // Randomly turn left or right if collision detected and start cooldown
-        float currentAngle = enemy->getAngle();
-        if (rand() % 2 == 0)
-        {
-            enemy->setAngle(currentAngle + 90.0f);
-        }
-        else
-        {
-            enemy->setAngle(currentAngle - 90.0f);
-        }
-        collisionCooldown = 30; // Set cooldown period
-    }
-
-    // Check if the main character is in the vision of the enemy
-    if (enemy->detectCharacter(*mainCharacter))
-    {
-        SDL_Log("Main character detected by enemy!");
-        detectionCooldown = 120; // Stop for 2 seconds (assuming 60 FPS)
-    }
 }

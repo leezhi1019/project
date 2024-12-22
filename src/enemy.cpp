@@ -1,108 +1,82 @@
 #include "../include/enemy.h"
-#include "../include/tool.h"
-#include <cmath>
+#include "../include/playground.h"
+#include <cstdlib>
+#include <ctime>
 
-Vision::Vision(int range, int angle) : range(range), angle(angle) {}
-
-bool Vision::isCharacterInSight(const Character &character, int enemyX, int enemyY, int enemyAngle) const
+Enemy::Enemy(SDL_Renderer *renderer, const std::string &name, const playground *gamePlayground, int startX, int startY, const std::vector<std::pair<int, int>> &waypoints, int speed)
+    : Character(renderer, name, gamePlayground, startX, startY), patrolWaypoints(waypoints), currentWaypointIndex(0), patrolSpeed(speed), lastMoveTime(0), vision(this, 5, M_PI / 4), characterDetected(false), detectionTime(0)
 {
-    // Calculate the distance and angle to the character
-    int charX = character.getX();
-    int charY = character.getY();
-    int deltaX = charX - enemyX;
-    int deltaY = charY - enemyY;
-    int distance = std::sqrt(deltaX * deltaX + deltaY * deltaY);
-
-    if (distance > range)
-    {
-        return false;
-    }
-
-    float angleToCharacter = std::atan2(deltaY, deltaX) * 180 / M_PI;
-    float angleDifference = std::fmod(std::abs(angleToCharacter - enemyAngle), 360.0f);
-
-    if (angleDifference > 180.0f)
-    {
-        angleDifference = 360.0f - angleDifference;
-    }
-
-    return angleDifference <= angle / 2;
+    std::srand(std::time(nullptr)); // Seed for random direction changes
 }
 
-Enemy::Enemy(SDL_Renderer *renderer, const std::string &name, int startX, int startY)
-    : renderer(renderer),
-      name(name),
-      x(startX),
-      y(startY),
-      moveSpeed(2.0f),
-      size(32), // Set size to be the same as the main character's size
-      currentWaypoint(0),
-      angle(0),
-      vision(250, 60), // Initialize vision with 250 range and 60 degree angle
-      movementPattern(nullptr)
+void Enemy::update()
 {
-    // Create red square texture
-    SDL_Surface *surface = SDL_CreateRGBSurface(0, size, size, 32, 0, 0, 0, 0);
-    SDL_FillRect(surface, NULL, SDL_MapRGB(surface->format, 255, 0, 0));
-    texture = SDL_CreateTextureFromSurface(renderer, surface);
-    SDL_FreeSurface(surface);
-}
+    Uint32 currentTime = SDL_GetTicks();
 
-Enemy::~Enemy()
-{
-    if (texture)
+    if (characterDetected)
     {
-        SDL_DestroyTexture(texture);
+        if (currentTime - detectionTime >= 2000)
+        {
+            characterDetected = false; // Resume patrol after 2 seconds
+        }
+        else
+        {
+            return; // Pause for 2 seconds
+        }
+    }
+
+    const playground *gamePlayground = getGamePlayground(); // Use the getter method
+    if (vision.isCharacterInVision(gamePlayground->getMainCharacter()))
+    {
+        SDL_Log("Character detected");
+        characterDetected = true;
+        detectionTime = currentTime;
+        return;
+    }
+
+    if (currentTime - lastMoveTime < pauseDuration)
+    {
+        return; // Pause for the specified duration
+    }
+
+    int nextX = gridX;
+    int nextY = gridY;
+
+    switch (currentWaypointIndex)
+    {
+    case 0:
+        nextX += patrolSpeed;
+        vision.setDirection(0); // Move right
+        break;
+    case 1:
+        nextX -= patrolSpeed;
+        vision.setDirection(M_PI); // Move left
+        break;
+    case 2:
+        nextY += patrolSpeed;
+        vision.setDirection(M_PI / 2); // Move down
+        break;
+    case 3:
+        nextY -= patrolSpeed;
+        vision.setDirection(-M_PI / 2); // Move up
+        break;
+    }
+
+    if (nextX < 0 || nextX >= 32 || nextY < 0 || nextY >= 18 || gamePlayground->isPositionBlocked(nextX, nextY) || gamePlayground->isEnemyCollision(nextX, nextY))
+    {
+        // Change direction randomly
+        currentWaypointIndex = std::rand() % 4;
+    }
+    else
+    {
+        gridX = nextX;
+        gridY = nextY;
+        lastMoveTime = currentTime; // Update the last move time
     }
 }
 
 void Enemy::render()
 {
-    SDL_Rect destRect = {static_cast<int>(x), static_cast<int>(y), size, size};
-    SDL_RenderCopy(renderer, texture, nullptr, &destRect);
-}
-
-void Enemy::update()
-{
-    if (movementPattern)
-    {
-        movementPattern(*this);
-    }
-}
-
-void Enemy::setMovementPattern(void (*movementPattern)(Enemy &))
-{
-    this->movementPattern = movementPattern;
-}
-
-bool Enemy::detectCharacter(const Character &character) const
-{
-
-    return vision.isCharacterInSight(character, x, y, angle);
-}
-
-void Enemy::setPosition(float newX, float newY)
-{
-    x = newX;
-    y = newY;
-}
-
-void Enemy::setAngle(float newAngle)
-{
-    angle = newAngle;
-}
-
-int Enemy::getVisionRange() const
-{
-    return vision.getRange();
-}
-
-int Enemy::getVisionAngle() const
-{
-    return vision.getAngle();
-}
-
-int Enemy::getAngle() const
-{
-    return angle;
+    Character::render();     // Call the base class render method
+    vision.render(renderer); // Render the vision area
 }

@@ -1,6 +1,7 @@
 CMakeFiles/my_Final_project_game.dir/src/enemy.cpp.obj: \
  C:\finalproject\project\src\enemy.cpp \
  C:/finalproject/project/include/enemy.h \
+ C:/finalproject/project/include/character.h \
  C:/finalproject/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/SDL.h \
  C:/finalproject/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/SDL_main.h \
  C:/finalproject/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/SDL_stdinc.h \
@@ -196,6 +197,9 @@ CMakeFiles/my_Final_project_game.dir/src/enemy.cpp.obj: \
  C:/finalproject/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/SDL_version.h \
  C:/finalproject/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/SDL_locale.h \
  C:/finalproject/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/SDL_misc.h \
+ C:/finalproject/project/SDL_lib/SDL2_ttf-2.22.0/x86_64-w64-mingw32/include/SDL2/SDL_ttf.h \
+ C:/finalproject/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/begin_code.h \
+ C:/finalproject/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/close_code.h \
  C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/string \
  C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/bits/requires_hosted.h \
  C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/bits/stringfwd.h \
@@ -276,24 +280,79 @@ CMakeFiles/my_Final_project_game.dir/src/enemy.cpp.obj: \
  C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/bits/uses_allocator_args.h \
  C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/tuple \
  C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/bits/ranges_util.h \
- C:/finalproject/project/include/character.h \
- C:/finalproject/project/SDL_lib/SDL2_ttf-2.22.0/x86_64-w64-mingw32/include/SDL2/SDL_ttf.h \
- C:/finalproject/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/begin_code.h \
- C:/finalproject/project/SDL_lib/SDL2-2.30.7/x86_64-w64-mingw32/include/SDL2/close_code.h \
+ C:/finalproject/project/include/vision.h \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/vector \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/bits/stl_uninitialized.h \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/bits/stl_vector.h \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/bits/stl_bvector.h \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/bits/vector.tcc \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/utility \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/bits/stl_relops.h \
+ C:/finalproject/project/include/playground.h \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/memory \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/bits/stl_tempbuf.h \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/bits/stl_raw_storage_iter.h \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/bits/align.h \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/bits/unique_ptr.h \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/ostream \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/ios \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/exception \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/bits/exception_ptr.h \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/bits/cxxabi_init_exception.h \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/typeinfo \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/bits/nested_exception.h \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/bits/ios_base.h \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/ext/atomicity.h \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/x86_64-w64-mingw32/bits/gthr.h \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/x86_64-w64-mingw32/bits/gthr-default.h \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/x86_64-w64-mingw32/include/pthread.h \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/x86_64-w64-mingw32/include/signal.h \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/x86_64-w64-mingw32/include/pthread_signal.h \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/x86_64-w64-mingw32/include/time.h \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/x86_64-w64-mingw32/include/sys/timeb.h \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/x86_64-w64-mingw32/include/sec_api/sys/timeb_s.h \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/x86_64-w64-mingw32/include/_timeval.h \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/x86_64-w64-mingw32/include/pthread_time.h \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/x86_64-w64-mingw32/include/pthread_compat.h \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/x86_64-w64-mingw32/include/pthread_unistd.h \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/x86_64-w64-mingw32/bits/atomic_word.h \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/bits/locale_classes.h \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/bits/locale_classes.tcc \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/system_error \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/x86_64-w64-mingw32/bits/error_constants.h \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/stdexcept \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/streambuf \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/bits/streambuf.tcc \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/bits/basic_ios.h \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/bits/locale_facets.h \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/cwctype \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/x86_64-w64-mingw32/include/wctype.h \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/x86_64-w64-mingw32/bits/ctype_base.h \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/bits/streambuf_iterator.h \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/x86_64-w64-mingw32/bits/ctype_inline.h \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/bits/locale_facets.tcc \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/bits/basic_ios.tcc \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/bits/ostream.tcc \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/bits/shared_ptr.h \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/bits/shared_ptr_base.h \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/bits/allocated_ptr.h \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/ext/aligned_buffer.h \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/ext/concurrence.h \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/bits/shared_ptr_atomic.h \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/bits/atomic_base.h \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/bits/atomic_lockfree_defines.h \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/bits/atomic_wait.h \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/cstdint \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/bits/std_mutex.h \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/backward/auto_ptr.h \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/bits/ranges_uninitialized.h \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/bits/ranges_algobase.h \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/pstl/glue_memory_defs.h \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/pstl/execution_defs.h \
+ C:/finalproject/project/include/constants.h \
  C:/finalproject/project/include/tool.h \
- C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/cmath \
- C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/x86_64-w64-mingw32/include/math.h \
- C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/bits/specfun.h \
- C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/limits \
- C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/tr1/gamma.tcc \
- C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/tr1/special_function_util.h \
- C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/tr1/bessel_function.tcc \
- C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/tr1/beta_function.tcc \
- C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/tr1/ell_integral.tcc \
- C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/tr1/exp_integral.tcc \
- C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/tr1/hypergeometric.tcc \
- C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/tr1/legendre_function.tcc \
- C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/tr1/modified_bessel_func.tcc \
- C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/tr1/poly_hermite.tcc \
- C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/tr1/poly_laguerre.tcc \
- C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/tr1/riemann_zeta.tcc
+ C:/finalproject/project/include/obstacle.h \
+ C:/finalproject/project/include/table.h \
+ C:/finalproject/project/include/bookshelf.h \
+ C:/finalproject/project/include/enemy.h \
+ C:/Users/ROG/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2/mingw64/include/c++/14.2.0/ctime
