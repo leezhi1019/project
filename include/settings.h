@@ -38,12 +38,9 @@ private:
     SDL_Color buttonHoverColor;
     std::vector<Button> buttons;
     std::vector<Section> sections;  // 三個主要區域
-    std::vector<Button> ruleButtons;     // 規則區域的按鈕
-    std::vector<Button> scoreButtons;    // 分數區域的按鈕
-    std::vector<Button> configButtons;   // 設定區域的按鈕
     std::vector<AvatarButton> avatarButtons;
-    SDL_Rect separatorLine;    // 分隔線
-    Button backButton;         // 返回選單按鈕
+    SDL_Rect usernameInputBox;
+    Button backButton;  // Declare backButton as Button
     int volumeLevel = 50;  // Default volume level
 
     // Private helper methods
@@ -53,13 +50,19 @@ private:
     void initializeAvatarButtons();
     void createVolumeControls(int x, int y, int width, int height);
     void updateVolumeDisplay();
+    void renderDividerLines();
+    void initializeUIElements(int sectionWidth, int sectionHeight);
+    void initializeGameRules(int width, int height, TTF_Font* font);
+    void renderSections();
+    void renderUIElements();
+    void initializeSettings(int width, int height, TTF_Font* font);
+    void initializeScores(int width, int height, TTF_Font* font);
 
 public:
     settings(const std::string& path, SDL_Renderer* renderer);
     ~settings();
     void render();
     int process_input(SDL_Event* event);
-    int update();
     void initializeSections();
 };
 

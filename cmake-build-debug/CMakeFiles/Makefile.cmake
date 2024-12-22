@@ -117,15 +117,15 @@ set(CMAKE_MAKEFILE_DEPENDS
   "C:/Users/leezhi/CLion 2024.3.1.1/bin/cmake/win/x64/share/cmake-3.30/Modules/Platform/Windows-windres.cmake"
   "C:/Users/leezhi/CLion 2024.3.1.1/bin/cmake/win/x64/share/cmake-3.30/Modules/Platform/Windows.cmake"
   "C:/Users/leezhi/CLion 2024.3.1.1/bin/cmake/win/x64/share/cmake-3.30/Modules/Platform/WindowsPaths.cmake"
-  "C:/Users/leezhi/FINAL/project/CMakeLists.txt"
+  "C:/Users/leezhi/Final/project/CMakeLists.txt"
   "CMakeFiles/3.30.5/CMakeCCompiler.cmake"
   "CMakeFiles/3.30.5/CMakeCXXCompiler.cmake"
   "CMakeFiles/3.30.5/CMakeRCCompiler.cmake"
   "CMakeFiles/3.30.5/CMakeSystem.cmake"
-  "C:/Users/leezhi/FINAL/project/cmake_modules/FindSDL2.cmake"
-  "C:/Users/leezhi/FINAL/project/cmake_modules/FindSDL2_image.cmake"
-  "C:/Users/leezhi/FINAL/project/cmake_modules/FindSDL2_mixer.cmake"
-  "C:/Users/leezhi/FINAL/project/cmake_modules/FindSDL2_ttf.cmake"
+  "C:/Users/leezhi/Final/project/cmake_modules/FindSDL2.cmake"
+  "C:/Users/leezhi/Final/project/cmake_modules/FindSDL2_image.cmake"
+  "C:/Users/leezhi/Final/project/cmake_modules/FindSDL2_mixer.cmake"
+  "C:/Users/leezhi/Final/project/cmake_modules/FindSDL2_ttf.cmake"
   )
 
 # The corresponding makefile is:
