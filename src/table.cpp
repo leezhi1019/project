@@ -3,10 +3,9 @@
 #include "../include/tool.h"
 #include "../include/constants.h"
 
-Table::Table(SDL_Renderer* renderer, int x, int y, int w, int h)
-    : Obstacle(renderer, x, y, w, h) {
-    // Try to load texture, but don't require it
-    texture = loadTexture(TABLE_TEXTURE, renderer);  // Use TABLE_TEXTURE instead of BOOKSHELF_TEXTURE
+Table::Table(SDL_Renderer* renderer, int x, int y, int w, int h, const char* texturePath)
+    : Obstacle(renderer, x, y, w, h), texturePath(texturePath) {
+    texture = loadTexture(texturePath, renderer);
     if (!texture) {
         SDL_Log("Using fallback rendering for table");
     }

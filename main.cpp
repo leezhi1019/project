@@ -9,6 +9,7 @@
 
 int main(int argc, char *argv[]) {
     game_is_running = initialize_window();
+    
     setup();
     while (game_is_running) {
         // SDL_Log("Game is running...");
