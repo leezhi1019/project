@@ -332,9 +332,8 @@ bool playground::isPositionBlocked(int x, int y) const {
 void playground::endGame() {
     isGameEnded = true;
     GameManagement::printStats();
-    extern int PAGE_ID;
-    PAGE_ID = SCOREID;  // Use SCOREID directly
-    extern ScorePage* scorePage;  // Match the lowercase name
+    updateSelectedCharacter();
+    PAGE_ID = SCOREID;
     scorePage->initialize();
 }
 

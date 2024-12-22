@@ -16,6 +16,8 @@
 #include "table.h"
 #include "bookshelf.h"
 #include "enemy.h" // Add this include
+#include "game_state.h"  // For SCOREID
+#include "game_management.h" // For GameManagement
 
 // For collectibles
 #include "collectible.h"  
@@ -23,6 +25,15 @@
 #include "coffee.h"       
 #include "freeze.h"       
 #include "pastexam.h"     
+#include "score_page.h"  // Include the full header
+#include "settings.h"    // Include the full header
+
+// Forward declarations
+class ScorePage;
+class settings;
+extern ScorePage* scorePage;
+extern settings* SettingsPage;
+extern int PAGE_ID;
 
 class playground {
     friend class CollectibleManager;  // Add this to allow access
@@ -57,7 +68,7 @@ private:
     bool isCollecting;
 
     // Add timer related members
-    float gameTime = 60.0f;  // 5 minutes in seconds
+    float gameTime = 60.0f;  // in seconds
     float currentTime;
     TTF_Font* timerFont;      // Separate font for timer
     SDL_Color timerColor;     // Color for timer text
@@ -115,7 +126,6 @@ public:
     void addTable(int x, int y, int w, int h);
     void addBookshelf(int x, int y, int w, int h);
     void initializePauseMenu();
-    void endGame();  // Add method to handle game ending
     void reset();    // Add method to reset/restart the game
 
     // Add accessor methods
@@ -135,5 +145,15 @@ public:
 
     bool isPaused() const { return m_isPaused; }  // Add this getter method
     void setPaused(bool paused) { m_isPaused = paused; }  // Add this setter method
+
+    void updateSelectedCharacter() {
+        if (SettingsPage) {
+            SDL_Texture* charTexture = SettingsPage->getSelectedCharacterTexture();
+            SDL_Rect charRect = SettingsPage->getSelectedCharacterRect();
+            scorePage->setCharacterTexture(charTexture, charRect);
+        }
+    }
+
+    void endGame(); // Just declare it here, don't define it
 };
 #endif

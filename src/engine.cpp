@@ -134,6 +134,12 @@ void process_input() {
                             PlayPage->endGame();  // This will set PAGE_ID to SCOREID
                             newPageId = SCOREID;  // Redirect to score page instead of menu
                         }
+                        if (newPageId == SCOREID) {
+                            // Pass the selected character to score page
+                            SDL_Texture* charTexture = SettingsPage->getSelectedCharacterTexture();
+                            SDL_Rect charRect = SettingsPage->getSelectedCharacterRect();
+                            scorePage->setCharacterTexture(charTexture, charRect);
+                        }
                         break;
                     case SETTINGSID:
                         newPageId = SettingsPage->process_input(&event);

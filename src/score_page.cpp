@@ -82,16 +82,25 @@ void ScorePage::updateScoreAnimation(float deltaTime) {
 }
 
 void ScorePage::calculateGrade() {
-    if (finalScore >= 95) grade = "A+";
+    if (finalScore >= 100) grade = "A+";
     else if (finalScore >= 90) grade = "A";
     else if (finalScore >= 85) grade = "A-";
-    else if (finalScore >= 80) grade = "B";
-    else grade = "C";
+    else if (finalScore >= 80) grade = "B+";
+    else if (finalScore >= 75) grade = "B";
+    else if (finalScore >= 70) grade = "B-";
+    else if (finalScore >= 65) grade = "C+";
+    else if (finalScore >= 60) grade = "C";
+    else grade = "F";  // Changed from C to F for scores below 60
 }
 
 void ScorePage::render() {
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     SDL_RenderClear(renderer);
+    
+    // Render character if available
+    if (characterTexture) {
+        SDL_RenderCopy(renderer, characterTexture, nullptr, &characterRect);
+    }
     
     renderCollectibles();
     renderScoreBar();

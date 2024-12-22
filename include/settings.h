@@ -45,6 +45,21 @@ public:
     void render();
     int update();
 
+    SDL_Texture* getSelectedCharacterTexture() const {
+        if (!characterOptions.empty() && selectedCharacter >= 0 && 
+            selectedCharacter < characterOptions.size()) {
+            return characterOptions[selectedCharacter].texture;
+        }
+        return nullptr;
+    }
+    SDL_Rect getSelectedCharacterRect() const {
+        if (!characterOptions.empty() && selectedCharacter >= 0 && 
+            selectedCharacter < characterOptions.size()) {
+            return characterOptions[selectedCharacter].rect;
+        }
+        return SDL_Rect{0, 0, 0, 0};
+    }
+
 private:
     void createButton(const char* text, int x, int y, int width, int height);
     void handleMouseMotion(int x, int y);

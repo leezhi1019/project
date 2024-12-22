@@ -31,6 +31,8 @@ private:
     float animationTimer;
     std::string grade;
     int finalScore;
+    SDL_Texture* characterTexture;
+    SDL_Rect characterRect;
 
     // Add loadTexture helper function
     SDL_Texture* loadTexture(const std::string& path, SDL_Renderer* renderer);
@@ -49,6 +51,16 @@ public:
     void render();
     int handleMouseClick(int x, int y);
     void handleMouseMotion(int x, int y);
+    void setCharacterTexture(SDL_Texture* texture, const SDL_Rect& rect) {
+        characterTexture = texture;
+        // Position the character on the left side of the score page
+        characterRect = {
+            700,  // X position
+            200, // Y position
+            300, // Width
+            375  // Height - maintaining aspect ratio
+        };
+    }
 };
 
 // Global pointer declaration
