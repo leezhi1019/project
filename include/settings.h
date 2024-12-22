@@ -34,8 +34,12 @@ private:
     std::vector<CharacterOption> characterOptions;
     int selectedCharacter = 0; // Track currently selected character
 
+//new add
     SDL_Texture* titleTexture = nullptr;
     SDL_Rect titleRect;
+    SDL_Texture* rulesTexture = nullptr;  // 規則文字材質
+    SDL_Rect rulesRect;                   // 規則文字位置和大小
+//new add ends here
 
 public:
     settings(const std::string& path, SDL_Renderer* renderer);
@@ -59,6 +63,9 @@ public:
         }
         return SDL_Rect{0, 0, 0, 0};
     }
+//new function
+    void initializeRules();
+//new function ends here
 
 private:
     void createButton(const char* text, int x, int y, int width, int height);

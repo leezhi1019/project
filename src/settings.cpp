@@ -35,14 +35,15 @@ settings::settings(const std::string& path, SDL_Renderer* renderer) {
     
     // Create only the Back to Menu button
     createButton("Back to Menu", centerX, 325 * scale, baseWidth + 50, baseHeight);
-
+//new add
     // Initialize character options
     const char* characterPaths[] = {
-        "../imgs/character1.png",
-        "../imgs/character2.png", 
-        "../imgs/character3.png"
+        "../imgs/book1.png",
+        "../imgs/book2.png", 
+        "../imgs/book3.png"
     };
-    
+//new add ends here
+
     // Calculate positions for character options
     int screenWidth = 1350;
     int screenHeight = 772;
@@ -74,6 +75,9 @@ settings::settings(const std::string& path, SDL_Renderer* renderer) {
         option.isSelected = (i == selectedCharacter);
         characterOptions.push_back(option);
     }
+    //new add
+    initializeRules();  // 新增: 初始化規則文字
+    //new add ends here
 }
 
 settings::~settings() {
@@ -153,7 +157,9 @@ void settings::render() {
         
         // If selected, render white bezel
         if (option.isSelected) {
-            SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+            //new add
+            SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+            //new add ends here
             SDL_Rect bezel = option.rect;
             // Draw thicker border
             for (int i = 0; i < 4; i++) {
@@ -188,7 +194,13 @@ void settings::render() {
             SDL_RenderCopy(renderer, button.textTexture, nullptr, &textRect);
         }
     }
-    
+    //new add
+    // 新增: 渲染規則文字
+    if (rulesTexture) {
+        SDL_Rect destRect = {20, 80, WINDOW_WIDTH/3 - 40, WINDOW_HEIGHT - 200};
+        SDL_RenderCopy(renderer, rulesTexture, nullptr, &destRect);
+    }
+//new add ends here
     SDL_RenderPresent(renderer);
 }
 
@@ -237,4 +249,49 @@ int settings::handleMouseClick(int x, int y) {
 int settings::update() {
     // Basic update implementation
     return SETTINGSID;  // Return current page ID
+}
+// new add
+void settings::initializeRules() {
+    // 新增: 規則文字內容
+    std::string rulesText = 
+        "1.Game time limit is 1 minute.\n\n"
+        " \n\n"
+        "2.Collect all books and \n"
+        "  old exams to get A+.\n\n"
+        " \n\n"
+        "3.Discovered by classmates\n"
+        "  deducts 5 seconds.\n\n"
+        " \n\n"
+        "4.Coffee power-up doubles\n"
+        "  collection speed.\n\n"
+        " \n\n"
+        "5.Phone power-up freezes\n"
+        "  classmates for 3 seconds.\n\n"
+        " \n\n"
+        "6.Press E to collect items.\n\n";
+
+    // 新增: 確保字體載入成功
+    TTF_Font* rulesFont = TTF_OpenFont("../fonts/Action_Man_Bold.ttf", 24);
+    if (!rulesFont) {
+        SDL_Log("Failed to load rules font: %s", TTF_GetError());
+        return;
+    }
+
+    // 新增: 創建文字表面
+    SDL_Color textColor = {0, 0, 0, 255};  // 黑色文字
+    SDL_Surface* surface = TTF_RenderText_Blended_Wrapped(rulesFont, 
+        rulesText.c_str(), 
+        textColor, 
+        WINDOW_WIDTH/3 - 40);  // 設定文字換行寬度為視窗寬度的1/3減去邊距
+
+    // 新增: 檢查並創建材質
+    if (surface) {
+        if (rulesTexture) {
+            SDL_DestroyTexture(rulesTexture);  // 如果已存在則先銷毀
+        }
+        rulesTexture = SDL_CreateTextureFromSurface(renderer, surface);
+        SDL_FreeSurface(surface);
+    }
+
+    TTF_CloseFont(rulesFont);  // 記得關閉字體
 }
