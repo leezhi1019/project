@@ -6,14 +6,13 @@
 void settings::initializeSections() {
     SDL_Log("Initializing sections...");
     
-    // Clear existing sections
     sections.clear();
     
     int sectionWidth = WINDOW_WIDTH / 3;
     int sectionHeight = WINDOW_HEIGHT - 120; // Height minus bottom area
     
-    // Create smaller font specifically for rules text
-    TTF_Font* rulesFont = TTF_OpenFont("../fonts/Action_Man_Bold.ttf", 30);  // Try a different size
+    // Create font only once
+    TTF_Font* rulesFont = TTF_OpenFont("../fonts/Action_Man_Bold.ttf", 24);  // Smaller size for rules
     if (!rulesFont) {
         SDL_Log("Failed to load rules font: %s", TTF_GetError());
         return;
@@ -39,16 +38,19 @@ void settings::initializeSections() {
         "5.Phone power-up freezes\n"
         "  classmates for 3 seconds.\n\n";
 
-    // Create texture for rules using the smaller font
+    // Create texture for rules using the font
     SDL_Color textColor = {0, 0, 0, 255};
-    SDL_Surface* surface = TTF_RenderText_Solid(rulesFont, 
-        rulesSection.textContent.c_str(), textColor);
+    SDL_Surface* surface = TTF_RenderText_Blended_Wrapped(rulesFont, 
+        rulesSection.textContent.c_str(), 
+        textColor,
+        sectionWidth - 40); // Width with margins
+
     if (surface) {
         rulesSection.textTexture = SDL_CreateTextureFromSurface(renderer, surface);
         SDL_FreeSurface(surface);
     }
 
-    TTF_CloseFont(rulesFont);  // Clean up the rules font
+    TTF_CloseFont(rulesFont);
     sections.push_back(rulesSection);
     
     // High Scores section
@@ -87,7 +89,11 @@ void settings::initializeSections() {
 
 settings::settings(const std::string& path, SDL_Renderer* renderer) {
     this->renderer = renderer;
-    this->background = loadTexture("../imgs/playground_background.jpg", renderer);
+    this->background = loadTexture(path.c_str(), renderer);
+    
+    // Initialize colors
+    buttonColor = {100, 100, 100, 255};       // Gray
+    buttonHoverColor = {150, 150, 150, 255};  // Light gray
     
     // Initialize font
     font = TTF_OpenFont("../fonts/Action_Man_Bold.ttf", 36);
@@ -159,53 +165,50 @@ void settings::createButton(const char* text, int x, int y, int width, int heigh
 }
 
 int settings::process_input(SDL_Event* event) {
-    if (event->type == SDL_MOUSEBUTTONDOWN) {
-        if (event->button.button == SDL_BUTTON_LEFT) {
-            int mouseX = event->button.x;
-            int mouseY = event->button.y;
+    switch (event->type) {
+        case SDL_MOUSEMOTION:
+            handleMouseMotion(event->motion.x, event->motion.y);
+            break;
             
-            // Handle back button click
-            for (const auto& button : buttons) {
-                if (mouseX >= button.rect.x && 
-                    mouseX <= button.rect.x + button.rect.w &&
-                    mouseY >= button.rect.y && 
-                    mouseY <= button.rect.y + button.rect.h) {
-                    
-                    SDL_Log("Button clicked: %s", button.text.c_str());
-                    
-                    // Handle different button actions
-                    if (button.text == "Back to Menu") {
-                        return MENUID;
+        case SDL_MOUSEBUTTONDOWN:
+            if (event->button.button == SDL_BUTTON_LEFT) {
+                int mouseX = event->button.x;
+                int mouseY = event->button.y;
+                
+                // Check avatar button clicks first
+                for (size_t i = 0; i < avatarButtons.size(); i++) {
+                    if (mouseX >= avatarButtons[i].rect.x && 
+                        mouseX <= avatarButtons[i].rect.x + avatarButtons[i].rect.w &&
+                        mouseY >= avatarButtons[i].rect.y && 
+                        mouseY <= avatarButtons[i].rect.y + avatarButtons[i].rect.h) {
+                        
+                        SDL_Log("Avatar %zu clicked", i+1);
+                        
+                        // Deselect all avatars
+                        for (auto& button : avatarButtons) {
+                            button.isSelected = false;
+                        }
+                        // Select clicked avatar
+                        avatarButtons[i].isSelected = true;
+                        break;
                     }
-                    else if (button.text == "+") {
-                        volumeLevel = std::min(100, volumeLevel + 1);
-                        updateVolumeDisplay();
-                    }
-                    else if (button.text == "-") {
-                        volumeLevel = std::max(0, volumeLevel - 1);
-                        updateVolumeDisplay();
+                }
+                
+                // Check regular button clicks
+                for (const auto& button : buttons) {
+                    if (mouseX >= button.rect.x && 
+                        mouseX <= button.rect.x + button.rect.w &&
+                        mouseY >= button.rect.y && 
+                        mouseY <= button.rect.y + button.rect.h) {
+                        
+                        if (button.text == "Back to Menu") {
+                            return MENUID;
+                        }
                     }
                 }
             }
-            
-            // Handle avatar button clicks
-            for (size_t i = 0; i < avatarButtons.size(); i++) {
-                if (mouseX >= avatarButtons[i].rect.x && 
-                    mouseX <= avatarButtons[i].rect.x + avatarButtons[i].rect.w &&
-                    mouseY >= avatarButtons[i].rect.y && 
-                    mouseY <= avatarButtons[i].rect.y + avatarButtons[i].rect.h) {
-                    
-                    // Deselect all other avatars
-                    for (auto& button : avatarButtons) {
-                        button.isSelected = false;
-                    }
-                    avatarButtons[i].isSelected = true;
-                    break;
-                }
-            }
-        }
+            break;
     }
-    
     return SETTINGSID;
 }
 
@@ -214,8 +217,8 @@ void settings::render() {
         SDL_RenderCopy(renderer, background, nullptr, nullptr);
     }
 
-    // Draw vertical dividing lines
-    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);  // Black lines
+    // Draw dividing lines
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 
     // Draw thick vertical lines
     for(int i = 0; i < 3; i++) {
@@ -235,58 +238,68 @@ void settings::render() {
             WINDOW_WIDTH, WINDOW_HEIGHT - 120 + i - 1);
     }
 
-    // Render section titles only once with black text
-    if (font) {
-        SDL_Color textColor = {0, 0, 0, 255};  // Black text only
-        
-        for (const auto& section : sections) {
-            SDL_Surface* surface = TTF_RenderText_Solid(font, section.title.c_str(), textColor);
-            if (surface) {
-                SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
-                if (texture) {
-                    SDL_Rect titleRect = {
-                        section.rect.x + (section.rect.w - surface->w) / 2,
-                        section.rect.y + 20,
-                        surface->w,
-                        surface->h
-                    };
-                    SDL_RenderCopy(renderer, texture, nullptr, &titleRect);
-                    SDL_DestroyTexture(texture);
-                }
-                SDL_FreeSurface(surface);
+    // Render rules section
+    for (const auto& section : sections) {
+        // First render section title
+        SDL_Color textColor = {0, 0, 0, 255};
+        SDL_Surface* titleSurface = TTF_RenderText_Solid(font, section.title.c_str(), textColor);
+        if (titleSurface) {
+            SDL_Texture* titleTexture = SDL_CreateTextureFromSurface(renderer, titleSurface);
+            if (titleTexture) {
+                SDL_Rect titleRect = {
+                    section.rect.x + (section.rect.w - titleSurface->w) / 2,
+                    section.rect.y + 20,
+                    titleSurface->w,
+                    titleSurface->h
+                };
+                SDL_RenderCopy(renderer, titleTexture, nullptr, &titleRect);
+                SDL_DestroyTexture(titleTexture);
             }
+            SDL_FreeSurface(titleSurface);
+        }
+
+        // Then render rules content if it's the rules section
+        if (section.title == "Game Rules" && section.textTexture) {
+            SDL_Rect textRect = {
+                section.rect.x + 20,  // Left margin
+                section.rect.y + 80,  // Space below title
+                section.rect.w - 40,  // Width with margins
+                section.rect.h - 100
+            };
+            SDL_RenderCopy(renderer, section.textTexture, nullptr, &textRect);
         }
     }
 
     // Render avatar buttons
     for (const auto& button : avatarButtons) {
-        SDL_SetRenderDrawColor(renderer, 200, 200, 200, 255);
-        SDL_RenderDrawRect(renderer, &button.rect);
-        
         if (button.avatarTexture) {
             SDL_RenderCopy(renderer, button.avatarTexture, nullptr, &button.rect);
         }
         
         if (button.isSelected) {
-            SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
-            SDL_Rect highlightRect = button.rect;
-            highlightRect.x -= 2;
-            highlightRect.y -= 2;
-            highlightRect.w += 4;
-            highlightRect.h += 4;
-            SDL_RenderDrawRect(renderer, &highlightRect);
+            SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);  // Black border
+            for (int i = 0; i < 3; i++) {
+                SDL_Rect borderRect = {
+                    button.rect.x - i,
+                    button.rect.y - i,
+                    button.rect.w + (2 * i),
+                    button.rect.h + (2 * i)
+                };
+                SDL_RenderDrawRect(renderer, &borderRect);
+            }
         }
     }
 
-    // Render back button last
+    // Render regular buttons with hover effect
     for (const auto& button : buttons) {
-        SDL_SetRenderDrawColor(renderer, 
-            button.isHovered ? 150 : 100,
-            button.isHovered ? 150 : 100,
-            button.isHovered ? 150 : 100,
+        SDL_SetRenderDrawColor(renderer,
+            button.isHovered ? buttonHoverColor.r : buttonColor.r,
+            button.isHovered ? buttonHoverColor.g : buttonColor.g,
+            button.isHovered ? buttonHoverColor.b : buttonColor.b,
             255);
+        
         SDL_RenderFillRect(renderer, &button.rect);
-
+        
         if (button.textTexture) {
             SDL_Rect textRect = button.rect;
             SDL_QueryTexture(button.textTexture, NULL, NULL, &textRect.w, &textRect.h);
@@ -296,77 +309,16 @@ void settings::render() {
         }
     }
 
-    // Render rules text with line breaks
-    for (const auto& section : sections) {
-        if (section.title == "Game Rules" && !section.textContent.empty()) {
-            // Create smaller font for rules
-            TTF_Font* rulesFont = TTF_OpenFont("../fonts/Action_Man_Bold.ttf", 30);
-            if (!rulesFont) {
-                SDL_Log("Failed to load rules font: %s", TTF_GetError());
-                continue;
-            }
-
-            SDL_Color textColor = {0, 0, 0, 255};  // Black text
-            int yOffset = 80;  // Starting Y position below title
-            
-            // Split the text by newlines and render each line
-            std::string text = section.textContent;
-            size_t pos = 0;
-            std::string line;
-            
-            while ((pos = text.find("\n")) != std::string::npos) {
-                line = text.substr(0, pos);
-                if (!line.empty()) {
-                    SDL_Surface* surface = TTF_RenderText_Solid(rulesFont, line.c_str(), textColor);
-                    if (surface) {
-                        SDL_Texture* lineTexture = SDL_CreateTextureFromSurface(renderer, surface);
-                        if (lineTexture) {
-                            SDL_Rect textRect = {
-                                section.rect.x + 20,  // Left margin
-                                section.rect.y + yOffset,
-                                surface->w,
-                                surface->h
-                            };
-                            SDL_RenderCopy(renderer, lineTexture, nullptr, &textRect);
-                            SDL_DestroyTexture(lineTexture);
-                            yOffset += surface->h + 5;  // Add spacing between lines
-                        }
-                        SDL_FreeSurface(surface);
-                    }
-                }
-                text.erase(0, pos + 1);
-            }
-            
-            // Render the last line if any
-            if (!text.empty()) {
-                SDL_Surface* surface = TTF_RenderText_Solid(rulesFont, text.c_str(), textColor);
-                if (surface) {
-                    SDL_Texture* lineTexture = SDL_CreateTextureFromSurface(renderer, surface);
-                    if (lineTexture) {
-                        SDL_Rect textRect = {
-                            section.rect.x + 20,
-                            section.rect.y + yOffset,
-                            surface->w,
-                            surface->h
-                        };
-                        SDL_RenderCopy(renderer, lineTexture, nullptr, &textRect);
-                        SDL_DestroyTexture(lineTexture);
-                    }
-                    SDL_FreeSurface(surface);
-                }
-            }
-            
-            TTF_CloseFont(rulesFont);
-        }
-    }
-
     SDL_RenderPresent(renderer);
 }
 
 void settings::handleMouseMotion(int x, int y) {
+    // Update hover states for all buttons
     for (auto& button : buttons) {
-        button.isHovered = (x >= button.rect.x && x <= button.rect.x + button.rect.w &&
-                           y >= button.rect.y && y <= button.rect.y + button.rect.h);
+        button.isHovered = (x >= button.rect.x && 
+                           x <= button.rect.x + button.rect.w &&
+                           y >= button.rect.y && 
+                           y <= button.rect.y + button.rect.h);
     }
 }
 
