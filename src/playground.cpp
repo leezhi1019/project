@@ -13,6 +13,7 @@
 #include "../include/game_state.h"
 #include "../include/score_page.h" // Add this include
 #include "../include/enemy.h" // Add this include
+#include <set>
 playground::playground(const std::string& backgroundPath, SDL_Renderer* renderer, const std::string& playerName)
     : renderer(renderer), m_isPaused(false), collectTimer(0), isCollecting(false)
 {
@@ -46,19 +47,6 @@ playground::playground(const std::string& backgroundPath, SDL_Renderer* renderer
     // Center table
     obstacles.push_back(std::make_unique<Table>(renderer, 10, 10, 2, 2));  
     SDL_Log("Center table added.");
-
-    // Add more tables around the playground
-    
-    // Group work tables
-    obstacles.push_back(std::make_unique<Table>(renderer, 20, 5, 2, 2));
-    obstacles.push_back(std::make_unique<Table>(renderer, 20, 8, 2, 2));
-   
-    // Reading area tables
-    obstacles.push_back(std::make_unique<Table>(renderer, 15, 15, 2, 2));
-    obstacles.push_back(std::make_unique<Table>(renderer, 20, 15, 2, 2));
-   
-    // Keep existing bookshelf
-    obstacles.push_back(std::make_unique<Bookshelf>(renderer, 15, 12, 2, 3));
    
     // Initialize test coffee collectible
     collectibles.push_back(std::make_unique<Coffee>(renderer, 10, 10));  // Place at grid position 10,10
@@ -353,7 +341,45 @@ void playground::reset() {
     
     obstacles.clear();
     obstacles.push_back(std::make_unique<Table>(renderer, 10, 10, 2, 2));
-    // ... rest of obstacle initialization ...
+    // Group work tables
+    obstacles.push_back(std::make_unique<Table>(renderer, 1, 0, 2, 2, TABLE_TEXTURE_1x1bag));
+    obstacles.push_back(std::make_unique<Table>(renderer, 28, 0, 2, 2, TABLE_TEXTURE_2x2book));
+    obstacles.push_back(std::make_unique<Table>(renderer, 30, 0, 2, 2, TABLE_TEXTURE_1x1book));
+
+    obstacles.push_back(std::make_unique<Table>(renderer, 12, 4, 2, 2, TABLE_TEXTURE_2x2bag));
+    obstacles.push_back(std::make_unique<Table>(renderer, 22, 4, 2, 2, TABLE_TEXTURE_2x2book));
+    obstacles.push_back(std::make_unique<Table>(renderer, 30, 5, 2, 2, TABLE_TEXTURE_1x1book));
+    obstacles.push_back(std::make_unique<Table>(renderer, 2, 5, 2, 2, TABLE_TEXTURE_1x1bag));
+    obstacles.push_back(std::make_unique<Table>(renderer, 27, 5, 2, 2, TABLE_TEXTURE_1x1bag));
+    obstacles.push_back(std::make_unique<Table>(renderer, 17, 2, 2, 2, TABLE_TEXTURE_1x1book));
+    
+    //obstacles.push_back(std::make_unique<Table>(renderer, 22, 6, 2, 2, TABLE_TEXTURE_2x2book));
+    //obstacles.push_back(std::make_unique<Table>(renderer, 17, 7, 2, 2, TABLE_TEXTURE_1x1book));
+    //obstacles.push_back(std::make_unique<Table>(renderer, 12, 9, 2, 2, TABLE_TEXTURE_2x2bag));
+    obstacles.push_back(std::make_unique<Table>(renderer, 26, 10, 2, 2, TABLE_TEXTURE_2x2book));
+    //obstacles.push_back(std::make_unique<Table>(renderer, 8, 14, 2, 2, TABLE_TEXTURE_1x1bag));
+
+    obstacles.push_back(std::make_unique<Table>(renderer, 27,15, 2, 2, TABLE_TEXTURE_2x2bag));
+    obstacles.push_back(std::make_unique<Table>(renderer, 22, 16, 2, 2, TABLE_TEXTURE_1x1book));
+    obstacles.push_back(std::make_unique<Table>(renderer, 17, 15, 2, 2, TABLE_TEXTURE_2x2book));
+    obstacles.push_back(std::make_unique<Table>(renderer, 12, 16, 2, 2, TABLE_TEXTURE_1x1bag));
+    obstacles.push_back(std::make_unique<Table>(renderer, 2,16, 2, 2, TABLE_TEXTURE_2x2bag));
+    obstacles.push_back(std::make_unique<Table>(renderer, 7, 16, 2, 2, TABLE_TEXTURE_1x1book));
+    //obstacles.push_back(std::make_unique<Table>(renderer, 4, 15, 2, 2, TABLE_TEXTURE_1x1book));
+    obstacles.push_back(std::make_unique<Table>(renderer, 3, 10, 2, 2, TABLE_TEXTURE_1x1bag));
+   
+    // Keep existing bookshelf
+    obstacles.push_back(std::make_unique<Bookshelf>(renderer, 27, 8, 1,2 , BOOKSHELF_TEXTURE_2X1));
+   obstacles.push_back(std::make_unique<Bookshelf>(renderer, 15, 7, 1, 3, BOOKSHELF_TEXTURE_3X1));
+   obstacles.push_back(std::make_unique<Bookshelf>(renderer, 12, 10, 1, 4, BOOKSHELF_TEXTURE_4X1));
+   obstacles.push_back(std::make_unique<Bookshelf>(renderer, 22, 9, 2, 4, BOOKSHELF_TEXTURE_4X2));
+
+   obstacles.push_back(std::make_unique<Bookshelf>(renderer, 0, 0, 1, 18, BOOKSHELF_TEXTURE_LEFT));
+   obstacles.push_back(std::make_unique<Bookshelf>(renderer, 3, 0, 25, 2, BOOKSHELF_TEXTURE_UP));
+   obstacles.push_back(std::make_unique<Bookshelf>(renderer, 32, 0, 1, 18, BOOKSHELF_TEXTURE_RIGHT));
+    obstacles.push_back(std::make_unique<Bookshelf>(renderer, 8, 4, 2, 4, BOOKSHELF_TEXTURE_4X2));
+    obstacles.push_back(std::make_unique<Bookshelf>(renderer, 31, 10, 1,2 , BOOKSHELF_TEXTURE_2X1));
+    obstacles.push_back(std::make_unique<Bookshelf>(renderer, 17, 9, 2, 4, BOOKSHELF_TEXTURE_4X2));
 
     // Reset collectibles
     collectibles.clear();
@@ -368,12 +394,41 @@ void playground::reset() {
     freezeIcon.isActive = false;
 }
 //collectibles test
+// Define a custom comparator for SDL_Point
+struct SDLPointCompare {
+    bool operator()(const SDL_Point& a, const SDL_Point& b) const {
+        // Compare first by x, then by y if x values are equal
+        if (a.x != b.x) return a.x < b.x;
+        return a.y < b.y;
+    }
+};
+
+// In playground class, modify the initializeCollectibles() function
 void playground::initializeCollectibles() {
-    // Use grid coordinates (divide by GRID_SIZE)
-    collectibles.push_back(std::make_unique<Note>(renderer, 3, 3));       // Position at (3,3) on grid
-    collectibles.push_back(std::make_unique<Coffee>(renderer, 6, 6));     // Position at (6,6) on grid
-    collectibles.push_back(std::make_unique<PastExam>(renderer, 9, 9));   // Position at (9,9) on grid
-    collectibles.push_back(std::make_unique<Freeze>(renderer, 12, 12));   // Position at (12,12) on grid
+    // Create a set with custom comparator
+    std::set<SDL_Point, SDLPointCompare> usedSpawnPoints;
+    
+    // Helper lambda to get unique spawn point
+    auto getUniqueSpawnPoint = [&usedSpawnPoints]() {
+        SDL_Point spawnPoint;
+        do {
+            spawnPoint = CollectibleManager::getRandomSpawnPoint();
+        } while (usedSpawnPoints.count(spawnPoint) > 0);
+        usedSpawnPoints.insert(spawnPoint);
+        return spawnPoint;
+    };
+    
+    // Get unique spawn points for each collectible
+    SDL_Point noteSpawn = getUniqueSpawnPoint();
+    SDL_Point coffeeSpawn = getUniqueSpawnPoint();
+    SDL_Point examSpawn = getUniqueSpawnPoint();
+    SDL_Point freezeSpawn = getUniqueSpawnPoint();
+    
+    // Create collectibles at unique spawn points
+    collectibles.push_back(std::make_unique<Note>(renderer, noteSpawn.x, noteSpawn.y));
+    collectibles.push_back(std::make_unique<Coffee>(renderer, coffeeSpawn.x, coffeeSpawn.y));
+    collectibles.push_back(std::make_unique<PastExam>(renderer, examSpawn.x, examSpawn.y));
+    collectibles.push_back(std::make_unique<Freeze>(renderer, freezeSpawn.x, freezeSpawn.y));
 }
 
 void playground::updateCollectibles(float deltaTime) {

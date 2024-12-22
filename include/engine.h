@@ -12,12 +12,12 @@
 #include "settings.h"
 
 // Declare all global variables as extern
-extern SDL_Window* mywindow;
-extern SDL_Renderer* renderer;
-extern SDL_Texture* background;
-extern menu* MenuPage;
-extern playground* PlayPage;
-extern settings* SettingsPage;
+extern SDL_Window *mywindow;
+extern SDL_Renderer *renderer;
+extern SDL_Texture *background;
+extern menu *MenuPage;
+extern playground *PlayPage;
+extern settings *SettingsPage;
 extern int PAGE_ID;
 extern int GameState;
 extern int game_is_running;
@@ -32,4 +32,3 @@ void render();
 void destroy_window();
 
 #endif
-

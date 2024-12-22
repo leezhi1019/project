@@ -1,5 +1,6 @@
 #include "../include/enemy.h"
 #include "../include/playground.h"
+#include "../include/audio_manager.h" // Add audio manager include
 #include <cstdlib>
 #include <ctime>
 
@@ -12,7 +13,7 @@ Enemy::Enemy(SDL_Renderer *renderer, const std::string &name, const playground *
 void Enemy::update()
 {
     // Don't update if the game is paused
-    if (getGamePlayground()->isPaused())  // Now calls the getter method
+    if (getGamePlayground()->isPaused()) // Now calls the getter method
     {
         return;
     }
@@ -37,6 +38,7 @@ void Enemy::update()
         SDL_Log("Character detected");
         characterDetected = true;
         detectionTime = currentTime;
+        AudioManager::playSoundEffect(); // Play detected sound effect
         return;
     }
 

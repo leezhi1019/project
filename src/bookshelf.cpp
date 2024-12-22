@@ -3,12 +3,12 @@
 #include "../include/tool.h"
 #include "../include/constants.h"
 
-Bookshelf::Bookshelf(SDL_Renderer* renderer, int x, int y, int w, int h)
-    : Obstacle(renderer, x, y, w, h), bookCount(0) {
-    // Try to load texture, but don't require it
-    texture = loadTexture(BOOKSHELF_TEXTURE, renderer);  // Use the constant
+Bookshelf::Bookshelf(SDL_Renderer* renderer, int x, int y, int w, int h, const char* texturePath)
+    : Obstacle(renderer, x, y, w, h) {
+    texture = loadTexture(texturePath, renderer);
     if (!texture) {
-        SDL_Log("Using fallback rendering for bookshelf");
+        SDL_Log("Failed to load bookshelf texture: %s", texturePath);
+        SDL_Log("SDL Error: %s", SDL_GetError());
     }
 }
 
@@ -21,11 +21,10 @@ void Bookshelf::render() {
     };
     
     if (texture) {
-        // Use the loaded texture if available
         SDL_RenderCopy(renderer, texture, nullptr, &destRect);
     } else {
-        // Fallback to colored rectangle only if texture is null
-        SDL_SetRenderDrawColor(renderer, 101, 67, 33, 255);
+        // Fallback to colored rectangle if texture not available
+        SDL_SetRenderDrawColor(renderer, 139, 69, 19, 255); // Brown color
         SDL_RenderFillRect(renderer, &destRect);
     }
 }

@@ -14,7 +14,7 @@ find_package(SDL2_image REQUIRED)
 find_package(SDL2_ttf REQUIRED)
 find_package(SDL2_mixer REQUIRED)
 
-include_directories(${SDL2_INCLUDE_DIR} ${SDL2_IMAGE_PATH}/include ${SDL2_TTF_PATH}/include ${SDL2_MIXER_PATH}/include )
+include_directories(${SDL2_INCLUDE_DIR} ${SDL2_IMAGE_INCLUDE_DIRS} ${SDL2_TTF_INCLUDE_DIRS} ${SDL2_MIXER_INCLUDE_DIRS} ${SDL2_PATH}/include ${SDL2_IMAGE_PATH}/include ${SDL2_TTF_PATH}/include ${SDL2_MIXER_PATH}/include)
 #link_directories(${SDL2_IMAGE_PATH}/lib/x64)
 
 add_executable(my_Final_project_game
@@ -38,6 +38,7 @@ add_executable(my_Final_project_game
     src/score_page.cpp         # Add this line
     src/enemy.cpp              # Add this line
     src/vision.cpp             # Add this line
+    src/audio_manager.cpp      # Add this line
 )
 
 target_sources(${PROJECT_NAME} PRIVATE
